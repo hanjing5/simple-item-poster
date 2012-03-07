@@ -2,7 +2,22 @@ class ProductsController < ApplicationController
 
 	# use this or add protect_from_forger :except=> :create
 	skip_before_filter :verify_authenticity_token, :except => [:create, :destroy, :update]
+	
+	###########################################################
+	# Shop is the controller for the single OUT OF ENVIRONMENT
+	# purchase page
+	###########################################################
+	def shop
+		# unencypt the id
+		@product_id = params[:encrypted_link].to_i(32)
+		@product = Product.find(@product_id)
+		render :layout => false	
+	end
 
+	###########################################################
+	# Edit is the controller for the landing page of a user
+	# who clicked on a link
+	###########################################################
 	def edit
 		@product = Product.find(params[:id])
 		@encrypted_link = make_encrypted_link(@product.encrypted_link)
@@ -11,15 +26,19 @@ class ProductsController < ApplicationController
 		end
 	end
 
-	# PUT request, xml for the api
+	###########################################################
+	# Update is the controller for a user updating the link/
+	# product he/she is trying to sell
+	###########################################################
 	def update
-		# 2 modes of operation
 		@product = Product.find(params[:id])
 		if @product.encrypted_link.nil?
-			# encrypted link is just the product's id with 
+	
+			# encrypted link is just the product's id in
 			# a base 36 encryption
 			@product.encrypted_link = @product.id.to_s(36)
 			@product.save
+
 		end
 			if @product.update_attributes(params[:product])
 				flash[:success]="Updated!"
@@ -28,6 +47,10 @@ class ProductsController < ApplicationController
 				flash[:error]="Failed to updated."
 				redirect_to edit_company_product_path
 			end
+	end
+
+	def preview
+		render :layout => false
 	end
 
 	# GET 
