@@ -1,0 +1,7 @@
+<h1>User Index</h1>
+<%= link_to "Sign up", new_user_path %>
+<%= link_to "Login", new_user_session_path %>
+<br>
+<% unless @users.empty? %>
+<%= render "users/previews", :users => @users %>
+<% end %>

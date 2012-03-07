@@ -1,0 +1,55 @@
+<table>
+        <tr>
+                <td>
+                Image
+                </td>
+                <td>
+                Name
+                </td>
+                <td>
+		Text
+                </td>
+                <td>
+                Ran Amount
+                </td>
+                <td>
+                Amount Left
+                </td>
+                <td>
+                Meta Data
+                </td>
+                <td>
+                Manage
+                </td>
+        </tr>
+        </tr>
+        <% @coupons.each do |coupon| %>
+        <tr>
+        <td>
+        <!--<%= image_tag coupon.picture.url %>-->
+        <%= image_tag coupon.picture.url(:medium) %>
+        <!--<%= image_tag coupon.picture.url(:thumb) %>-->
+        <br>
+        <td>
+        <%= coupon.name %>
+        </td>
+        <td>
+        <%= coupon.description %>
+        </td>
+        <td>
+        <%= coupon.limit %>
+        </td>
+        <td>
+        <%= coupon.limit %>
+        </td>
+        <td>
+        <%= coupon.meta_data %>
+        </td>
+        <td>
+	
+        <%= link_to "delete", @coupons, :method => :delete, :confirm => "You sure?", :title => "Delete #{coupon.name}" %>
+        </td>
+        </tr>
+
+        <% end %>
+</table>

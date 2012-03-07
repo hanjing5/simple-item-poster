@@ -1,0 +1,38 @@
+<html>
+<head>
+<link href="/stylesheets/tmp_users/custom.css" rel="stylesheet">
+<style>
+body {
+	width:550px;
+	height:150px;
+	margin:0 auto;
+	z-index:2;
+	position:relative;
+	background-color:#FFFFFF;
+	text-align:center;
+	
+}
+#larger_text {
+font-size:1.5em;
+}
+</style>
+</head>
+<body>
+<br>
+
+<div style="font-size:1.5em">
+Best Buy rewards you with this coupon for your efforts!<br>
+</div>
+<br>
+<%= form_for("tmp_user", :url => {:action=>'create'}) do |f| %>
+  <%= f.hidden_field :token, :value => @token %>
+  <!--<%= @token %><br>-->
+  <%= f.hidden_field :coupon_id, :value => @coupon_id %>
+  <!--<%= @coupon_id %><br>-->
+  <%= f.text_field :email, :placeholder=>"Enter email for delivery", :style=>"font-size:2em;height:2em; width:15em" %><br>
+  <%= f.submit 'Redeem Your Reward!', :class=>'btn btn-success', :style=>"width:15em; font-size:2em; height:2em"%><br>
+
+  <div style="font-size:1.5em">Only jerks send spam and jerks we are not.</div>
+<% end %>
+</body>
+</html>

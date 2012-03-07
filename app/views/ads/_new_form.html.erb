@@ -1,0 +1,24 @@
+<!-- Form to use to create new ads. ad should be availible -->
+<%= form_for [@company, ad], :html => { :multipart => true } do |f| %>
+	<h5>Ad name</h5>
+	<%= f.text_field :name, :placeholder => "Ad name" %>
+	<h5>Description</h5>
+	<%= f.text_field :description, :placeholder => "eg. Throw another shrimp on the barbie" %>
+	<h5>Related picture</h5>
+	<%= f.file_field :picture %>
+	<h5>-100: hate ========= love: 100</h5>
+	<%= f.number_field :love_hate, :in => -100...100 %>
+	<h5>-100: fear ========= relief: 100</h5>
+	<%= f.number_field :relief_fear, :in => -100...100 %>
+	<h5>-100: boredom ========= excitement: 100</h5>
+	<%= f.number_field :excite_bore,  :in => -100...100 %>
+	<h5>-100: sad ========= happy: 100</h5>
+	<%= f.number_field :happy_sad, :in => -100...100 %>
+	<h5>-100: funny ========= serious: 100</h5>
+	<%= f.number_field :funny_serious, :in => -100...100 %>
+	<h5>-100: disgusting ========= sexy: 100</h5>
+	<%= f.number_field :sexy_disgust, :in => -100...100 %>
+	<h5>Cost per 1000 aquisitions</h5>
+	<%= f.number_field :cost_per_purchase, :min => 0 %>
+	<%= f.submit :submit %>
+<% end %>

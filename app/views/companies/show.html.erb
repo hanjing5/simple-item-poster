@@ -1,0 +1,93 @@
+<!-- Company show page -->
+<h1>Welcome, <%= current_company.name.capitalize %>!</h1>
+
+<hr>
+<table style="width:100%; text-align:center">
+	<tbody>
+		<tr>
+			<td style="width:33%">
+<div class="products-previews">
+  <h2>Products</h2>
+	<h1><%= @products_count %></h1>
+	<% if @correct_company %>
+      <%= link_to "Product List", company_products_path(current_company) %>
+		| <%= link_to "New Product", company_product_path(current_company, 'new') %>
+	<% end %>
+</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<div class="row">
+	<div class="span4">
+		<h1>Products</h1>
+	</div>
+    <div class="span4 offset4" style="text-align:right">
+<%= link_to "Add Product", company_product_path(current_company, "new"), :class=>"btn btn-success btn-large" %>
+	</div>
+</div>
+<hr>
+
+<table class="table" style="width:100%; text-align:center; font-size:1.5em; ">
+	<thead>
+        <tr>
+                <th style="padding:0.5em">
+                Image
+                </th>
+                <th style="padding:0.5em">
+                Name
+                </th>
+                <th style="padding:0.5em">
+                Link
+                </th>
+                <th style="padding:0.5em">
+                Price
+                </th>
+                <th style="padding:0.5em">
+                Viewed
+                </th>
+                <th style="padding:0.5em">
+                Sold
+                </th>
+                <th style="padding:0.5em">
+                </th>
+        </tr>
+	</thead>
+	<% if not @products.nil? %>
+        <% @products.each do |product| %>
+        <tr>
+        <td style="padding:0.5em">
+        <!--<%= image_tag product.picture.url %>-->
+        <!--<%= image_tag product.picture.url(:medium) %>-->
+        <%= image_tag product.picture.url(:thumb) %>
+				</td>
+        <td style="padding:0.5em">
+        <%= link_to "#{product.name}", edit_company_product_path(current_company, product.id) %>
+        </td>
+        <td style="padding:0.5em">
+        <%= product.link %>
+				</td>
+        <td style="padding:0.5em">
+        <%= number_to_currency product.price %>
+				</td>
+        <td style="padding:0.5em">
+        <%= product.displayed %>
+        </td>
+        <td style="padding:0.5em">
+        <%= product.purchased %>
+        </td>
+        <td style="padding:0.5em">
+
+        <%= link_to "delete", company_product_path(current_company, product.id) , :method => :delete, :confirm => "Are you sure you want to delete?" %>
+        </td>
+        </tr>
+
+        <% end %>
+	<% else %>
+	You dont have any products yet!
+	<% end %>
+</table>
+
+
+

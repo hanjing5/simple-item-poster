@@ -1,0 +1,12 @@
+<!-- show page for ads -->
+<h2><%= @company.name %></h2>
+<h3><%= @ad.id %></h3>
+<%= image_tag @ad.picture.url %>
+<!-- Put other stuff in here -->
+<br>
+<%= link_to "XML-view", company_ad_path( @ad ) + ".xml"  %>
+<br>
+
+<%= link_to "JSON-view", company_ad_path( @ad ) + ".json"  %>
+
+

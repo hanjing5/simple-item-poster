@@ -1,0 +1,5 @@
+<%= form_for("tmp_user", :url => {:action=>'create'}) do |f| %>
+  <%= f.text_field :email, :placeholder=>"email" %><br>
+  <%= f.submit 'Sign Up', :class=>'btn btn-large btn-primary', :style=>"width:15em" %><br>
+<% end %>
+

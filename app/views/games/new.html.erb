@@ -1,0 +1,24 @@
+<h1>Add a New Platform</h1>
+<br>
+<%= form_for :game, @game, :url =>{ :action => "create"}, :html => { :multipart => true } do |form| %>
+
+	<%= hidden_field_tag(:publisher_id, current_publisher.id) %>
+
+	<h3>Name</h3>
+        <%= form.text_field :name %>
+
+	<!--Below is if you are doing picture-based Coupons-->
+	<h3>Meta Data</h3>
+        <%= form.text_field :meta_data %>
+        <br>
+<!--    <%= form.submit "Submit", :class=>"btn btn-primary btn-large" %>-->
+<button type="submit" class="btn primary large" id="game_submit" name="commit">Submit!</button>
+
+        </p>
+<% end %>
+
+<br>
+<%= link_to "Home", publisher_path(current_publisher) %> | 
+<%= link_to "Manage", publisher_games_path %>
+
+

@@ -1,0 +1,66 @@
+<!-- Header file -->
+<%= yield :head %>
+
+<header>
+<nav>
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="/" >Gamertiser!</a>
+      <ul class="nav">
+		
+		<li class=''><%= link_to "Home", root_url %></li>
+		<% if company_signed_in? and publisher_signed_in? %>
+			<li class="dropdown" id="menu1">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#menu1">
+					My Brand
+					<b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">
+					<li class=''><%= link_to "My Brand's Dashboard", current_company %><li>
+			<li class=''><%= link_to "Products", company_products_path(current_company) %><li>
+			<li class=''><%= link_to "Rewards", company_coupons_path(current_company) %><li>
+			<li class=''><%= link_to "Ads", company_ads_path(current_company) %><li>
+					<li class="divider"></li>
+					<li class=""><%= link_to "Logout", destroy_company_session_path, :method => :delete , :class => 'links'%></li>
+				</ul>
+			</li>
+			<li class="dropdown" id="menu2">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#menu2">
+					My Platform
+					<b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">
+					<li class=''><%= link_to "My Platform's Dashboard", current_publisher %><li>
+					<li class=""><%= link_to "Games", publisher_games_path(current_publisher) %><li>
+					<li class=''><%= link_to "Documentation", documentation_path %><li>
+					<li class="divider"></li>
+					<li class=""><%= link_to "Logout", destroy_publisher_session_path, :method => :delete, :class => 'links' %></li>
+				</ul>
+			</li>
+		
+		<% elsif company_signed_in? %>
+			<li class=''><%= link_to "My Brand's Dashboard", current_company %><li>
+			<li class=''><%= link_to "Products", company_products_path(current_company) %><li>
+			<li class=''><%= link_to "Rewards", company_coupons_path(current_company) %><li>
+			<li class=''><%= link_to "Ads", company_ads_path(current_company) %><li>
+			<li class=""><%= link_to "Logout", destroy_company_session_path, :method => :delete, :class => 'links' %></li>
+		<% elsif publisher_signed_in? %>
+			<li class=""><%= link_to "My Platform's Dashboard", current_publisher %><li>
+			<li class=""><%= link_to "Games", publisher_games_path(current_publisher) %><li>
+			<li class=''><%= link_to "Documentation", documentation_path %><li>
+			<li class=""><%= link_to "Logout", destroy_publisher_session_path, :method => :delete, :class => 'links' %></li>
+		<% else %>
+			<!--<li class=""><%= link_to "Brand Partners", companies_path %></li>
+			<li class=""><%= link_to "Platform Partners", publishers_path %></li>-->
+		<% end %>
+	</ul>
+    </div>
+  </div>
+</div>
+</header>
+</nav>
+<br />
+<br />
+<br />
+

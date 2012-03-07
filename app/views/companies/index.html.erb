@@ -1,0 +1,91 @@
+<div class="row">
+	<div class="span4">
+		<h1>Rewards and Coupons</h1>
+	</div>
+    <div class="span4 offset4" style="text-align:right">
+<%= link_to "New Coupon", company_coupon_path(current_company, "new"), :class=>"btn" %>
+	</div>
+</div>
+<hr>
+
+<table class="table" style="width:100%; text-align:center; font-size:1.5em; ">
+	<thead>
+        <tr>
+                <th style="padding:0.5em">
+                Image
+                </th>
+                <th style="padding:0.5em">
+                Name
+                </th>
+                <th style="padding:0.5em">
+		Text
+                </th>
+                <th style="padding:0.5em">
+                Showed
+                </th>
+                <th style="padding:0.5em">
+                CT
+                </th>
+                <th style="padding:0.5em">
+                Redeemed
+                </th>
+                <th style="padding:0.5em">
+                Limit
+                </th>
+                <th style="padding:0.5em">
+                Expense
+                </th>
+                <th style="padding:0.5em">
+                Meta Data
+                </th>
+                <th style="padding:0.5em">
+                Manage
+                </th>
+        </tr>
+	</thead>
+	<% if not @coupons.nil? %>
+        <% @coupons.each do |coupon| %>
+        <tr>
+        <td style="padding:0.5em">
+        <!--<%= image_tag coupon.picture.url %>-->
+        <!--<%= image_tag coupon.picture.url(:medium) %>-->
+        <%= image_tag coupon.picture.url(:thumb) %>
+        <br>
+        <td style="padding:0.5em">
+        <%= coupon.name %>
+        </td>
+        <td style="padding:0.5em">
+        <%= coupon.description %>
+        </td>
+        <td style="padding:0.5em">
+        <%= coupon.displayed %>
+        </td>
+        <td style="padding:0.5em">
+        <%= coupon.click_through %>
+        </td>
+        <td style="padding:0.5em">
+        <%= coupon.redeemed %>
+        </td>
+        <td style="padding:0.5em">
+        <%= coupon.limit %>
+        </td>
+        <td style="padding:0.5em">
+        <%= number_to_currency coupon.cost_per_redeem * coupon.redeemed %>
+		</td>
+        <td style="padding:0.5em">
+        <%= coupon.meta_data %>
+        </td>
+        <td style="padding:0.5em">
+
+        <%= link_to "Delete",coupon_path(coupon.id) , :method => :delete, :confirm => "Are you sure you want ot delete?" %>
+        </td>
+        </tr>
+
+        <% end %>
+	<% else %>
+	You dont have any coupons yet!
+	<% end %>
+</table>
+
+
+

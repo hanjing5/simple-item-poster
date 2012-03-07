@@ -1,0 +1,29 @@
+<!-- Header file -->
+<%= yield :head %>
+
+<header>
+<nav>
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="/" >Gamertiser!</a>
+      <ul class="nav">
+		
+		<% if company_signed_in? %>
+			<!--<li class=''><%= link_to "My Brand's Dashboard", current_company %><li>-->
+			<li class=''><%= link_to "Products", company_products_path(current_company) %><li>
+			<li class=""><%= link_to "Logout", destroy_company_session_path, :method => :delete, :class => 'links' %></li>
+		<% else %>
+			<!--<li class=""><%= link_to "Brand Partners", companies_path %></li>
+			<li class=""><%= link_to "Platform Partners", publishers_path %></li>-->
+		<% end %>
+	</ul>
+    </div>
+  </div>
+</div>
+</header>
+</nav>
+<br />
+<br />
+<br />
+

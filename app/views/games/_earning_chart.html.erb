@@ -1,0 +1,156 @@
+<div class="row">
+    <div class="span4">
+	
+	<h2>
+	Earnings
+	</h2>
+	</div>
+    <div class="span4 offset4">
+			Start:
+            <input id="popupDateFieldStart" style="width:5em" value="<%= @visible_end_date.year %>-<%= @visible_end_date.mon %>-<%= @visible_end_date.day %>">
+			End:
+            <input id="popupDateFieldEnd" style="width:5em" value="<%= @visible_start_date.year %>-<%= @visible_start_date.mon %>-<%= @visible_start_date.day %>">
+			<div class="btn btn-primary" style="width:5em; margin-left:0.5em" onclick="setNewVR()">Apply</div>
+</div>
+</div>
+<hr>
+
+    <script type='text/javascript'>
+      google.load('visualization', '1', {'packages':['annotatedtimeline']});
+      google.setOnLoadCallback(drawVisualization);
+			var options = {
+					'allowHtml': true, 
+					'allowRedraw':true,
+					'displayExactValues':true, 
+					title: 'Earnings Graph',
+					width: '100%', height: 266,
+               		chartArea: {left:38,top:30, width:"75%",height:"70%"},
+  	                legendTextStyle: {color:'#666666'},
+	                hAxis: {title: 'Time',
+               		titleTextStyle: {color: '#5c5c5c'},
+               		titlePosition: 'out'},
+					fill:80
+              
+			}
+	function drawVisualization() {
+	  // Create and populate the data table.
+		var JSONObject = {
+	      cols: [
+			{id: 'date', label: 'Date', type: 'date'},
+          {id: 'earning', label: 'Daily Earning', type: 'number'}
+		],
+      rows: [
+<% @daily_earnings.each do |de| %>
+	<%= "{c:[{v: new Date(#{de.created_at.year}, #{de.created_at.mon-1}, #{de.created_at.day})}, 
+		{v: #{de.daily_earning}}]}," %>
+<% end %>
+		]};
+
+  var data = new google.visualization.DataTable(JSONObject, 0.5);
+
+  // Create and draw the visualization.
+  visualization = new google.visualization.AnnotatedTimeLine(document.getElementById('chart_div'));
+  visualization.draw(data, options);
+	var today = new Date(<%= @visible_start_date.year %>, <%= @visible_start_date.mon-1 %>, <%= @visible_start_date.day %>);
+	var daysago = new Date(<%= @visible_end_date.year %>, <%= @visible_end_date.mon-1 %>, <%= @visible_end_date.day %>);
+	visualization.setVisibleChartRange(daysago,today);
+}
+
+</script>
+<%= javascript_include_tag 'calendarview' %>
+<style type='text/css'>@import url('http://0.0.0.0:3000/stylesheets/calendarview.css');</style>
+ <script type="text/javascript">
+      window.onload = function() {
+        Calendar.setup(
+          {
+            dateField      : 'popupDateFieldStart',
+            triggerElement : 'popupDateFieldStart'
+          }
+        )
+        Calendar.setup(
+          {
+            dateField      : 'popupDateFieldEnd',
+            triggerElement : 'popupDateFieldEnd'
+          }
+        )
+		//////////////////////////////////////////////////
+		// Duplicated IMCT or impression click through code
+		// Stay here or it wouldn't work
+		//////////////////////////////////////////////////
+        Calendar.setup(
+          {
+            dateField      : 'popupDateFieldStartIMCT',
+            triggerElement : 'popupDateFieldStartIMCT'
+          }
+        )
+        Calendar.setup(
+          {
+            dateField      : 'popupDateFieldEndIMCT',
+            triggerElement : 'popupDateFieldEndIMCT'
+          }
+        )
+		//////////////////////////////////////////////////
+		
+      }
+
+		
+		function setNewVR( ){
+			var start_str = jQuery("#popupDateFieldStart").val().split('-');
+			var end_str = jQuery("#popupDateFieldEnd").val().split('-');
+	
+			var start_date = new Date(Number(start_str[0]),Number(start_str[1])-1,Number(start_str[2]) ) ;
+			var end_date = new Date(Number(end_str[0]),Number(end_str[1])-1 ,Number(end_str[2]) ) ;
+var JSONObject = {
+	      cols: [
+			{id: 'date', label: 'Date', type: 'date'},
+          {id: 'earning', label: 'Daily Earning', type: 'number'}
+		],
+      rows: [
+<% @daily_earnings.each do |de| %>
+	<%= "{c:[{v: new Date(#{de.created_at.year}, #{de.created_at.mon-1}, #{de.created_at.day})}, 
+		{v: #{de.daily_earning}}]}," %>
+<% end %>
+		]};
+
+			var data = new google.visualization.DataTable(JSONObject, 0.5);
+			var visualization = new google.visualization.AnnotatedTimeLine(document.getElementById('chart_div'));
+			visualization.draw(data, options);
+			visualization.setVisibleChartRange(start_date,end_date);
+			
+		}
+		
+		//////////////////////////////////////////////////
+		// Duplicated IMCT or impression click through code
+		// Stay here or it wouldn't work
+		//////////////////////////////////////////////////
+		function setNewVRIMCT( ){
+			var start_str = jQuery("#popupDateFieldStartIMCT").val().split('-');
+			var end_str = jQuery("#popupDateFieldEndIMCT").val().split('-');
+	
+			var start_date = new Date(Number(start_str[0]),Number(start_str[1])-1,Number(start_str[2]) ) ;
+			var end_date = new Date(Number(end_str[0]),Number(end_str[1])-1 ,Number(end_str[2]) ) ;
+
+			var JSONObject = {
+		      cols: [
+				{id: 'date', label: 'Date', type: 'date'},
+	          {id: 'earning', label: 'Daily Earning', type: 'number'}
+					],
+		      rows: [
+				<% @daily_imct.each do |de| %>
+					<%= "{c:[{v: new Date(#{de.created_at.year}, #{de.created_at.mon-1}, #{de.created_at.day})}, 
+						{v: #{de.impressions}}]}," %>
+				<% end %>
+					]}
+
+			var data = new google.visualization.DataTable(JSONObject, 0.5);
+			var visualization = new google.visualization.AnnotatedTimeLine(document.getElementById('imct_chart_div'));
+			visualization.draw(data, options);
+			visualization.setVisibleChartRange(start_date,end_date);
+			
+		}
+		///////////////////////////////////////////////////
+
+
+    </script>
+<div id='chart_div' style='width: 100%; height: 300px;'></div>
+

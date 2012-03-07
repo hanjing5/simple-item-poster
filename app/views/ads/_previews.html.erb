@@ -1,0 +1,10 @@
+<!-- ads preview page -->
+<%= will_paginate ads, :param_name => 'ad_page' %>
+<% ads.each do |ad| %>
+	<div class="ad-preview">
+		<table class="ad-table">
+			<%= render "ads/preview", :ad => ad %>
+		</table>
+	</div>
+<% end %>
+

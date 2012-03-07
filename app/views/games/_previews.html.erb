@@ -1,0 +1,19 @@
+<!-- coupon preview page -->
+<%= will_paginate coupons, :param_name => 'coupon_page' %>
+
+<% coupons.each do |coupon| %>
+	<div class="coupon-preview">
+		<table class="coupon-table">
+          <tr id="coupon-id-<%= coupon.id %>">
+	<td class="coupon-table">
+		<span class="name"><%= link_to coupon.name, coupon %></span>
+		<span class="timestamp"><%= time_ago_in_words coupon.created_at %></span>
+      <% if @correct_company %>
+		<span class="delete"><%= link_to "delete", coupon, :method => :delete %></span>
+		<% end %>
+	</td>
+</tr>
+			<% render "coupons/preview", :coupon => coupon %>
+		</table>
+	</div>
+<% end %>

@@ -1,0 +1,19 @@
+<h1>Edit Game</h1>
+<hr>
+
+<%= form_for @game, :as=>:game, :url => {:action=>"update"}, :html => {:multipart =>true} do |f| %>
+  <%= render 'shared/error_messages', :object => f.object %>
+  <div class="field">
+	<h3>Name</h3>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <h3>Meta Data</h3>
+    <%= f.text_field :meta_data %>
+  </div>
+	<hr>
+  <div class="actions">
+    <%= f.submit "Update Record", :class=>'btn btn-primary btn-large' %>
+  </div>
+<% end %>
+

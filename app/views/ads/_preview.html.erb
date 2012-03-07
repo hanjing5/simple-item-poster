@@ -1,0 +1,12 @@
+<!-- Show basic ad preview -->
+<tr id="ad-id-<%= ad.id %>">
+	<td class="ad-table">
+		<span class="name"><%= link_to ad.name, [ad.company, ad] %></span>
+		<span class="timestamp"><%= time_ago_in_words ad.created_at %></span>
+		<% if @correct_company %>
+		<span class="delete"><%= link_to "delete", [ad.company, ad], :method => :delete %></span>
+		<% end %>
+	</td>
+</tr>
+
+

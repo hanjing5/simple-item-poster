@@ -1,0 +1,6 @@
+address1 @d.address1
+address2 @d.address2
+city @d.city
+state @d.state
+zip @d.zip
+user_id @d.user_id

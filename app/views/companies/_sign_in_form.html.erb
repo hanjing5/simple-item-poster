@@ -1,0 +1,8 @@
+<%= form_for("company", :url => company_session_path) do |f| %>
+  <%= f.text_field :email %><br>
+  <%= f.password_field :password %><br>
+  <p><%= f.check_box :remember_me %> Remember me </p>
+  <%= f.submit 'Sign in', :class=>'btn btn-large btn-primary', :style=>"width:15em" %><br>
+  <%= link_to "Forgot your password?", new_password_path('company') %>
+<% end %>
+

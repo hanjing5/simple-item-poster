@@ -1,0 +1,6 @@
+<h1>Pics#edit</h1>
+<p>Find me in app/views/pics/edit.html.erb</p>
+<%= form_for :pic, @pic, :url => pic_path, :html => { :multipart => true } do |form| %>
+  <%= form.file_field :picture_link %>
+<% end %>
+

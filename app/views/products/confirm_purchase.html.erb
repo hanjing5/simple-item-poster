@@ -1,0 +1,55 @@
+<%= render 'products/shop_header' %>
+<!--<table class='table'>-->
+<table style='text-align:center' align='center'>
+<tbody>
+<tr>
+<td style="text-align:center;border-top:0px solid #C0C0C0">
+<img src='<%= @product.picture_path %>' width='90%' height='90%'>
+<br>
+<%= @product.name %>
+<br>  
+<font size='3em' color='#E56717' >
+<%= number_to_currency @product.price %>
+</font>
+</td>
+<td style="width:2em">
+</td>
+<td style="text-align:center;border-top:0px solid #C0C0C0;">
+<%= form_for("invoice", :url => purchase_create_url) do |f| %>
+  Ship to: <%= current_user.name %> <br>
+  <%= hidden_field_tag :product_id, @product.id %>
+  <%= hidden_field_tag :user_id, @user_id %>
+  <%= hidden_field_tag :credit_card_token, current_user.credit_card_token %>
+  <%= hidden_field_tag :price, @product.price %>
+
+<!--  <%= f.collection_select(:shipping_address_id, current_user.shipping_addresses, 
+	:id,
+	:address1, 
+	{:prompt => 'Select Shipping Address'},:style => "width: 175px" ) %><br>-->
+
+<h3>
+<%= @default_address.address1 %>
+</h3>
+  <% if @default_address.address2 %>
+<h3>
+  <%= @default_address.address2 %>
+</h3>
+  <% end %>
+<h3>
+  <%= @default_address.city %>,  
+  <%= @default_address.state %>   
+  <%= @default_address.zip %><br>
+</h3>
+<br>
+  <%= f.submit 'Purchase', :class=>'btn btn-large btn-success',:style=>'font-size:1.75em' %>
+	
+<% end %>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+<%= link_to 'Update Card', "#{new_credit_card_path}?product_id=#{@product.id}"%>
+|
+<%= link_to 'Update Address',"#{new_shipping_address_path}?product_id=#{@product.id}" %> | 
+<%= link_to 'Back to Shop',api_v1_product_inventory_display_url %>

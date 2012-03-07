@@ -1,0 +1,19 @@
+company_id @ad.company.id
+	company_name @ad.company.name
+	id @ad.id
+	title @ad.name
+	description @ad.description
+	created_at @ad.created_at
+	updated_at @ad.updated_at
+	limit @ad.limit
+	type @ad.type
+	cost_per_1k_views @ad.cost_per_impression
+	cost_per_1k_clicks @ad.cost_per_click
+	cost_per_1k_purchases @ad.cost_per_purchase
+	love_hatred @ad.love_hate
+	relief_fear @ad.relief_fear
+	excitement_boredom @ad.excite_bore
+	happy_sad @ad.happy_sad
+	funny_serious @ad.funny_serious
+	sexy_disgust @ad.sexy_disgust
+	image @ad.picture.url

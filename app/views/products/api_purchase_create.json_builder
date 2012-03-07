@@ -1,0 +1,6 @@
+product @product.name
+product_id @invoice.product_id
+price @invoice.price
+user @user.name
+user_id @invoice.user_id
+purchase_date @invoice.created_at

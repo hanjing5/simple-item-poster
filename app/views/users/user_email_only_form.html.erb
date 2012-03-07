@@ -1,0 +1,12 @@
+<%= form_for @user, :url => { :action => "user_email_only_create" } do |f| %>
+  <%= f.text_field :email %>
+  <%= f.submit :submit, :class=>'btn' %>
+<% end %>
+
+<%= form_for("user", :url => user_registration_path) do |f| %>
+  <%= f.text_field :email, :placeholder=>"email" %><br>
+  <%= f.password_field :password, :placeholder=>'password' %><br>
+  <!--<%= f.password_field :password_confirmation, :placeholder=>'password confirmation' %><br>-->
+  <%= f.submit 'Sign Up', :class=>'btn btn-large btn-primary', :style=>"width:15em" %><br>
+<% end %>
+

@@ -1,0 +1,27 @@
+<h1>Upload Image</h1>
+<p>Find me in app/views/pics/new.html.erb</p>
+<%= form_for :pic, @pic, :url =>{ :action => "create"}, :html => { :multipart => true } do |form| %>
+	
+	<p>
+	<%= form.label :name %> <br>
+	<%= form.text_field :name %>
+  	</p>
+	<p>
+	<%= form.label :meta_data %> <br>
+	<%= form.text_field :meta_data %>
+  	</p>
+	<p>
+	<%= form.label :limit %> <br>
+	<%= form.text_field :limit %>
+  	</p>
+
+	<p>
+	<%= form.file_field :picture_link %>
+  	</p>
+	<br>
+<!--	<%= form.submit "Submit" %>-->
+<button type="submit" class="btn primary large" id="pic_submit" name="commit">Sign up for Beta</button>
+
+	</p>
+<% end %>
+

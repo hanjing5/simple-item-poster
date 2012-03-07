@@ -1,0 +1,11 @@
+company_id @coupon.company.id
+	company_name @coupon.company.name
+	id @coupon.id
+	title @coupon.name
+	description @coupon.description
+	created_at @coupon.created_at
+	updated_at @coupon.updated_at
+	picture_path @path + @coupon.picture_file_name
+    meta_data @coupon.meta_data
+message @message
+success @success

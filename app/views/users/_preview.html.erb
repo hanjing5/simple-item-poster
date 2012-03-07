@@ -1,0 +1,9 @@
+<!-- Show a preview for a given user -->
+<tr id="user-id-<%= user.id %>">
+	<td class="user-table">
+		<span class="name"><%= link_to user.name, user %></span>
+		<span class="timestamp"><%= time_ago_in_words user.created_at %></span>
+	</td>
+</tr>
+
+

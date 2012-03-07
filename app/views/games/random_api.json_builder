@@ -1,0 +1,10 @@
+company_id @product.company.id
+company_name @product.company.name
+id @product.id
+title @product.name
+description @product.description
+created_at @product.created_at
+updated_at @product.updated_at
+cost_per_redeemed @product.price
+meta_data @product.meta_data
+picture_path @path + @product.picture_file_name

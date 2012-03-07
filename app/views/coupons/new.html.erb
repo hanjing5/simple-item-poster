@@ -1,0 +1,35 @@
+<h1>Upload Image</h1>
+<%= form_for :coupon, @coupon, :url =>{ :action => "create"}, :html => { :multipart => true } do |form| %>
+
+	<%= hidden_field_tag(:company_id, current_company.id) %>
+
+	<h3>Name</h3>
+        <%= form.text_field :name %>
+
+	<h3>Description</h3>
+        <%= form.text_field :description %>
+
+	<h3>Limit (Number)</h3>
+        <%= form.text_field :limit %>
+
+	<!--Below is if you are doing picture-based Coupons-->
+	<h3>Meta Data</h3>
+        <%= form.text_field :meta_data %>
+	<br>
+	<br>
+	<br>
+	<p>
+        <%= form.file_field :picture %>
+	</p>
+        <br>
+<!--    <%= form.submit "Submit" %>-->
+<button type="submit" class="btn primary large" id="coupon_submit" name="commit">Submit!</button>
+
+        </p>
+<% end %>
+
+<br>
+<%= link_to "Home", company_path(current_company) %> | 
+<%= link_to "Manage", company_coupons_path %>
+
+

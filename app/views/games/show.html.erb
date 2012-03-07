@@ -1,0 +1,171 @@
+<!--Load the Google Chart AJAX API-->
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<!-- The Body -->
+<div class="container" style="font-size:1.5em; padding-top:0.5em;">
+<div class="row">
+	<div class="span4">
+<h1>
+<%= @game.name %>
+</h1>
+	</div>
+    <div class="span4 offset4" style="text-align:right">
+		<%= link_to "Edit Record", {:action => "edit", :id => @game.id}, :class=>"btn btn-info btn-large" %>
+	</div>
+</div>
+<hr>
+<%= render 'earning_chart' %>
+<br>
+<table class="table">
+<thead>
+<tr>
+<th style="text-align:center">
+	5 Day Earning
+</th>
+<th style="text-align:center">
+	30 Day Earning
+</th>
+<th style="text-align:center">
+	Total Earning
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td style="text-align:center">
+	<%= number_to_currency @fivedays %>
+	</td>
+	<td style="text-align:center">
+	<%= number_to_currency @thirtydays %>
+	</td>
+	<td style="text-align:center">
+	<%= number_to_currency @totaldays %>
+	</td>
+</tr>
+</tbody>
+</table>
+<br>
+<br>
+<br>
+<div>
+<%= render 'imct_chart' %>
+<table class="table">
+<thead>
+<tr>
+<th style="text-align:center">
+</th>
+<th style="text-align:center">
+	5 Day
+</th>
+<th style="text-align:center">
+	30 Day
+</th>
+<th style="text-align:center">
+	Total
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td style="text-align:center">
+	Impression
+	</td>
+	<td style="text-align:center">
+	<%=  @fivedays_im %>
+	</td>
+	<td style="text-align:center">
+	<%=  @thirtydays_im %>
+	</td>
+	<td style="text-align:center">
+	<%=  @totaldays_im %>
+	</td>
+</tr>
+<tr>
+	<td style="text-align:center">
+	Click Through
+	</td>
+	<td style="text-align:center">
+	<%= @fivedays_ct %>
+	</td>
+	<td style="text-align:center">
+	<%= @thirtydays_ct %>
+	</td>
+	<td style="text-align:center">
+	<%= @totaldays_ct %>
+	</td>
+</tr>
+</tbody>
+</table>
+</div>
+<br>
+<br>
+<br>
+
+<div>
+	<h2>
+	Meta Data
+	</h2>
+<hr>
+	<%= @game.meta_data %>
+</div>
+<br>
+<br>
+<br>
+
+<div>
+	<h2>
+	Simple Android SDK
+	</h2>
+<hr>
+<pre>
+
+Coming soon!
+
+</pre>
+</div>
+<br>
+<br>
+<br>
+
+<div>
+	<h2>
+	Simple HTML5 SDK
+	</h2>
+<hr>
+<pre>
+
+&#60;div id="gamertiser_images"&#62;&#60;/div&#62;
+&#60;style type='text/css'&#62;@import url('http://gamertiser.com/stylesheets/rewardbox.css');&#60;/style&#62;
+&#60;script src="/test/coupons/USER_EMAIL_ONLY_FORM.js"&#62;&#60;/script&#62;
+&#60;script type="text/javascript"&#62;
+USER_EMAIL_ONLY_FORM.load();
+GAMERTISER_SHOW('coupon', <%= @game.token %>);
+&#60;/script&#62;
+
+</pre>
+Just copy and paste the above at wherever you like in the &#60;body&#62; tags of your HTML page.
+</div>
+<br>
+<br>
+<br>
+
+<div>
+	<h2>
+	Token
+	</h2>
+<hr>
+<pre>
+	<%= @game.token %>
+</pre>
+</div>
+<br>
+
+<div>
+			<%= link_to "New Token", { :action => "new_token", :publisher_id => current_publisher.id, :game_id => @game.id }, :class=>"btn btn-danger" %>
+WARNING: For REST API only! Update your SDK's token accordingly or things might break.
+</div>
+<br>
+<br>
+<br>
+<br>
+</div>

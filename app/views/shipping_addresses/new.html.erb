@@ -1,0 +1,28 @@
+<h4>
+Where should we ship your reward to?
+</h4>
+   <% if flash[:notice] %>
+      <p class="notice"><%= flash[:notice] %></p>
+    <% end %>
+    <% if flash[:error] %>
+      <p class="error"><%= flash[:error] %></p>
+    <% end %>
+<%= render 'products/shop_header' %>
+<%= form_for :shipping_addresses, :url=> create_shipping_address_url do |f| %>
+	<% if current_user %>
+		<%= hidden_field_tag 'user_id', current_user.id %>
+	<% else %>
+		<%= hidden_field_tag 'user_id', -1 %>
+	<% end %>
+<% if @product_id %>
+<%= hidden_field_tag :product_id, @product_id %>
+<% else %>
+<% end %>
+  <%= f.text_field :address1, :placeholder=>"address line 1" %><br>
+  <%= f.text_field :address2, :placeholder=>"address line 2" %><br>
+  <%= f.text_field :city, :placeholder=>"city" %><br>
+  <%= f.collection_select(:state, State.all, :state ,:state, {:prompt => 'Select State'},:style => "width: 125px" ) %>
+  <%= f.text_field :zip, :placeholder=>"zip code" %><br>
+  <%= f.submit 'Last Step', :class=>'btn btn-large btn-primary', :style=>"width:15em" %><br>
+<% end %>
+

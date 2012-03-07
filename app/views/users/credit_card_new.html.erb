@@ -1,0 +1,23 @@
+<%= render 'products/shop_header' %>
+<h2>Register Your Card</h2>
+   <% if flash[:notice] %>
+      <p class="notice"><%= flash[:notice] %></p>
+    <% end %>
+    <% if flash[:error] %>
+      <p class="error"><%= flash[:error] %></p>
+    <% end %>
+<%= form_for("card", :url => create_credit_card_url) do |f| %>
+  <%= hidden_field_tag :product_id, @product_id %>
+  <%= f.text_field :number, :placeholder=>'Number' %><br>
+  <%= f.text_field :cvc,:placeholder=>'CVC on the back of your card'%><br>
+  Expiration Date(MM/YYYY) 
+  <%= f.text_field :exp_month, :style=>'width:2em'%> / 
+  <%= f.text_field :exp_year, :style=>'width:4em'%><br>
+  <% if current_user %>
+  <%= hidden_field_tag :user_id, current_user.id %>
+  <% else %>
+  <%= hidden_field_tag :user_id, -1 %>
+  <% end %>
+  <%= f.submit 'Finished!', :class=>'btn btn-large btn-primary', :style=>"width:15em" %><br>
+<% end %>
+

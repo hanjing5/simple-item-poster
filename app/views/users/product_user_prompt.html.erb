@@ -1,0 +1,38 @@
+<%= render 'products/shop_header' %>
+<table class='table'>
+<tr>
+<td>
+<% if flash[:notice] %>
+      <p class="notice"><%= flash[:notice] %></p>
+    <% end %>
+    <% if flash[:sign_in_error] %>
+      <p class="error"><%= flash[:sign_in_error] %></p>
+    <% end %>
+<%= form_for("user", :url => user_session_path, :class=>'well') do |f| %>
+	<%= hidden_field_tag :product_id, @product_id %>
+  <%= f.text_field :email, :placeholder=>'email'%><br>
+  <%= f.password_field :password, :placeholder=>'password' %><br>
+  <p><%= f.check_box :remember_me %> Remember me </p>
+  <%= f.submit 'Sign in', :class=>'btn btn-large btn-primary', :style=>"width:15em" %><br>
+  <%= link_to "Forgot your password?", new_password_path('user') %>
+<% end %>
+</td>
+<td>
+<% if flash[:notice] %>
+      <p class="notice"><%= flash[:notice] %></p>
+    <% end %>
+    <% if flash[:error] %>
+      <p class="error"><%= flash[:error] %></p>
+    <% end %>
+<%= form_for("user", :url => user_registration_path) do |f| %>
+	<%= hidden_field_tag :product_id, @product_id %>
+  <%= f.text_field :name, :placeholder=>"user name" %><br>
+  <%= f.text_field :email, :placeholder=>"email" %><br>
+  <%= f.password_field :password, :placeholder=>'password' %><br>
+  <%= f.password_field :password_confirmation, :placeholder=>'password confirmation' %><br>
+  <%= f.submit 'Sign Up', :class=>'btn btn-large btn-primary' %><br>
+<% end %>
+</td>
+</tr>
+</table>
+

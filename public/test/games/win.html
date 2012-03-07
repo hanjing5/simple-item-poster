@@ -1,0 +1,36 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;"/>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-language" content="en" />
+<title>Open Odyssey</title>
+<style>
+body  {
+	background-image: url('tarzan_bg.jpg');
+    margin:0px;  
+    padding:0px;  
+    text-align:center;  
+}
+</style>
+
+</head>
+<body style="margin:0;padding:0; text-align:center">
+<a href="index.html" style="border:0"><img style="margin-right:0; margin-left:0" src="images/boards/finish.png" style="border:0"/></a>
+
+<script src="http://0.0.0.0:3000/javascripts/jquery.js"></script>
+<style type='text/css'>@import url('http://0.0.0.0:3000/stylesheets/productbox_right.css');</style>
+<script src="http://0.0.0.0:3000/test/products/SHOP_FORM.js"></script>
+<script type="text/javascript">
+var token = '12345'; SHOP_FORM.load(token); //loads feedback tab
+$(document).ready(function(){
+	GAMERTISER_DISPLAY_SHOP(token);
+	$("#gamertiser_shop_main").css("left",$(document).width()/2-$("#gamertiser_shop_main").width()/2);
+});
+	//$("#gamertiser_shop_tab").css("right",'0');
+	//$("#gamertiser_shop_tab").css("margin-right",'-7px');
+</script>
+
+</body>
+</html>
+

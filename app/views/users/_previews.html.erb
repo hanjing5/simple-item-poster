@@ -1,0 +1,5 @@
+<!-- Shows a bunch of users -->
+<%= will_paginate users %>
+<% users.each do |user| %>
+	<%= render "users/preview", :user => user %>
+<% end %>

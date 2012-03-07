@@ -1,0 +1,6 @@
+<h1>User Dashboard</h1>
+<% if current_user.id == @user.id %>
+<h3><%= @user.name %></h3>
+<% else %>
+You don't have permission
+<% end %>

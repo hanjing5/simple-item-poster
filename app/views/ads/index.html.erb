@@ -1,0 +1,36 @@
+<table>
+        <tr>
+                <td>
+                Image
+                </td>
+                <td>
+                Name
+                </td>
+
+        </tr>
+
+	<% if not @ads.nil? %>
+        <% @ads.each do |ad| %>
+        <tr>
+        <td>
+        <!--<%= image_tag ad.picture.url %>-->
+        <!--<%= image_tag ad.picture.url(:medium) %>-->
+        <%= image_tag ad.picture.url(:thumb) %>
+        <br>
+        <td>
+        <%= ad.name %>
+        </td>
+
+        <td>
+
+        <%= link_to "delete", company_ad_path(current_company,ad.id), :method => :delete, :confirm => "You sure?", :title => "Delete #{ad.name}" %>
+        </td>
+        </tr>
+
+        <% end %>
+	<% else %>
+	You dont have any ads yet!
+	<% end %>
+</table>
+
+<%= link_to "New Ad", company_ad_path(current_company, "new") %>

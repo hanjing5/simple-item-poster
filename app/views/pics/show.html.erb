@@ -1,0 +1,41 @@
+<table>
+	<tr>
+		<td>
+		Image
+		</td>
+		<td>
+		Name
+		</td>
+		<td>
+		Meta Data
+		</td>
+		<td>
+		Ran Amount
+		</td>
+		<td>
+		Amount Left
+		</td>
+	</tr>
+	<% @pics.each do |pic| %>
+	<tr>
+	<td>
+	<!--<%= image_tag pic.picture_link.url %>-->
+	<%= image_tag pic.picture_link.url(:medium) %>
+	<!--<%= image_tag pic.picture_link.url(:thumb) %>-->
+	<br>
+	<td>
+	<%= pic.name %>
+	</td>
+	<td>
+	<%= pic.meta_data %>
+	</td>
+	<td>
+	<%= pic.limit %>
+	</td>
+	<td>
+	<%= pic.limit %>
+	</td>
+
+	<tr>
+	<% end %>
+</table>
