@@ -3,6 +3,10 @@ class ProductsController < ApplicationController
 	# use this or add protect_from_forger :except=> :create
 	skip_before_filter :verify_authenticity_token, :except => [:create, :destroy, :update]
 
+	def edit
+		@product = Product.find(params[:id])
+	end
+
 	# PUT request, xml for the api
 	def update
 		# 2 modes of operation

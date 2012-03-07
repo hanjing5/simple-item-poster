@@ -44,9 +44,9 @@ ActiveRecord::Schema.define(:version => 20120307070638) do
     t.integer  "funny_serious"
     t.integer  "sexy_disgust"
     t.string   "picture_file_name"
-    t.datetime "picture_updated_at"
-    t.integer  "picture_file_size"
     t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
     t.text     "meta_data"
     t.integer  "distance",                                            :default => 0
   end
@@ -98,9 +98,9 @@ ActiveRecord::Schema.define(:version => 20120307070638) do
     t.integer  "redeemed",                                           :default => 0
     t.integer  "ext_coupon_id"
     t.string   "picture_file_name"
-    t.datetime "picture_updated_at"
-    t.integer  "picture_file_size"
     t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
     t.text     "meta_data"
     t.decimal  "cost_per_redeem",      :precision => 8, :scale => 2, :default => 0.0
     t.integer  "displayed",                                          :default => 0
@@ -176,9 +176,9 @@ ActiveRecord::Schema.define(:version => 20120307070638) do
     t.integer  "limit"
     t.integer  "redeemed"
     t.string   "picture_link_file_name"
-    t.datetime "picture_link_updated_at"
-    t.integer  "picture_link_file_size"
     t.string   "picture_link_content_type"
+    t.integer  "picture_link_file_size"
+    t.datetime "picture_link_updated_at"
   end
 
   create_table "pictures", :force => true do |t|
@@ -198,12 +198,11 @@ ActiveRecord::Schema.define(:version => 20120307070638) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "picture_file_name"
-    t.datetime "picture_updated_at"
-    t.integer  "picture_file_size"
     t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
     t.text     "meta_data"
     t.decimal  "price",                :precision => 8, :scale => 2, :default => 0.0
-    t.integer  "clicked_through",                                    :default => 0
     t.integer  "purchased",                                          :default => 0
     t.integer  "displayed",                                          :default => 0
     t.integer  "click_through",                                      :default => 0

@@ -1,0 +1,36 @@
+<h1>Upload Product</h1>
+<%= form_for :product, @product, :url =>{ :action => "update"}, :method=>"put", :html => { :multipart => true } do |form| %>
+
+	<%= hidden_field_tag(:company_id, current_company.id) %>
+
+	<h3>Name</h3>
+        <%= form.text_field :name %>
+<!--	<h3>Product Type</h3>
+    <%= form.collection_select(:product_type, Type.all, :name,:name, {:prompt => 'Select Type'},:style => "width: 175px" ) %>-->
+
+	<h3>Link</h3>
+        <%= form.text_field :link %>
+
+	<h3>Price</h3>
+        <%= form.text_field :price %>
+
+	<h3>Description</h3>
+        <%= form.text_field :description %>
+	<br>
+	<br>
+	<br>
+	<p>
+        <%= form.file_field :picture %>
+	</p>
+        <br>
+<!--    <%= form.submit "Submit" %>-->
+<button type="submit" class="btn primary large" id="product_submit" name="commit">Submit!</button>
+
+        </p>
+<% end %>
+
+<br>
+<!--<%= link_to "Home", company_path(current_company) %> | 
+<%= link_to "Manage", company_products_path %>-->
+
+
