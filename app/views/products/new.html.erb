@@ -1,5 +1,5 @@
 <h1>Upload Product</h1>
-<%= form_for :product, @product, :url =>{ :action => "create"}, :html => { :multipart => true } do |form| %>
+<%= form_for :product, @product, :url =>{ :action => "create"},  :html => { :multipart => true } do |form| %>
 
 	<%= hidden_field_tag(:company_id, current_company.id) %>
 
@@ -24,7 +24,7 @@
 	</p>
         <br>
 <!--    <%= form.submit "Submit" %>-->
-<button type="submit" class="btn primary large" id="product_submit" name="commit">Submit!</button>
+<button type="Submit" class="btn btn-success btn-large" id="product_submit" name="commit">Add</button>
 
         </p>
 <% end %>

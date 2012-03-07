@@ -28,6 +28,9 @@ Adserver::Application.routes.draw do
   devise_for :companies, :controllers => {:registrations => "registrations"} do
     get 'companies', :to => "companies#show", :as => :company_root
   end
+
+	match "g/:encrypted_link" => "products#shop", :as => :single_shop
+
   resources :companies, :only => [:new, :show, :index, :create] do
   	resources :products do
       get 'first_product', :on=>:collection

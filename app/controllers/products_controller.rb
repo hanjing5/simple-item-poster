@@ -5,20 +5,29 @@ class ProductsController < ApplicationController
 
 	def edit
 		@product = Product.find(params[:id])
+		@encrypted_link = make_encrypted_link(@product.encrypted_link)
+		if @product.nil?
+			@new = true
+		end
 	end
 
 	# PUT request, xml for the api
 	def update
 		# 2 modes of operation
-		respond_to do |format|
-			format.html do
-				# TODO: write me!
-			end
-			
-			format.xml do
-				# TODO: write me!
-			end
+		@product = Product.find(params[:id])
+		if @product.encrypted_link.nil?
+			# encrypted link is just the product's id with 
+			# a base 36 encryption
+			@product.encrypted_link = @product.id.to_s(36)
+			@product.save
 		end
+			if @product.update_attributes(params[:product])
+				flash[:success]="Updated!"
+				redirect_to edit_company_product_path
+			else
+				flash[:error]="Failed to updated."
+				redirect_to edit_company_product_path
+			end
 	end
 
 	# GET 
@@ -38,10 +47,17 @@ class ProductsController < ApplicationController
     @product.company_id = current_company.id
 
     if @product.save
-      flash[:success] = "Submit Success!"
-      redirect_to :action => 'index', :params => {:company_id => @product.company_id}
-    else 
-      render 'new'
+			@product.encrypted_link = @product.id.to_s(36)
+			if @product.save
+				flash[:success] = "Submit Success!"
+				redirect_to edit_company_product_path(current_company.id, @product.id )
+			else
+				flash[:error]="Product didn't save properly"
+				render 'new'
+			end
+    else
+			flash[:error]="Product didn't save"
+     	render 'new'
     end
   end
 
@@ -298,4 +314,7 @@ class ProductsController < ApplicationController
         def picture_path_builder(root_url, product)
             @path = root_url + 'system/pictures/'+ product.id.to_s+'/medium/'
         end	
+				def make_encrypted_link(str)
+					"#{root_url}g/#{str}"
+				end
 end

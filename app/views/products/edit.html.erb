@@ -1,22 +1,26 @@
-<h1>Upload Product</h1>
-<%= form_for :product, @product, :url =>{ :action => "update"}, :method=>"put", :html => { :multipart => true } do |form| %>
+
+<h1>Edit</h1>
+<table class="table">
+<tr>
+<td>
+<%= form_for :product, @product, :url =>{ :action => "update"},  :html => { :multipart => true,:method=>"put" } do |form| %>
 
 	<%= hidden_field_tag(:company_id, current_company.id) %>
 
 	<h3>Name</h3>
-        <%= form.text_field :name %>
+	<%= form.text_field :name %>
 <!--	<h3>Product Type</h3>
-    <%= form.collection_select(:product_type, Type.all, :name,:name, {:prompt => 'Select Type'},:style => "width: 175px" ) %>-->
+	<%= form.collection_select(:product_type, Type.all, :name,:name, {:prompt => 'Select Type'},:style => "width: 175px" ) %>-->
 
 	<h3>Link</h3>
-        <%= form.text_field :link %>
+  <%= form.text_field :link %>
 
 	<h3>Price</h3>
-        <%= form.text_field :price %>
+  <%= form.text_field :price %>
 
 	<h3>Description</h3>
-        <%= form.text_field :description %>
-	<br>
+  <%= form.text_field :description %>
+	
 	<br>
 	<br>
 	<p>
@@ -24,7 +28,7 @@
 	</p>
         <br>
 <!--    <%= form.submit "Submit" %>-->
-<button type="submit" class="btn primary large" id="product_submit" name="commit">Submit!</button>
+<button type="Submit" class="btn btn-success btn-large" id="product_submit" name="commit">Save</button>
 
         </p>
 <% end %>
@@ -32,5 +36,30 @@
 <br>
 <!--<%= link_to "Home", company_path(current_company) %> | 
 <%= link_to "Manage", company_products_path %>-->
+</td>
+<td>
+	<h3>Share this link</h3>
+	<%= @encrypted_link %>
+<br>
+<br>
+<!-- share on fb button -->
+<!-- share on twitter button -->
+<!--Shared Link Area-->
+<button class="btn btn-primary btn-large">Share on Facebook</button>
+<button class="btn btn-primary btn-large">Share on Twitter</button>
+<br>	
+<br>
+	<h3>Picture Preview</h3>
+	<% if @product.picture_file_name %>
+	<%= image_tag @product.picture.url(:thumb) %>
+	<% else %>
+	You don't have a picture
+	<% end %>
 
+<br>
 
+<button class="btn btn-info btn-large">Preview</button>
+<button class="btn btn-info btn-large">Stats</button>
+</td>
+</tr>
+</table>
