@@ -82,8 +82,8 @@ Adserver::Application.routes.draw do
   match "/api/v1/product/purchase/success", :to => "products#purchase_success"
 
   match "/g/:encrypted_link/create", :to => "products#confirm_purchase_single_shop_create", :as=>'confirm_purchase_single_shop_create'
-  match "/g/:encrypted_link/credit_card", :to => "products#single_shop_with_credit_card", :as=>'confirm_purchase_single_shop_with_credit_card'
-  match "/g/:encrypted_link/success", :to => "products#confirm_purchase_single_shop_success", :as=>'confirm_purchase_single_shop_success'
+  match "/g/:encrypted_link/card", :to => "products#single_shop_with_credit_card", :as=>'confirm_purchase_single_shop_with_credit_card'
+  match "/g/:encrypted_link/success", :to => "products#purchase_single_success"
 
   match "/api/v1/product/user_prompt" => 'users#product_user_prompt', :as => :product_user_prompt
 

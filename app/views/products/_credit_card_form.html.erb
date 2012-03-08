@@ -4,7 +4,7 @@
     <% if flash[:error] %>
       <p class="error"><%= flash[:error] %></p>
     <% end %>
-<%= form_for("invoice", :url => confirm_purchase_single_shop_create_url) do |f| %>
+<%= form_for("card", :url => confirm_purchase_single_shop_create_url) do |f| %>
 	<%= hidden_field_tag :encrypted_link, @product.id.to_s(32) %>
 	<%= hidden_field_tag :price, @product.price %>
   <%= f.text_field :number, :placeholder=>'Number' %><br>

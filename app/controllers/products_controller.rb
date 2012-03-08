@@ -44,6 +44,55 @@ class ProductsController < ApplicationController
 	end
 
 	###########################################################
+	# store invoices, send Strip the command to buy the item
+	# update earnings for the seller
+	###########################################################
+	def confirm_purchase_single_shop_create
+		# check for payment info
+		# send to stripe for a credit card token
+		Stripe.api_key = "9sir8teed4nvvwDoSOjBgy29k4pNy3iF"
+		# get credit card info
+		# send to stripe and/or store it through post call
+		begin
+			response = Stripe::Token.create(:card=>params[:card],:currency=>"usd")
+		rescue StandardError => err
+			# catch the errors that stripe throws
+			flash[:error] = 'Credit card info errors. Please check your entry again.'
+			puts err
+			redirect_to :action=>'single_shop_with_credit_card', :layout=>false, :encrypted_link=>params[:encrypted_link]
+			return
+		end
+
+		# find the product
+		@product = Product.find(params[:encrypted_link].to_i(32))
+
+		# catch token and store that
+		@token = response.zip[7][0][1]
+		puts @token
+
+		# fire up an invoice 
+		@client_ip = request.remote_ip  
+		@i = Invoice.new(
+			:buyer_ip=>@client_ip,
+			:product_id =>@product.id,
+			:credit_card_token=>@token,
+			:price=>@product.price
+		)
+		if @i.save
+			puts 'we saved the token'
+			redirect_to :action=>'purchase_single_success', :layout=>false
+		else
+			puts 'we could not save the token'
+			redirect_to :action=>'single_shop_with_credit_card', :layout=>false, :encrypted_link=>params[:encrypted_link]
+		end
+	end
+
+	# for the single shop purchases
+	def purchase_single_success
+		render :layout=>false
+	end
+
+	###########################################################
 	# Edit is the controller for the landing page of a user
 	# who clicked on a link
 	###########################################################
@@ -207,16 +256,6 @@ class ProductsController < ApplicationController
 	end
 
 
-	###########################################################
-	# store invoices, send Strip the command to buy the item
-	# update earnings for the seller
-	###########################################################
-	def confirm_purchase_single_shop_create
-		# check for payment info
-		# send to stripe for a credit card token
-			
-		render :controler=>"products", :action=>"purchase_single_success", :layout=>false
-	end
 
 	###########################################################
 	# controls checkoutprocess for the store
@@ -364,10 +403,6 @@ class ProductsController < ApplicationController
 
   end
 	
-	# for the single shop purchases
-	def purchase_single_success
-		render :layout=>false
-	end
 
 	# for the store
 	def purchase_success

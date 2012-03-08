@@ -18,9 +18,16 @@
 
 				<%= @product.description %>
 				<br>
-				<div class="credit_card">
+				<div style="display:none" id='credit_card_form'>
+				<%= render 'credit_card_form' %>
 				</div>
-				<%= link_to 'I want this', confirm_purchase_single_shop_with_credit_card_path(:product_id=>@product.id.to_s(32)), :method => :get, :remote=>true, :class=>'btn btn-success btn-large',:id=>'want_button' %>
+				<a href='#' onclick="$('#credit_card_form').show();$('#want_button').hide();" class="btn btn-success btn-large" id='want_button'>
+					Get this
+				</a>
+
+				<!--<div class="credit_card"></div>
+				<%= link_to 'I want this', confirm_purchase_single_shop_with_credit_card_path(:product_id=>@product.id.to_s(32)), :method => :get, :remote=>true, :class=>'btn btn-success btn-large',:id=>'want_button' %>-->
+
 			</td>
 		</tr>
 	</tbody>

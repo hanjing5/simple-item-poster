@@ -5,6 +5,7 @@ describe Pic do
 end
 
 
+
 # == Schema Information
 #
 # Table name: pics
@@ -20,9 +21,9 @@ end
 #  cost_per_redeem           :integer(4)
 #  limit                     :integer(4)
 #  redeemed                  :integer(4)
-#  picture_link_file_size    :integer(4)
 #  picture_link_file_name    :string(255)
-#  picture_link_updated_at   :datetime
 #  picture_link_content_type :string(255)
+#  picture_link_file_size    :integer(4)
+#  picture_link_updated_at   :datetime
 #
 
