@@ -1,14 +1,14 @@
 <%= render "single_shop_header" %>
 <div class="container">
-<table style='text-align:center' align='center'>
+<table style='text-align:center' align='center' style="height:50em">
 	<tbody>
-		<tr>
-			<td style="text-align:center;border-top:0px solid #C0C0C0">
+		<tr style="height:50em">
+			<td style="text-align:center;border-top:0px solid #C0C0C0;">
 				<img src='<%= @product.picture_path %>' width='90%' height='90%'>
 			</td>
 		<td style="width:2em">
 		</td>
-			<td style="text-align:center;border-top:0px solid #C0C0C0;">
+			<td style="text-align:center;border-top:0px solid #C0C0C0;width:20em;">
 				<br>
 				<h1><%= @product.name %><h1>
 
@@ -21,7 +21,7 @@
 				<div style="display:none" id='credit_card_form'>
 				<%= render 'credit_card_form' %>
 				</div>
-				<a href='#' onclick="$('#credit_card_form').show();$('#want_button').hide();" class="btn btn-success btn-large" id='want_button'>
+				<a href='#' onclick="$('#credit_card_form').show(500);$('#want_button').hide();" class="btn btn-success btn-large" id='want_button'>
 					Get this
 				</a>
 

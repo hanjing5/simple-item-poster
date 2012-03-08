@@ -1,3 +1,16 @@
+			<div id="myCompanySignInModal" class="modal hide fade">
+				<div class="modal-header">
+					<a class="close" data-dismiss="modal" >&times;</a>
+					<h3>Log In</h3>
+				</div>
+              <div id="publisher_error"></div>
+<% if flash[:notice] %>
+      <p class="notice"><%= flash[:notice] %></p>
+    <% end %>
+    <% if flash[:error] %>
+      <p class="error"><%= flash[:error] %></p>
+    <% end %>
+				<div class="modal-body">
 <%= form_for("company", :url => company_session_path) do |f| %>
   <%= f.text_field :email %><br>
   <%= f.password_field :password %><br>
@@ -6,3 +19,5 @@
   <%= link_to "Forgot your password?", new_password_path('company') %>
 <% end %>
 
+				</div>
+			</div>

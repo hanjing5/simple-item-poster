@@ -1,8 +1,3 @@
-			<div id="myCompanySignUpModal" class="modal hide fade">
-				<div class="modal-header">
-					<a class="close" data-dismiss="modal" >&times;</a>
-					<h3>New Brand Sign Up</h3>
-				</div>
               <div id ="company_error"></div>
 <% if flash[:notice] %>
       <p class="notice"><%= flash[:notice] %></p>
@@ -10,15 +5,11 @@
     <% if flash[:error] %>
       <p class="error"><%= flash[:error] %></p>
     <% end %>
-				<div class="modal-body">
  <%= form_for "company", :url => company_registration_path,:remote => true do |f| %>
 
-  <%= f.text_field :name, :placeholder=>"company name" %><br>
+<!--  <%= f.text_field :name, :placeholder=>"company name" %><br>-->
   <%= f.text_field :email, :placeholder=>"email" %><br>
   <%= f.password_field :password, :placeholder=>'password' %><br>
-  <%= f.password_field :password_confirmation, :placeholder=>'password confirmation' %><br>
+<!--  <%= f.password_field :password_confirmation, :placeholder=>'password confirmation' %><br>-->
   <%= f.submit 'Sign Up', :class=>'btn btn-large btn-primary', :style=>"width:15em" %><br>
 <% end %>
-
-				</div>
-			</div>

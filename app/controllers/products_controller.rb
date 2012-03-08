@@ -98,6 +98,7 @@ class ProductsController < ApplicationController
 			@product = Product.find(params[:encrypted_link].to_i(32))
 			if @product.picture_file_name
 				@product['picture_path'] = picture_path_builder(@product) + @product.picture_file_name
+				@product['download_path'] = download_path_builder(@product) + @product.picture_file_name
 			end
 			render :layout=>false
 			return
@@ -105,6 +106,22 @@ class ProductsController < ApplicationController
 			redirect_to root_url
 		end
 	end
+
+ 	def download
+		@product = Product.find(params[:encrypted_link].to_i(32))
+		@product['picture_path'] = picture_path_builder(@product) + @product.picture_file_name
+		@product['download_path'] = download_path_builder(@product) + @product.picture_file_name
+    #send_file "#{@product.picture_path}", :type=>"image/jpeg" 
+		#require 'net/http'
+
+		#Net::HTTP.start('0.0.0.0:3000') { |http|
+		#	resp = http.get(@product['download_path'])
+		#	open("fun.jpg", "wb") { |file|
+		#		file.write(resp.body)
+		#	 }
+		#}
+		#puts "Yay!!"
+  end
 
 	###########################################################
 	# Edit is the controller for the landing page of a user
@@ -435,6 +452,9 @@ class ProductsController < ApplicationController
 
         def picture_path_builder(product)
             @path = root_url + 'system/pictures/'+ product.id.to_s+'/medium/'
+        end	
+        def download_path_builder(product)
+            @path = '/system/pictures/'+ product.id.to_s+'/original/'
         end	
 				def make_encrypted_link(str)
 					"#{root_url}g/#{str}"

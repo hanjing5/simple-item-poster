@@ -1,19 +1,20 @@
 <!-- Company show page -->
-<h1>Welcome, <%= current_company.name.capitalize %>!</h1>
-
+<div class="row">
+	<div class="span4">
+		<h1>Welcome, <%= current_company.name.capitalize %>!</h1>
+	</div>
+	<div class="span4 offset4">
+		<h2>Products: <%= @products_count %></h2>
+	</div>
+</div>
 <hr>
+
 <table style="width:100%; text-align:center">
 	<tbody>
 		<tr>
 			<td style="width:33%">
-<div class="products-previews">
-  <h2>Products</h2>
-	<h1><%= @products_count %></h1>
-	<% if @correct_company %>
-      <%= link_to "Product List", company_products_path(current_company) %>
-		| <%= link_to "New Product", company_product_path(current_company, 'new') %>
-	<% end %>
-</div>
+<!--<div class="products-previews">
+</div>-->
 			</td>
 		</tr>
 	</tbody>
@@ -21,7 +22,7 @@
 
 <div class="row">
 	<div class="span4">
-		<h1>Products</h1>
+		<h2>Products</h2>
 	</div>
     <div class="span4 offset4" style="text-align:right">
 <%= link_to "Add Product", company_product_path(current_company, "new"), :class=>"btn btn-success btn-large" %>
@@ -33,7 +34,7 @@
 	<thead>
         <tr>
                 <th style="padding:0.5em">
-                Image
+                Preview
                 </th>
                 <th style="padding:0.5em">
                 Name

@@ -6,16 +6,19 @@
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="/" >Gamertiser!</a>
+      <a class="brand" href="/" >Gamertiser</a>
       <ul class="nav">
 		
 		<% if company_signed_in? %>
 			<!--<li class=''><%= link_to "My Brand's Dashboard", current_company %><li>-->
 			<li class=''><%= link_to "Products", company_products_path(current_company) %><li>
+			<li class=''><%= link_to "Account", company_products_path(current_company) %><li>
 			<li class=""><%= link_to "Logout", destroy_company_session_path, :method => :delete, :class => 'links' %></li>
 		<% else %>
 			<!--<li class=""><%= link_to "Brand Partners", companies_path %></li>
 			<li class=""><%= link_to "Platform Partners", publishers_path %></li>-->
+			<li style=""><%= link_to "Demo", "#" %></li>
+			<li><a data-toggle="modal" href="#myCompanySignInModal">Log In</a></li>
 		<% end %>
 	</ul>
     </div>
@@ -27,3 +30,4 @@
 <br />
 <br />
 
+<%= render "companies/sign_in_form" %>
