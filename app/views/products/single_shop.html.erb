@@ -1,0 +1,29 @@
+<%= render "single_shop_header" %>
+<div class="container">
+<table style='text-align:center' align='center'>
+	<tbody>
+		<tr>
+			<td style="text-align:center;border-top:0px solid #C0C0C0">
+				<img src='<%= @product.picture_path %>' width='90%' height='90%'>
+			</td>
+		<td style="width:2em">
+		</td>
+			<td style="text-align:center;border-top:0px solid #C0C0C0;">
+				<br>
+				<h1><%= @product.name %><h1>
+
+				<h1 style="color:#E56717">
+					<%= number_to_currency @product.price %>
+				</h1>
+
+				<%= @product.description %>
+				<br>
+				<div class="credit_card">
+				</div>
+				<%= link_to 'I want this', confirm_purchase_single_shop_with_credit_card_path(:product_id=>@product.id.to_s(32)), :method => :get, :remote=>true, :class=>'btn btn-success btn-large',:id=>'want_button' %>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+<%= render "single_shop_footer" %>

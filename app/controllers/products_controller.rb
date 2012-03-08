@@ -4,14 +4,43 @@ class ProductsController < ApplicationController
 	skip_before_filter :verify_authenticity_token, :except => [:create, :destroy, :update]
 	
 	###########################################################
-	# Shop is the controller for the single OUT OF ENVIRONMENT
+	# single_shop is the controller for the single OUT OF ENVIRONMENT
 	# purchase page
+	# The main difference between this and confirm_purchase
+	# methods is that this one doesn't care if there is no user
+	# or shipping address
 	###########################################################
-	def shop
+	def single_shop
 		# unencypt the id
 		@product_id = params[:encrypted_link].to_i(32)
 		@product = Product.find(@product_id)
+		@product['picture_path'] = ''
+		if @product.picture_file_name
+			@product['picture_path'] = picture_path_builder(root_url, @product) + @product.picture_file_name
+		end
 		render :layout => false	
+	end
+
+	###########################################################
+	# Just in case user does not have javascript enabled
+	###########################################################
+	def single_shop_with_credit_card
+		respond_to do |format|
+			format.js do
+				@product = Product.find(params[:product_id].to_i(32))
+				return
+			end
+			format.html do
+				@product_id = params[:encrypted_link].to_i(32)
+				@product = Product.find(@product_id)
+				@product['picture_path'] = ''
+				if @product.picture_file_name
+					@product['picture_path'] = picture_path_builder(root_url, @product) + @product.picture_file_name
+				end
+				render :layout => false	
+				return
+			end
+		end
 	end
 
 	###########################################################
@@ -174,15 +203,26 @@ class ProductsController < ApplicationController
 				@products << rand_record
 		    end
 	    end
-
 		render :layout => false
 	end
 
-	def confirm_purchase
-		# get user info (credit card and name)
+
+	###########################################################
+	# store invoices, send Strip the command to buy the item
+	# update earnings for the seller
+	###########################################################
+	def confirm_purchase_single_shop_create
+		# check for payment info
+		# send to stripe for a credit card token
 			
-		# dump into stats database
-		# api call to Stripe
+		render :controler=>"products", :action=>"purchase_single_success", :layout=>false
+	end
+
+	###########################################################
+	# controls checkoutprocess for the store
+	# need shipping address and credit card
+	###########################################################
+	def confirm_purchase
 		if current_user.nil? and params[:user_id] == '-1'
 			puts 'User ID doesnt exists, routing to make user register'
 			redirect_to :controller=>'users',:action=>'product_user_prompt', :layout=>false, :product_id=>params[:product_id]
@@ -195,13 +235,12 @@ class ProductsController < ApplicationController
 			puts 'User credit card doesnt exists, routing to make user log credit card'
 			@product_id = params[:product_id]	
 			redirect_to :controller=>'users',:action=>'credit_card_new', :product_id=>@product_id,:layout=>false
-		else 
-
+		else
+			# debug
 			puts "Credit Card #{current_user.credit_card_token}"
 			puts params[:user_id]
 			puts 'Passed all test, lets confirm'
 				
-
 			@product = Product.find_by_id(params[:product_id])
 			@product['picture_path'] = picture_path_builder(root_url, @product) + @product.picture_file_name
 			@default_address = current_user.shipping_addresses.find_by_default(true)
@@ -215,6 +254,10 @@ class ProductsController < ApplicationController
 		end
 	end
 
+
+	###########################################################
+	# creates the invoice. basically the user has bought it
+	###########################################################
 	def confirm_purchase_create
 		@i = Invoice.new(params[:invoice])
 		if @i.save
@@ -320,6 +363,13 @@ class ProductsController < ApplicationController
 	end
 
   end
+	
+	# for the single shop purchases
+	def purchase_single_success
+		render :layout=>false
+	end
+
+	# for the store
 	def purchase_success
 		render :layout=>false
 	end

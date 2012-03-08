@@ -1,0 +1,16 @@
+   <% if flash[:notice] %>
+      <p class="notice"><%= flash[:notice] %></p>
+    <% end %>
+    <% if flash[:error] %>
+      <p class="error"><%= flash[:error] %></p>
+    <% end %>
+<%= form_for("invoice", :url => confirm_purchase_single_shop_create_url) do |f| %>
+	<%= hidden_field_tag :encrypted_link, @product.id.to_s(32) %>
+	<%= hidden_field_tag :price, @product.price %>
+  <%= f.text_field :number, :placeholder=>'Number' %><br>
+  <%= f.text_field :cvc,:placeholder=>'CVC on the back of your card'%><br>
+  Expiration Date(MM/YYYY) 
+  <%= f.text_field :exp_month, :style=>'width:2em'%> / 
+  <%= f.text_field :exp_year, :style=>'width:4em'%><br>
+  <%= f.submit 'Buy It!', :class=>'btn btn-large btn-success', :style=>"width:15em" %><br>
+<% end %>
