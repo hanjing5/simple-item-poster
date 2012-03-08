@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
 
+	require 'digest/md5'
 	# use this or add protect_from_forger :except=> :create
 	skip_before_filter :verify_authenticity_token, :except => [:create, :destroy, :update]
 	
@@ -16,7 +17,7 @@ class ProductsController < ApplicationController
 		@product = Product.find(@product_id)
 		@product['picture_path'] = ''
 		if @product.picture_file_name
-			@product['picture_path'] = picture_path_builder(root_url, @product) + @product.picture_file_name
+			@product['picture_path'] = picture_path_builder(@product) + @product.picture_file_name
 		end
 		render :layout => false	
 	end
@@ -80,7 +81,9 @@ class ProductsController < ApplicationController
 		)
 		if @i.save
 			puts 'we saved the token'
-			redirect_to :action=>'purchase_single_success', :layout=>false
+			# we pass the invoice id so purchase single success have a way to get the invoice
+  		@digest = Digest::MD5.hexdigest("#{@i.id}#{@i.credit_card_token}#{params[:encrypted_link]}#{@i.created_at}")
+			redirect_to :action=>'purchase_single_success', :layout=>false, :id=>@i.id.to_s(32), :encrypted_link=>params[:encrypted_link], :success => @digest
 		else
 			puts 'we could not save the token'
 			redirect_to :action=>'single_shop_with_credit_card', :layout=>false, :encrypted_link=>params[:encrypted_link]
@@ -88,8 +91,19 @@ class ProductsController < ApplicationController
 	end
 
 	# for the single shop purchases
-	def purchase_single_success
-		render :layout=>false
+	def purchase_single_success		
+		@i = Invoice.find(params[:id].to_i(32))
+  	@digest = Digest::MD5.hexdigest("#{@i.id}#{@i.credit_card_token}#{params[:encrypted_link]}#{@i.created_at}")
+		if @digest = params[:success]
+			@product = Product.find(params[:encrypted_link].to_i(32))
+			if @product.picture_file_name
+				@product['picture_path'] = picture_path_builder(@product) + @product.picture_file_name
+			end
+			render :layout=>false
+			return
+		else
+			redirect_to root_url
+		end
 	end
 
 	###########################################################
@@ -248,7 +262,7 @@ class ProductsController < ApplicationController
 		for type in Type.all do
 			rand_record = Product.find_by_product_type(type.name)
 		    if rand_record
-				rand_record['picture_path'] = picture_path_builder(root_url, rand_record) + rand_record.picture_file_name
+				rand_record['picture_path'] = picture_path_builder(rand_record) + rand_record.picture_file_name
 				@products << rand_record
 		    end
 	    end
@@ -281,7 +295,7 @@ class ProductsController < ApplicationController
 			puts 'Passed all test, lets confirm'
 				
 			@product = Product.find_by_id(params[:product_id])
-			@product['picture_path'] = picture_path_builder(root_url, @product) + @product.picture_file_name
+			@product['picture_path'] = picture_path_builder(@product) + @product.picture_file_name
 			@default_address = current_user.shipping_addresses.find_by_default(true)
 			@user = current_user
 			puts @user
@@ -419,7 +433,7 @@ class ProductsController < ApplicationController
             s.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil ? false : true
         end
 
-        def picture_path_builder(root_url, product)
+        def picture_path_builder(product)
             @path = root_url + 'system/pictures/'+ product.id.to_s+'/medium/'
         end	
 				def make_encrypted_link(str)

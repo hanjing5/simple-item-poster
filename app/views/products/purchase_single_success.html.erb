@@ -1,1 +1,15 @@
-SUCCESS!
+<%= render "single_shop_header" %>
+<p>
+Success! Here are your stuff. You should also receive another copy in your email soon
+</p>
+
+<p>
+<%= link_to "#{@product.link}", @product.link %>
+</p>
+
+<p>
+<% if @product.picture_file_name %>
+<%= link_to "#{@product.picture_path}", @product.picture_path %>
+<% end %>
+</p>
+<%= render "single_shop_footer" %>
