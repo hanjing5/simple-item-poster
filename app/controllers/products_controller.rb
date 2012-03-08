@@ -15,6 +15,7 @@ class ProductsController < ApplicationController
 		# unencypt the id
 		@product_id = params[:encrypted_link].to_i(32)
 		@product = Product.find(@product_id)
+		@product.increment!(:displayed)
 		@product['picture_path'] = ''
 		if @product.picture_file_name
 			@product['picture_path'] = picture_path_builder(@product) + @product.picture_file_name
@@ -34,9 +35,10 @@ class ProductsController < ApplicationController
 			format.html do
 				@product_id = params[:encrypted_link].to_i(32)
 				@product = Product.find(@product_id)
+				@product.increment!(:displayed)
 				@product['picture_path'] = ''
 				if @product.picture_file_name
-					@product['picture_path'] = picture_path_builder(root_url, @product) + @product.picture_file_name
+					@product['picture_path'] = picture_path_builder(@product) + @product.picture_file_name
 				end
 				render :layout => false	
 				return
@@ -73,16 +75,19 @@ class ProductsController < ApplicationController
 
 		# fire up an invoice 
 		@client_ip = request.remote_ip  
+
 		@i = Invoice.new(
 			:buyer_ip=>@client_ip,
 			:product_id =>@product.id,
 			:credit_card_token=>@token,
 			:price=>@product.price
 		)
+
 		if @i.save
 			puts 'we saved the token'
 			# we pass the invoice id so purchase single success have a way to get the invoice
   		@digest = Digest::MD5.hexdigest("#{@i.id}#{@i.credit_card_token}#{params[:encrypted_link]}#{@i.created_at}")
+			@product.incremented!(:purchased)
 			redirect_to :action=>'purchase_single_success', :layout=>false, :id=>@i.id.to_s(32), :encrypted_link=>params[:encrypted_link], :success => @digest
 		else
 			puts 'we could not save the token'

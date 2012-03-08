@@ -1,10 +1,14 @@
 <!-- Company show page -->
 <div class="row">
 	<div class="span4">
+	<% if current_company.name %>
 		<h1>Welcome, <%= current_company.name.capitalize %>!</h1>
+	<% else %>
+		<h1>Welcome</h1>
+	<% end %>
 	</div>
 	<div class="span4 offset4">
-		<h2>Products: <%= @products_count %></h2>
+		<h2>Total: <%= @products_count %></h2>
 	</div>
 </div>
 <hr>
@@ -22,7 +26,7 @@
 
 <div class="row">
 	<div class="span4">
-		<h2>Products</h2>
+		<h2>List of Products</h2>
 	</div>
     <div class="span4 offset4" style="text-align:right">
 <%= link_to "Add Product", company_product_path(current_company, "new"), :class=>"btn btn-success btn-large" %>
@@ -67,7 +71,7 @@
         <%= link_to "#{product.name}", edit_company_product_path(current_company, product.id) %>
         </td>
         <td style="padding:0.5em">
-        <%= product.link %>
+        <%= root_url + "g/" + product.encrypted_link %>
 				</td>
         <td style="padding:0.5em">
         <%= number_to_currency product.price %>
