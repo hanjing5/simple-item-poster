@@ -41,6 +41,7 @@ Adserver::Application.routes.draw do
     end
   end
 
+
   # resources :ads, :only => [:index]
   resources :ads, :only => [:api_login] do
       post 'api_login', :on => :collection

@@ -62,6 +62,7 @@ class ProductsController < ApplicationController
 			# catch the errors that stripe throws
 			flash[:error] = 'Credit card info errors. Please check your entry again.'
 			puts err
+			
 			redirect_to :action=>'single_shop_with_credit_card', :layout=>false, :encrypted_link=>params[:encrypted_link]
 			return
 		end
@@ -77,6 +78,7 @@ class ProductsController < ApplicationController
 		@client_ip = request.remote_ip  
 
 		@i = Invoice.new(
+			:email => params[:card][:email],
 			:buyer_ip=>@client_ip,
 			:product_id =>@product.id,
 			:credit_card_token=>@token,
@@ -111,6 +113,7 @@ class ProductsController < ApplicationController
 			redirect_to root_url
 		end
 	end
+
 
  	def download
 		@product = Product.find(params[:encrypted_link].to_i(32))
@@ -161,10 +164,6 @@ class ProductsController < ApplicationController
 				flash[:error]="Failed to updated."
 				redirect_to edit_company_product_path
 			end
-	end
-
-	def preview
-		render :layout => false
 	end
 
 	# GET 

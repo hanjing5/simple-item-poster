@@ -1,10 +1,10 @@
-   <% if flash[:notice] %>
-      <p class="notice"><%= flash[:notice] %></p>
-    <% end %>
-    <% if flash[:error] %>
-      <p class="error"><%= flash[:error] %></p>
-    <% end %>
-<%= form_for("card", :url => confirm_purchase_single_shop_create_url) do |f| %>
+<% if flash[:notice] %>
+	<p class="notice"><%= flash[:notice] %></p>
+<% end %>
+<% if flash[:error] %>
+	<p class="error"><%= flash[:error] %></p>
+<% end %>
+<%= form_for("card", :url => confirm_purchase_single_shop_create_path) do |f| %>
 	<%= hidden_field_tag :encrypted_link, @product.id.to_s(32) %>
 	<%= hidden_field_tag :price, @product.price %>
   <%= f.text_field :number, :placeholder=>'Number: 4242 4242 4242 4242' %>
@@ -12,5 +12,7 @@
   Expiration Date(MM/YYYY) <br>
   <%= f.text_field :exp_month, :style=>'width:2em'%> / 
   <%= f.text_field :exp_year, :style=>'width:4em'%><br>
+	<%= f.text_field :email,:placeholder=>'Email: so we can email it to you!' %><br>
+	<p>Spam are for jerks and jerks we are not.</p>
   <%= f.submit 'Buy It!', :class=>'btn btn-large btn-success', :style=>"width:15em" %><br>
 <% end %>
