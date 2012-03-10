@@ -2,8 +2,8 @@ class ChangeColumnsInCouponStat < ActiveRecord::Migration
   def self.up
 	remove_column :coupon_stats, :interactions
 	add_column :coupon_stats, :game_id, :integer
-	add_column :coupon_stats, :click_through, :boolean, :default=>0
-	add_column :coupon_stats, :impression, :boolean, :default=>0
+	add_column :coupon_stats, :click_through, :boolean, :default=>false
+	add_column :coupon_stats, :impression, :boolean, :default=>false
   end
 
   def self.down
