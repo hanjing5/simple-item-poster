@@ -3,15 +3,15 @@ class CompaniesController < ApplicationController
 
   def show
     
-	  @toolbar_hash = {:company => 'active'}
-  	@company = current_company
-    @products_count = @company.products.count
+	@toolbar_hash = {:company => 'active'}
+	@company = current_company
+	@products_count = @company.products.count
     
     if @products_count == 0
       # if you dont have a product, we want to add a product before 
       # accessing your stats
-      redirect_to first_product_company_products_path(current_company.id)
-      return
+	redirect_to first_product_company_products_path(current_company.id)
+	return
     end
 
     @correct_company = false
@@ -41,5 +41,26 @@ class CompaniesController < ApplicationController
     @toolbar_hash_company = 'active'
   	@companies = Company.order("name DESC")
   end
+
+	def account
+		@company = current_company
+	end
+	
+	def update_password
+		@company = Company.find(current_company.id)
+		#if @company.password != params[:companies][:password_confirmation]
+		#	flash[:error] = 'Old password didnt match. Please check again.'
+		#	redirect_to account_companies_path
+		#	return
+		#end
+		if @company.update_attributes(params[:companies])
+			sign_in @company, :bypass=>true
+			flash[:success] = 'Success! Password changed!'
+			redirect_to account_companies_path
+		else
+			flash[:error] = 'Something went wrong. Please try again.'
+			redirect_to account_companies_path
+		end
+	end
 
 end

@@ -25,22 +25,24 @@ Adserver::Application.routes.draw do
   # new_game_token_url(:publisher_id => current_publisher.id, :game_id => game.id)
   match 'publishers/:publisher_id/games/:game_id/new_token' => 'games#new_token', :as => :new_game_token
 
-  devise_for :companies, :controllers => {:registrations => "registrations"} do
+  devise_for :companies, :controllers => {:registrations => "registrations", :passwords=>"passwords"} do
     get 'companies', :to => "companies#show", :as => :company_root
   end
+	resources :passwords
 
 	match "g/:encrypted_link" => "products#single_shop", :as => :single_shop
 
-  resources :companies, :only => [:new, :show, :index, :create] do
-  	resources :products do
-      get 'first_product', :on=>:collection
-    end
-  	resources :coupons  # name space to change url 
-  	resources :ads do
-      post 'api_login', :on => :collection
-    end
-  end
-
+	resources :companies, :only => [:new, :show, :index, :create] do
+		get 'account', :on=>:collection
+		post 'update_password', :on=>:collection
+		resources :products do
+			get 'first_product', :on=>:collection
+		end
+  		resources :coupons  # name space to change url 
+	  	resources :ads do
+			post 'api_login', :on => :collection
+		end
+	end
 
   # resources :ads, :only => [:index]
   resources :ads, :only => [:api_login] do
@@ -48,8 +50,8 @@ Adserver::Application.routes.draw do
   end
 
   devise_for :users, :controllers => {:registrations => "registrations", :sessions=>"sessions"} do
-		get 'users', :to => "products#inventory_display", :as => :user_root
-  	get 'users/sign_out'=>'devise/sessions#destroy'
+	get 'users', :to => "products#inventory_display", :as => :user_root
+	get 'users/sign_out'=>'devise/sessions#destroy'
   end
 
   resources :users, :only => [:new, :show, :index] do
