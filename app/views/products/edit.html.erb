@@ -1,4 +1,9 @@
+<table>
+<tr>
+<td>
 <h1>Edit</h1>
+</td>
+<td>
     <% if flash[:success] %>
       <div class="alert alert-success">
 				<%= flash[:success] %>
@@ -10,6 +15,9 @@
 				<%= flash[:error] %>
 			</div>
     <% end %>
+</td>
+</tr>
+</table>
 <table class="table">
 <tr>
 <td>
@@ -49,7 +57,29 @@
 </td>
 <td>
 	<h3>Share this link</h3>
-	<font><%= @encrypted_link %></font>
+<div id="copy">
+<pre id="clip_text">
+<%= @encrypted_link %>
+</pre>
+</div>
+
+<button type="button" id="copy" name="copy" value="Copy to Clipboard" class="btn">copy</button>
+<script>
+	//create client
+	var clip = new ZeroClipboard.Client();
+	//event
+	clip.addEventListener('mousedown',function() {
+		//clip.setText(document.getElementById('box-content').html());
+		clip.setText("<%= @encrypted_link %>");
+	});
+	clip.addEventListener('complete',function(client,text) {
+		alert('copied: ' + text);
+	});
+	//glue it to the button
+	clip.glue('copy');
+</script>
+
+
 <%= link_to 'Copy', "#{@encrypted_link}", :class=>"btn btn-info btn-large" %>
 <%= link_to 'Preview', "#{@encrypted_link}", :class=>"btn btn-info btn-large",:target=>'_blank' %>
 <br>

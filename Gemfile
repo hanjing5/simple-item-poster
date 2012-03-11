@@ -9,12 +9,12 @@ gem "thinking-sphinx", "~>2.0.4"
 gem "flying-sphinx" , "~>0.6.0"
 gem "jquery-rails", "~> 1.0.19"
 gem 'devise'
-gem "paperclip", "~> 2.0"
 gem "json_builder", "~> 3.0.6"
 gem 'mysql2', '~> 0.2.17'
 gem 'tlsmail'
 gem 'stripe'
 # gem "activerecord-import", "~> 0.2.8"
+gem 'paperclip', :git => 'git://github.com/thoughtbot/paperclip.git'
 
 group :development do
   gem 'rspec-rails', '2.0.1'
