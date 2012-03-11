@@ -24,6 +24,7 @@
 class Product < ActiveRecord::Base
 	belongs_to :company
 
+	#has_attached_file :picture, :styles => { :medium => "300x300>", :thumb => "100x100>" }
 	has_attached_file :picture, :styles => { :medium => "300x300>", :thumb => "100x100>" }
 	
 	attr_accessible :company_id, :name, :description, :meta_data, :picture,:price,:product_type, :link

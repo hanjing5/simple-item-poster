@@ -89,7 +89,7 @@ class ProductsController < ApplicationController
 			puts 'we saved the token'
 			# we pass the invoice id so purchase single success have a way to get the invoice
   		@digest = Digest::MD5.hexdigest("#{@i.id}#{@i.credit_card_token}#{params[:encrypted_link]}#{@i.created_at}")
-			@product.incremented!(:purchased)
+			@product.increment!(:purchased)
 			redirect_to :action=>'purchase_single_success', :layout=>false, :id=>@i.id.to_s(32), :encrypted_link=>params[:encrypted_link], :success => @digest
 		else
 			puts 'we could not save the token'
@@ -158,10 +158,10 @@ class ProductsController < ApplicationController
 
 		end
 			if @product.update_attributes(params[:product])
-				flash[:success]="Updated!"
+				flash[:success]="Update Success!"
 				redirect_to edit_company_product_path
 			else
-				flash[:error]="Failed to updated."
+				flash[:error]="Failed to updated!"
 				redirect_to edit_company_product_path
 			end
 	end
