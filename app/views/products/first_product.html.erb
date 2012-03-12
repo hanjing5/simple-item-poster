@@ -1,18 +1,20 @@
 <h1>Add your first product</h1>
+<hr>
 <%= form_for :product, @product, :url =>{ :action => "create"}, :html => { :multipart => true } do |form| %>
 
 	<%= hidden_field_tag(:company_id, current_company.id) %>
 
 	<h3>Name</h3>
-        <%= form.text_field :name %>
+        <%= form.text_field :name, :placeholder=>'Awesome Media' %>
 <!--	<h3>Product Type</h3>
     <%= form.collection_select(:product_type, Type.all, :name,:name, {:prompt => 'Select Type'},:style => "width: 175px" ) %>-->
 
 	<h3>Link</h3>
-        <%= form.text_field :link %>
+        <%= form.text_field :link, :placeholder=>'http://exampleofwallpaper.com' %>
 
 	<h3>Price</h3>
-        <%= form.text_field :price %>
+        <font style="font-size:1.5em">$</font> <%= form.text_field :price %>
+
 
 	<h3>Description</h3>
         <%= form.text_field :description %>

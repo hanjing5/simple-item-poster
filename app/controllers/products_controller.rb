@@ -14,9 +14,18 @@ class ProductsController < ApplicationController
 	def single_shop
 		# unencypt the id
 		@product_id = params[:encrypted_link].to_i(32)
+		
 		@product = Product.find(@product_id)
-		@product.increment!(:displayed)
+
+		# prepare the picture
 		@product['picture_path'] = ''
+		
+		# simple impression increment
+		@product.increment!(:displayed)
+
+		# sophisticated stats database increment
+		create_stats(@product, :impression)
+
 		if @product.picture_file_name
 			@product['picture_path'] = picture_path_builder(@product) + @product.picture_file_name
 		end
@@ -24,9 +33,16 @@ class ProductsController < ApplicationController
 	end
 
 	###########################################################
+	# format.js just do a ajax/jquery call to show the credit 
+	# card form
 	# Just in case user does not have javascript enabled
+	# we show a new page with the credit card form shown already
 	###########################################################
 	def single_shop_with_credit_card
+
+		# sophisticated stats database increment
+		create_stats(@product, :click_through)
+
 		respond_to do |format|
 			format.js do
 				@product = Product.find(params[:product_id].to_i(32))
@@ -85,11 +101,17 @@ class ProductsController < ApplicationController
 			:price=>@product.price
 		)
 
+
 		if @i.save
 			puts 'we saved the token'
 			# we pass the invoice id so purchase single success have a way to get the invoice
   		@digest = Digest::MD5.hexdigest("#{@i.id}#{@i.credit_card_token}#{params[:encrypted_link]}#{@i.created_at}")
+			
+			# increment simple reporting
 			@product.increment!(:purchased)
+			# sophisticated stats database increment
+			create_stats(@product, :purchase)
+
 			redirect_to :action=>'purchase_single_success', :layout=>false, :id=>@i.id.to_s(32), :encrypted_link=>params[:encrypted_link], :success => @digest
 		else
 			puts 'we could not save the token'
@@ -462,5 +484,15 @@ class ProductsController < ApplicationController
         end	
 				def make_encrypted_link(str)
 					"#{root_url}g/#{str}"
+				end
+
+				def create_stats(product, symbol)
+					@ip = request.remote_ip
+					ProductStat.create!(
+						:product_id => product.id,
+						:company_id => product.company_id,
+						:ip => @ip,
+						symbol => true
+					)
 				end
 end

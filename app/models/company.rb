@@ -1,3 +1,18 @@
+class Company < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :paypal_email
+  
+  # Relational stuff
+  has_many :ads
+  has_many :coupons
+  has_many :products
+end
+
 # == Schema Information
 #
 # Table name: companies
@@ -16,19 +31,6 @@
 #  name                   :string(255)
 #  created_at             :datetime
 #  updated_at             :datetime
+#  paypal_email           :string(255)
 #
 
-class Company < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :name
-  
-  # Relational stuff
-  has_many :ads
-  has_many :coupons
-  has_many :products
-end

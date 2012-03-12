@@ -1,24 +1,13 @@
-<table>
-<tr>
-<td>
+<div class="row">
+<div class="span4">
 <h1>Edit</h1>
-</td>
-<td>
-    <% if flash[:success] %>
-      <div class="alert alert-success">
-				<%= flash[:success] %>
-			</div>
-    <% end %>
-    
-    <% if flash[:error] %>
-      <div class="alert alert-error">
-				<%= flash[:error] %>
-			</div>
-    <% end %>
-</td>
-</tr>
-</table>
+</div>
+<div class="span4 offset4">
+Price: <%= number_to_currency @product.price %> Sold: <%= @product.purchased %> Earnings: <%= number_to_currency(@product.price * @product.purchased) %>
+</div>
+</div>
 <table class="table">
+<%= render 'shared/info' %>
 <tr>
 <td>
 <%= form_for :product, @product, :url =>{ :action => "update"},  :html => { :multipart => true,:method=>"put" } do |form| %>
@@ -55,15 +44,12 @@
 <!--<%= link_to "Home", company_path(current_company) %> | 
 <%= link_to "Manage", company_products_path %>-->
 </td>
-<td>
-	<h3>Share this link</h3>
-<div id="copy">
-<pre id="clip_text">
-<%= @encrypted_link %>
-</pre>
-</div>
 
-<button type="button" id="copy" name="copy" value="Copy to Clipboard" class="btn">copy</button>
+<td>
+<h3>Share this link</h3>
+<pre id="copy" class="prettyprint linenums"><font style="font-size:1.5em"><%= @encrypted_link %></font></pre>
+
+<button id="copy" name="copy" value="Copy to Clipboard" class="btn btn-info btn-large">copy</button>
 <script>
 	//create client
 	var clip = new ZeroClipboard.Client();
@@ -73,34 +59,39 @@
 		clip.setText("<%= @encrypted_link %>");
 	});
 	clip.addEventListener('complete',function(client,text) {
-		alert('copied: ' + text);
+		alert('Copied to Clipboard: ' + text);
 	});
 	//glue it to the button
 	clip.glue('copy');
 </script>
 
-
-<%= link_to 'Copy', "#{@encrypted_link}", :class=>"btn btn-info btn-large" %>
 <%= link_to 'Preview', "#{@encrypted_link}", :class=>"btn btn-info btn-large",:target=>'_blank' %>
 <br>
 <br>
 <!-- share on fb button -->
 <!-- share on twitter button -->
 <!--Shared Link Area-->
-<button class="btn btn-primary btn-large">Share on Facebook</button>
-<button class="btn btn-primary btn-large">Share on Twitter</button>
+<!--<a class='btn btn-primary btn-large'  href="http://twitter.com/home?status=Buy my <%= @product.name %> on food.io at <%= @encrypted_link %> " target="_blank" title="Click to share this post on Twitter">Share on Twitter</a>-->
+
+<a href="javascript:window.open(%22http://www.facebook.com/dialog/feed?app_id=114816261931958&amp;name=game&amp;caption=Just $2.&amp;redirect_uri=https://gamertiser.com/links&amp;display=popup&amp;message=Buy%20game%20on%20link%21&amp;link=https%3A%2F%2Fgamertiser.com%2Fl%2FUWo%22,%22Share%22,%22width=500,height=250,scrollbars=yes%22);" 
+	class="btn btn-info btn-large">
+	Share on Facebook
+</a>
+<a href="javascript:window.open(%22http://twitter.com/share?text=Buy%20game%20on%20Gumroad%21&amp;url=https%3A%2F%2Fgamertiser.com%2Fl%2FUWo%22,%22Share%22,%22width=500,height=250,scrollbars=yes%22)" 
+	class="btn btn-info btn-large">
+		Share on Tweet
+</a>
+
 <br>	
 <br>
 	<h4>Picture Preview</h4>
 	<% if @product.picture_file_name %>
-	<%= image_tag @product.picture.url(:thumb) %>
+		<%= image_tag @product.picture.url(:thumb) %>
 	<% else %>
-	You don't have a picture
+		You don't have a picture
 	<% end %>
-
-<br>
-
-<button class="btn btn-info btn-large">Stats</button>
+	<br>
+	<button class="btn btn-info btn-large">Stats</button>
 </td>
 </tr>
 </table>

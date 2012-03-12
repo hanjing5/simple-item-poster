@@ -1,3 +1,16 @@
+require 'spec_helper'
+
+describe Company do
+ it "should create right" do
+   lambda do
+     @company = Factory(:company)
+   end.should change(Company, :count).by(1)
+   @company.id.should == 1
+
+ end
+
+end
+
 # == Schema Information
 #
 # Table name: companies
@@ -16,17 +29,6 @@
 #  name                   :string(255)
 #  created_at             :datetime
 #  updated_at             :datetime
+#  paypal_email           :string(255)
 #
 
-require 'spec_helper'
-
-describe Company do
- it "should create right" do
-   lambda do
-     @company = Factory(:company)
-   end.should change(Company, :count).by(1)
-   @company.id.should == 1
-
- end
-
-end

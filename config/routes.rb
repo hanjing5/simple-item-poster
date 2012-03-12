@@ -32,8 +32,10 @@ Adserver::Application.routes.draw do
 
 	match "g/:encrypted_link" => "products#single_shop", :as => :single_shop
 
-	resources :companies, :only => [:new, :show, :index, :create] do
+	resources :companies, :only => [:new, :show, :index, :create, :edit,:update] do
 		get 'account', :on=>:collection
+		get 'edit_password', :on=>:collection
+		get 'bank', :on=>:collection
 		post 'update_password', :on=>:collection
 		resources :products do
 			get 'first_product', :on=>:collection

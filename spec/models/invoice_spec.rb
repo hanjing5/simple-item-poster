@@ -5,6 +5,7 @@ describe Invoice do
 end
 
 
+
 # == Schema Information
 #
 # Table name: invoices
@@ -18,5 +19,6 @@ end
 #  created_at          :datetime
 #  updated_at          :datetime
 #  buyer_ip            :string(255)
+#  email               :string(255)
 #
 

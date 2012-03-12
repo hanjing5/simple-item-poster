@@ -42,4 +42,40 @@ class CompaniesController < ApplicationController
   	@companies = Company.order("name DESC")
   end
 
+	###########################################################
+	# Edit is the controller for the landing page of a user
+	# who clicked on a link
+	###########################################################
+	def edit
+		@company = current_company
+	end
+
+	###########################################################
+	# Update is the controller for a user updating the link/
+	# product he/she is trying to sell
+	###########################################################
+	def update
+		@company = current_company
+			if @company.update_attributes(params[:company])
+				flash[:success]="Update Success!"
+				redirect_to account_companies_path
+			else
+				flash[:error]="Failed to updated!"
+				redirect_to account_companies_path
+			end
+	end
+
+	def edit_password
+		@header_edit_password = 'active'
+	end
+
+	def bank
+		@header_bank = 'active'
+	end
+
+
+	def account
+		redirect_to edit_password_companies_path
+	end
+
 end

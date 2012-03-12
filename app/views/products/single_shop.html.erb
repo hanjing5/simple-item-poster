@@ -1,5 +1,47 @@
 <%= render "single_shop_header" %>
 <div class="container">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="row-fluid">
+				<div class="span6">
+					<div class="span3">
+						<h1>
+							<%= @product.name %>
+						<h1>
+					</div>
+					<div class="span3">
+						<h1 style="color:#E56717">
+							<%= number_to_currency @product.price %>
+						</h1>
+					</div>
+
+					<img src='<%= @product.picture_path %>'>
+					<div class="span6">
+						<%= @product.description %><br>
+						fooodosoafjklefjaklewjf
+					</div>
+				</div>
+				<div class="span6">
+					<br>
+					<div style="display:none" id='credit_card_form'>
+					<%= render 'credit_card_form' %>
+					</div>
+					<script>
+						function showCreditCardForm() {
+							$('#credit_card_form').show(500);
+							$('#want_button').hide();
+						}		
+					</script>
+					<a href='#' onclick="showCreditCardForm()" class="btn btn-success btn-large" id='want_button'>
+						Get this
+					</a>
+
+					<!--<div class="credit_card"></div>
+					<%= link_to 'I want this', confirm_purchase_single_shop_with_credit_card_path(:product_id=>@product.id.to_s(32)), :method => :get, :remote=>true, :class=>'btn btn-success btn-large',:id=>'want_button' %>-->
+				</div>
+			</div>
+		</div>
+	</div>
 <table style='text-align:center' align='center' style="height:50em">
 	<tbody>
 		<tr style="height:50em">

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120310075043) do
+ActiveRecord::Schema.define(:version => 20120312005357) do
 
   create_table "ad_stats", :force => true do |t|
     t.integer  "ad_id"
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(:version => 20120310075043) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "paypal_email"
   end
 
   add_index "companies", ["email"], :name => "index_companies_on_email", :unique => true
@@ -190,6 +191,17 @@ ActiveRecord::Schema.define(:version => 20120310075043) do
     t.string   "pic_content_type"
     t.integer  "pic_file_size"
     t.datetime "pic_updated_at"
+  end
+
+  create_table "product_stats", :force => true do |t|
+    t.boolean  "impression",    :default => false
+    t.boolean  "purchase",      :default => false
+    t.integer  "product_id"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "ip"
+    t.boolean  "click_through", :default => false
   end
 
   create_table "products", :force => true do |t|
