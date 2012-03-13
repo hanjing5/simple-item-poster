@@ -7,25 +7,7 @@ Adserver::Application.routes.draw do
   match "/contact", :to => "pages#contact"
   match "/documentation", :to => "pages#documentation"
 
-  devise_for :publishers, :controllers => {:registrations => "registrations"} do
-    get 'publishers', :to => "publishers#show",:as => :publisher_root
-  end
-  resources :payments
-
-  # Matches new_token url for platforms/publishers to create tokens for API calls
-  # This route can be invoked with new_token_url(:id => current_publisher.id)
-  match 'publishers/:id/new_token' => 'publishers#new_token', :as => :new_token
-
-  resources :publishers, :only => [:new, :show, :index, :new_token] do
-    resources :games
-  end
-
-  # Matches new_token url for games to create tokens for API calls
-  # This route can be invoked with 
-  # new_game_token_url(:publisher_id => current_publisher.id, :game_id => game.id)
-  match 'publishers/:publisher_id/games/:game_id/new_token' => 'games#new_token', :as => :new_game_token
-
-  devise_for :companies, :controllers => {:registrations => "registrations", :passwords=>"passwords"} do
+  devise_for :companies, :controllers => {:registrations => "registrations", :passwords=>"passwords", :sessions=>"sessions"} do
     get 'companies', :to => "companies#show", :as => :company_root
   end
 	resources :passwords
@@ -46,6 +28,23 @@ Adserver::Application.routes.draw do
 		end
 	end
 
+  devise_for :publishers, :controllers => {:registrations => "registrations"} do
+    get 'publishers', :to => "publishers#show",:as => :publisher_root
+  end
+  resources :payments
+
+  # Matches new_token url for platforms/publishers to create tokens for API calls
+  # This route can be invoked with new_token_url(:id => current_publisher.id)
+  match 'publishers/:id/new_token' => 'publishers#new_token', :as => :new_token
+
+  resources :publishers, :only => [:new, :show, :index, :new_token] do
+    resources :games
+  end
+
+  # Matches new_token url for games to create tokens for API calls
+  # This route can be invoked with 
+  # new_game_token_url(:publisher_id => current_publisher.id, :game_id => game.id)
+  match 'publishers/:publisher_id/games/:game_id/new_token' => 'games#new_token', :as => :new_game_token
   # resources :ads, :only => [:index]
   resources :ads, :only => [:api_login] do
       post 'api_login', :on => :collection

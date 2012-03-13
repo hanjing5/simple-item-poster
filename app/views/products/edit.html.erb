@@ -71,16 +71,22 @@ Price: <%= number_to_currency @product.price %> Sold: <%= @product.purchased %> 
 <!-- share on fb button -->
 <!-- share on twitter button -->
 <!--Shared Link Area-->
-<!--<a class='btn btn-primary btn-large'  href="http://twitter.com/home?status=Buy my <%= @product.name %> on food.io at <%= @encrypted_link %> " target="_blank" title="Click to share this post on Twitter">Share on Twitter</a>-->
+<a href="http://twitter.com/home?status=Buy <%= @product.name %> on food.io <%= @encrypted_link %>" target="_blank" title="Click to share this post on Twitter">
+	<%= image_tag 'shareontwitter.png' %>
+</a>
+<a href="http://twitter.com/home?status=Buy <%= @product.name %> on food.io <%= @encrypted_link %>" target="_blank" title="Click to share this post on Twitter">
+	<%= image_tag 'shareonfb.png' %>
+</a>
 
-<a href="javascript:window.open(%22http://www.facebook.com/dialog/feed?app_id=114816261931958&amp;name=game&amp;caption=Just $2.&amp;redirect_uri=https://gamertiser.com/links&amp;display=popup&amp;message=Buy%20game%20on%20link%21&amp;link=https%3A%2F%2Fgamertiser.com%2Fl%2FUWo%22,%22Share%22,%22width=500,height=250,scrollbars=yes%22);" 
+
+<!--<a href="javascript:window.open('http://www.facebook.com/dialog/feed?app_id=114816261931958&name=game&caption=Just $2.&redirect_uri=https://gamertiser.com/links&amp;display=popup&amp;message=Buy%20game%20on%20link%21&amp;link=https%3A%2F%2Fgamertiser.com%2Fl%2FUWo%22,%22Share%22,%22width=500,height=250,scrollbars=yes%22);" 
 	class="btn btn-info btn-large">
 	Share on Facebook
 </a>
-<a href="javascript:window.open(%22http://twitter.com/share?text=Buy%20game%20on%20Gumroad%21&amp;url=https%3A%2F%2Fgamertiser.com%2Fl%2FUWo%22,%22Share%22,%22width=500,height=250,scrollbars=yes%22)" 
-	class="btn btn-info btn-large">
+<a href="javascript:window.open('http://twitter.com/share?text=Buy game on Gumroad &url=https://gamertiser.com/l/UWo/','Share','width=500,height=250,scrollbars=yes')" 
+	class="btn btn-info btn-large" target='none'>
 		Share on Tweet
-</a>
+</a>-->
 
 <br>	
 <br>

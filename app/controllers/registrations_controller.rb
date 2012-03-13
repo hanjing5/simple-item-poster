@@ -1,21 +1,27 @@
 # app/controllers/registrations_controller.rb
 class RegistrationsController < Devise::RegistrationsController
   def create
+		puts "overriding registerations controller"
 		if(params[:company])
 			@company = Company.new(params[:company])
-			puts "Enter RegistrationController" 
+
+			puts params[:company][:email]
 
 			if @company.save
 				sign_in @company
 				respond_to do |format|
-				format.js { render(:update) { |page| page.redirect_to @company } }
+					#format.js { render(:update) { |page| page.redirect_to @company } }
+					redirect_to root_url	
+					return
 				end
-				else
+			else
 				flash[:error] = 'Registration failed. Please try again.'
 					respond_to do |format|
-					format.js
+					#format.js
+					redirect_to root_url	
+					return
 				end
-				end
+			end
 
 		elsif params[:publisher] 
 			

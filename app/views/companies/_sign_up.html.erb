@@ -5,11 +5,11 @@
     <% if flash[:error] %>
       <p class="error"><%= flash[:error] %></p>
     <% end %>
- <%= form_for "company", :url => company_registration_path,:remote => true do |f| %>
+<%= form_for("company", :url => company_session_path) do |f| %>
 
 <!--  <%= f.text_field :name, :placeholder=>"company name" %><br>-->
   <%= f.text_field :email, :placeholder=>"email" %><br>
   <%= f.password_field :password, :placeholder=>'password' %><br>
 <!--  <%= f.password_field :password_confirmation, :placeholder=>'password confirmation' %><br>-->
-  <%= f.submit 'Sign Up', :class=>'btn btn-large btn-primary', :style=>"width:15em" %><br>
+  <%= f.submit 'Start Selling', :class=>'btn btn-large btn-primary', :style=>"width:15em" %><br>
 <% end %>
