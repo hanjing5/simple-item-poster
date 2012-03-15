@@ -1,15 +1,15 @@
 <div class="row">
 <div class="span4">
-
 <h1>Edit</h1>
 </div>
 <div class="span4 offset4">
 Price: <%= number_to_currency @product.price %> Sold: <%= @product.purchased %> Earnings: <%= number_to_currency(@product.price * @product.purchased) %>
 </div>
 </div>
-<hr>
-<div class="row">
-<div class="span6">
+<table class="table">
+<%= render 'shared/info' %>
+<tr>
+<td>
 <%= form_for :product, @product, :url =>{ :action => "update"},  :html => { :multipart => true,:method=>"put" } do |form| %>
 
 	<%= hidden_field_tag(:company_id, current_company.id) %>
@@ -30,10 +30,7 @@ Price: <%= number_to_currency @product.price %> Sold: <%= @product.purchased %> 
 	
 	<br>
 	<br>
-	<h3>Upload Your File</h3>
 	<p>
-	(Optional unless you are selling an uploaded file)
-	<br>
         <%= form.file_field :picture %>
 	</p>
         <br>
@@ -46,15 +43,13 @@ Price: <%= number_to_currency @product.price %> Sold: <%= @product.purchased %> 
 <br>
 <!--<%= link_to "Home", company_path(current_company) %> | 
 <%= link_to "Manage", company_products_path %>-->
+</td>
 
-</div>
-<div class="span6">
-<h3>Share this link </h3>
-(click to copy)
-<pre id="copy" class="prettyprint linenums"><font style="font-size:1.5em"><%= @encrypted_link %></font>
-</pre>
-<a id="copy" name="copy" value="Copy to Clipboard" class="btn btn-info btn-large">Select</a>
+<td>
+<h3>Share this link</h3>
+<pre id="copy" class="prettyprint linenums"><font style="font-size:1.5em"><%= @encrypted_link %></font></pre>
 
+<button id="copy" name="copy" value="Copy to Clipboard" class="btn btn-info btn-large">copy</button>
 <script>
 	//create client
 	var clip = new ZeroClipboard.Client();
@@ -76,12 +71,13 @@ Price: <%= number_to_currency @product.price %> Sold: <%= @product.purchased %> 
 <!-- share on fb button -->
 <!-- share on twitter button -->
 <!--Shared Link Area-->
-<a href="http://twitter.com/home?status=Buy <%= @product.name %> on Bockie.com <%= @encrypted_link %>" target="_blank" title="Click to share this post on Twitter">
+<a href="http://twitter.com/home?status=Buy <%= @product.name %> on food.io <%= @encrypted_link %>" target="_blank" title="Click to share this post on Twitter">
 	<%= image_tag 'shareontwitter.png' %>
 </a>
-<a href="http://twitter.com/home?status=Buy <%= @product.name %> on Bockie.com <%= @encrypted_link %>" target="_blank" title="Click to share this post on Twitter">
+<a href="http://twitter.com/home?status=Buy <%= @product.name %> on food.io <%= @encrypted_link %>" target="_blank" title="Click to share this post on Twitter">
 	<%= image_tag 'shareonfb.png' %>
 </a>
+
 
 <!--<a href="javascript:window.open('http://www.facebook.com/dialog/feed?app_id=114816261931958&name=game&caption=Just $2.&redirect_uri=https://gamertiser.com/links&amp;display=popup&amp;message=Buy%20game%20on%20link%21&amp;link=https%3A%2F%2Fgamertiser.com%2Fl%2FUWo%22,%22Share%22,%22width=500,height=250,scrollbars=yes%22);" 
 	class="btn btn-info btn-large">
@@ -98,10 +94,10 @@ Price: <%= number_to_currency @product.price %> Sold: <%= @product.purchased %> 
 	<% if @product.picture_file_name %>
 		<%= image_tag @product.picture.url(:thumb) %>
 	<% else %>
-		You don't have a preview, <a href='#'> add a preview</a>
+		You don't have a picture
 	<% end %>
 	<br>
-	<!--<button class="btn btn-info btn-large">Stats</button>-->
-
-</div>
-</div>
+	<button class="btn btn-info btn-large">Stats</button>
+</td>
+</tr>
+</table>

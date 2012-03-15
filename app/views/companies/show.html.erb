@@ -70,8 +70,23 @@
         <td style="padding:0.5em">
         <%= link_to "#{product.name}", edit_company_product_path(current_company, product.id) %>
         </td>
-        <td style="padding:0.5em">
-        <%= root_url + "g/" + product.encrypted_link %>
+        <td style="padding:0.5em;background-color:#ccc;-moz-border-radius: 5px;border-radius: 5px;" id="copy">
+				<font style="font-size:1em;" id="copy"><%= root_url + "g/" + product.encrypted_link %></font>
+
+				<script>
+					//create client
+					var clip = new ZeroClipboard.Client();
+					//event
+					clip.addEventListener('mousedown',function() {
+						//clip.setText(document.getElementById('box-content').html());
+						clip.setText("<%= root_url + 'g/' + product.encrypted_link %>");
+					});
+					clip.addEventListener('complete',function(client,text) {
+						alert('Copied to Clipboard: ' + text);
+					});
+					//glue it to the button
+					clip.glue('copy');
+				</script>
 				</td>
         <td style="padding:0.5em">
         <%= number_to_currency product.price %>
@@ -84,7 +99,7 @@
         </td>
         <td style="padding:0.5em">
 
-        <%= link_to "delete", company_product_path(current_company, product.id) , :method => :delete, :confirm => "Are you sure you want to delete?" %>
+        <%= link_to "delete", company_product_path(current_company, product.id) , :method => :delete, :confirm => "Are you sure you want to delete?", :class=>"btn btn-danger" %>
         </td>
         </tr>
 

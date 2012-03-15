@@ -1,31 +1,24 @@
 <!--Company's Home page tab -->
+<div class="container">
 			<p></p>
-			<table style="">
-				<tbody>
-					<tr>
-						<% if company_signed_in? %>
-							<%= link_to "Go To Dashboard", current_company, :class=>"btn btn-large btn-primary" %><br><br>
-				                        <%= link_to "Logout", destroy_company_session_path, :method => :delete, :class=>"btn btn-large btn-primary" %>
-	
-						<% else %>
-							<td style="padding-left:15em; padding-right:12.5em; padding-top:5em; padding-bottom:5em; border-right:1px solid #C8C8C8;">
-							<h2>Easy Sell via Link</h2>
+<div class="row">
+<div class="span6">
+							<h2>Sell anything via a link</h2>
 							<br>
-							<p>Start selling you stuff in 5 minutes!</p>
-							<p>Just sign up and post a link. 
-							<p>We will take care of the rest.</p>
+							<p>Start selling your stuff in 5 minutes!</p>
+							<p>Just sign up and post a link,</p>
+							<p>and we will take care of the rest.</p>
 							<!--<%= alert %>
                               <%= render 'companies/sign_in_form' %>-->
-							</td>
-							<td style="padding-left:12.5em;width:15em; text-align:center;">
+
+</div>
+<div class="span6">
 								<br>
 								<p><h3>Sign up to Start Selling.</h3></p>
 
 								<%= render "companies/sign_up" %>
 								<!--or <a data-toggle="modal" href="#myCompanySignInModal">Log In</a>-->
-							</td>
-						<% end %>
-					</tr>
-				</tbody>
-			</table>
 
+</div>
+</div>
+</div>
