@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120312005357) do
+ActiveRecord::Schema.define(:version => 20120315083400) do
 
   create_table "ad_stats", :force => true do |t|
     t.integer  "ad_id"
@@ -53,6 +53,16 @@ ActiveRecord::Schema.define(:version => 20120312005357) do
 
   add_index "ads", ["company_id"], :name => "index_ads_on_company_id"
   add_index "ads", ["distance"], :name => "index_ads_on_distance"
+
+  create_table "attachments", :force => true do |t|
+    t.integer  "product_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+  end
 
   create_table "companies", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false

@@ -180,3 +180,22 @@ $.ajaxTransport('jsonpi', function(opts, originalOptions, jqXHR) {
 })
 
 }(window.jQuery)
+
+
+
+// public/javascripts/application.js
+
+$(document).ready(function() {
+  $("#button").bind("click", function() {
+    /* Generating unique id
+    */
+    var rand = Math.random().toString().split(".")[1];
+    var input = '<input type="file" name="attachment['+rand+']" />'
+    $(this).before('<br/>' + input + '<br/>' );
+  });
+
+  /* Pushing the first input to the DOM
+  */
+  $("#button").trigger("click");
+
+});

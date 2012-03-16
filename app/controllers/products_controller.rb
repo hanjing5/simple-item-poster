@@ -125,6 +125,13 @@ class ProductsController < ApplicationController
   	@digest = Digest::MD5.hexdigest("#{@i.id}#{@i.credit_card_token}#{params[:encrypted_link]}#{@i.created_at}")
 		if @digest = params[:success]
 			@product = Product.find(params[:encrypted_link].to_i(32))
+			@downloadables = @product.attachments.all
+			if @downloadables
+				@downloadables.each do |downloadable|
+					downloadable['download_path'] = downloadable_path_builder(downloadable)+ downloadable.file_file_name
+					puts downloadable['download_path']
+				end
+			end
 			if @product.picture_file_name
 				@product['picture_path'] = picture_path_builder(@product) + @product.picture_file_name
 				@product['download_path'] = download_path_builder(@product) + @product.picture_file_name
@@ -159,6 +166,14 @@ class ProductsController < ApplicationController
 	###########################################################
 	def edit
 		@product = Product.find(params[:id])
+		@downloadables = @product.attachments.all
+		if @downloadables
+			@downloadables.each do |downloadable|
+				downloadable['download_path'] = downloadable_path_builder(downloadable)+ downloadable.file_file_name
+				puts downloadable['download_path']
+			end
+		end
+
 		@encrypted_link = make_encrypted_link(@product.encrypted_link)
 		if @product.nil?
 			@new = true
@@ -171,6 +186,22 @@ class ProductsController < ApplicationController
 	###########################################################
 	def update
 		@product = Product.find(params[:id])
+		if params['delete_attachment']
+			Attachment.find_by_id(params['delete_attachment']).delete	
+		end
+		puts params['attachment']
+		if params['attachment']
+			params['attachment'].each do |k, v|
+				puts v	
+				puts
+				@file = Attachment.new({'file'=>v})
+				@file.product_id = @product.id
+				puts
+				
+				@file.save
+			end
+		end
+
 		if @product.encrypted_link.nil?
 	
 			# encrypted link is just the product's id in
@@ -478,10 +509,34 @@ class ProductsController < ApplicationController
 
         def picture_path_builder(product)
             @path = root_url + 'system/pictures/'+ product.id.to_s+'/medium/'
-        end	
+        end
+	
         def download_path_builder(product)
             @path = '/system/pictures/'+ product.id.to_s+'/original/'
         end	
+
+				###########################################################
+				# the crazy amount of variables that you see is due to me crunched on time
+				# currently the location of the folder being stored is (i think) based on a 
+				# size 9 integer divided in groups of 3 (i.e.: /000/001/234/ or /000/000/012/)
+				###########################################################
+        def downloadable_path_builder(downloadable)
+						@length = 9
+						@tmp = @length - downloadable.id.to_s.size
+						@p = ''
+						@t = 1
+						while @t <= @tmp
+							if @t % 3 == 0 and @t != 0
+								@p += '0/'
+							else
+								@p += '0'
+							end
+							@t+=1
+						end
+						@p = @p + downloadable.id.to_s
+            @path = '/system/attachments/files/' + @p +'/original/'
+        end	
+
 				def make_encrypted_link(str)
 					"#{root_url}g/#{str}"
 				end

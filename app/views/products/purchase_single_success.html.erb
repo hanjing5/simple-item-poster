@@ -1,11 +1,14 @@
 <%= render "single_shop_header" %>
 <div class="container">
 <h1>
-Success! 
+Download Bay
 </h1>
 <hr>
+<div class="row">
+<div class="span6">
 <h2>
-Here are your stuff. You should also receive a copy of in your email soon</h2>
+	Thank you for purchasing <%= @product.name %>!
+</h2>
 <br>
 <br>
 
@@ -15,12 +18,32 @@ Here are your stuff. You should also receive a copy of in your email soon</h2>
 <br>
 
 <% if @product.picture_file_name %>
-<h1>Your File</h1>
+</div>
+<div class="span6">
+<h1>Your Files</h1>
 <hr>
 <!--<%= link_to "#{@product.picture_path}", @product.picture_path %>-->
 <!--<%= link_to 'Raw blast output', @product.download_path, :class=>'btn btn-success btn-large' %>-->
-<%= link_to 'Download', @product.download_path, :class=>'btn btn-success btn-large' %>
+<table>
+<% if @downloadables %>
+	<% @downloadables.each do |downloadable| %>
+<tr>
+<td>
+		<h2><%= link_to downloadable.file_file_name, downloadable.download_path %></h2>
+</td>
+<td>
+</td>
+<td>
+		<%= link_to 'Download', downloadable.download_path, :class=>'btn btn-success btn-large' %><br>
+</td>
+<tr>
+	<% end %>
+<% end %>
+</table>
+<!--<%= link_to 'Download', @product.download_path, :class=>'btn btn-success btn-large' %>-->
 <% end %>
 
+</div>
+</div>
 </div>
 <%= render "single_shop_footer" %>

@@ -7,17 +7,19 @@ class ProductStat < ActiveRecord::Base
 	attr_accessible :purchase, :impression, :product_id, :company_id, :ip
 end
 
+
 # == Schema Information
 #
 # Table name: product_stats
 #
-#  id         :integer(4)      not null, primary key
-#  impression :boolean(1)      default(FALSE)
-#  purchase   :boolean(1)      default(FALSE)
-#  product_id :integer(4)
-#  company_id :integer(4)
-#  created_at :datetime
-#  updated_at :datetime
-#  ip         :string(255)
+#  id            :integer(4)      not null, primary key
+#  impression    :boolean(1)      default(FALSE)
+#  purchase      :boolean(1)      default(FALSE)
+#  product_id    :integer(4)
+#  company_id    :integer(4)
+#  created_at    :datetime
+#  updated_at    :datetime
+#  ip            :string(255)
+#  click_through :boolean(1)      default(FALSE)
 #
 

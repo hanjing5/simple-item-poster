@@ -4,7 +4,7 @@
 <h1>Edit</h1>
 </div>
 <div class="span4 offset4">
-Price: <%= number_to_currency @product.price %> Sold: <%= @product.purchased %> Earnings: <%= number_to_currency(@product.price * @product.purchased) %>
+	<h3>Price: <%= number_to_currency @product.price %> - Sold: <%= @product.purchased %> - Earnings: <%= number_to_currency(@product.price * @product.purchased) %></h3>
 </div>
 </div>
 <hr>
@@ -15,26 +15,34 @@ Price: <%= number_to_currency @product.price %> Sold: <%= @product.purchased %> 
 	<%= hidden_field_tag(:company_id, current_company.id) %>
 
 	<h3>Product Name</h3>
+<div class="input-prepend">
+<span class="add-on"><i class="icon-file"></i></span>
 	<%= form.text_field :name %>
+</div>
 <!--	<h3>Product Type</h3>
 	<%= form.collection_select(:product_type, Type.all, :name,:name, {:prompt => 'Select Type'},:style => "width: 175px" ) %>-->
 
 	<h3>Link</h3>
+<div class="input-prepend">
+<span class="add-on"><i class="icon-home"></i></span>
   <%= form.text_field :link %>
+</div>
 
 	<h3>Price</h3>
   <%= form.text_field :price %>
 
 	<h3>Description</h3>
   <%= form.text_field :description %>
-	
 	<br>
 	<br>
-	<h3>Upload Your File</h3>
-	<p>
+	<h3>Upload Your File(s)</h3>
+	<!--<p>
 	(Optional unless you are selling an uploaded file)
 	<br>
-        <%= form.file_field :picture %>
+	<%= form.file_field :picture %>-->
+	<input type="button" id="button" class="btn btn-primary" value="Attach More Files" />
+	<br>
+	<!--<input type="submit" id="save" class="btn btn-success btn-large" value="Upload" />-->
 	</p>
         <br>
 <!--    <%= form.submit "Submit" %>-->
@@ -43,17 +51,47 @@ Price: <%= number_to_currency @product.price %> Sold: <%= @product.purchased %> 
         </p>
 <% end %>
 
+
+<!--deprecated testing for uploads -->
+<!--<%= form_for :attachment, @product, :url =>{ :action => "update"},  :html => { :multipart => true,:method=>"put" } do |form| %>
+	<%= hidden_field_tag(:company_id, current_company.id) %>
+	<h3>Upload Your File</h3>
+	<p>
+	(Optional unless you are selling an uploaded file)
+	<br>
+	<%= form.file_field :file %>
+	</p>
+	<br>
+	<button type="Submit" class="btn btn-success btn-large" id="product_submit" name="commit">Save</button>
+	</p>
+<% end %>-->
+
+
+<!--<%= form_for :update, :html => { :multipart => true, :id => "upload_form",:method=>"put" }, :url => { :action => "update" } do |f| %>
+	<input type="button" id="button" class="btn btn-primary" value="Attach More Files" />
+	<br>
+	<input type="submit" id="save" class="btn btn-success btn-large" value="Upload" />
+<% end %>-->
+
 <br>
-<!--<%= link_to "Home", company_path(current_company) %> | 
-<%= link_to "Manage", company_products_path %>-->
+<!--<%= link_to "Home", company_path(current_company) %> | <%= link_to "Manage", company_products_path %>-->
 
 </div>
 <div class="span6">
-<h3>Share this link </h3>
-(click to copy)
+<div class="row">
+	<div class="span3">
+		<h3>Share this link</h3>
+		(click to copy)
+	</div>
+	<div class="span3">
+		<%= link_to 'Select', "#{@encrypted_link}", :class=>"btn btn-info btn-large",:target=>'_blank' %>
+		<%= link_to 'Preview', "#{@encrypted_link}", :class=>"btn btn-info btn-large",:target=>'_blank' %>
+	</div>
+</div>
+
 <pre id="copy" class="prettyprint linenums"><font style="font-size:1.5em"><%= @encrypted_link %></font>
 </pre>
-<a id="copy" name="copy" value="Copy to Clipboard" class="btn btn-info btn-large">Select</a>
+<!--<a id="copy" name="copy" value="Copy to Clipboard" class="btn btn-info btn-large">Select</a>-->
 
 <script>
 	//create client
@@ -69,10 +107,6 @@ Price: <%= number_to_currency @product.price %> Sold: <%= @product.purchased %> 
 	//glue it to the button
 	clip.glue('copy');
 </script>
-
-<%= link_to 'Preview', "#{@encrypted_link}", :class=>"btn btn-info btn-large",:target=>'_blank' %>
-<br>
-<br>
 <!-- share on fb button -->
 <!-- share on twitter button -->
 <!--Shared Link Area-->
@@ -94,14 +128,42 @@ Price: <%= number_to_currency @product.price %> Sold: <%= @product.purchased %> 
 
 <br>	
 <br>
-	<h4>Picture Preview</h4>
 	<% if @product.picture_file_name %>
+		<h3>Picture Preview</h3>
 		<%= image_tag @product.picture.url(:thumb) %>
 	<% else %>
-		You don't have a preview, <a href='#'> add a preview</a>
-	<% end %>
+		You don't have a preview, you can
 	<br>
 	<!--<button class="btn btn-info btn-large">Stats</button>-->
+<h3>Upload a Preview</h3>
+<%= form_for :product, @product, :url =>{ :action => "update"},  :html => { :multipart => true,:method=>"put" } do |form| %>
+	<%= hidden_field_tag(:company_id, current_company.id) %>
+	<p>
+	<%= form.file_field :picture %>
+	</p>
+	<!--<%= form.submit "Submit" %>-->
+	<input type="Submit" class="btn" id="product_submit" name="commit" value="Upload"/>
+	<% end %>
+<% end %>
+<% if @downloadables %>
+<!--show this if the user have stuff to sell-->
+	<h3>File List</h3>
+	<table class="table">
+		<% @downloadables.each do |downloadable| %>
+			<tr>
+				<td>
+					<%= link_to downloadable.file_file_name, downloadable.download_path %>
+				</td>
+				<td>
+					<%= form_for :product, @product, :url =>{ :action => "update"},  :html => { :multipart => true,:method=>"put" } do |form| %>
+					<%= hidden_field_tag(:delete_attachment, downloadable.id) %>
+					<button type="Submit" class="btn btn-danger" id="product_submit" name="commit">delete</button>
+					<% end %>
+				</td>
+			</tr>
+		<% end %>
+	</table>
+<% end %>
 
 </div>
 </div>

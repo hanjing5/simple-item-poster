@@ -23,6 +23,7 @@
 #
 class Product < ActiveRecord::Base
 	belongs_to :company
+	has_many :attachments
 
 	#has_attached_file :picture, :styles => { :medium => "300x300>", :thumb => "100x100>" }
 	has_attached_file :picture
@@ -31,6 +32,8 @@ class Product < ActiveRecord::Base
   validates :name, :presence => true
   validates :link, :presence => true
   validates :price, :presence => true
+
+	accepts_nested_attributes_for :attachments, :allow_destroy => true
 end
 
 
