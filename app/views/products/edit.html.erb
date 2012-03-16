@@ -14,25 +14,36 @@
 
 	<%= hidden_field_tag(:company_id, current_company.id) %>
 
+<table>
+<tr>
+<td style="padding-right:20px">
 	<h3>Product Name</h3>
-<div class="input-prepend">
-<span class="add-on"><i class="icon-file"></i></span>
-	<%= form.text_field :name %>
-</div>
+	<div class="input-prepend">
+	<span class="add-on"><i class="icon-file"></i></span>
+		<%= form.text_field :name ,:style=>'width:10em'%>
+	</div>
 <!--	<h3>Product Type</h3>
 	<%= form.collection_select(:product_type, Type.all, :name,:name, {:prompt => 'Select Type'},:style => "width: 175px" ) %>-->
-
+</td>
+<td style="padding-right:20px">
 	<h3>Link</h3>
 <div class="input-prepend">
 <span class="add-on"><i class="icon-home"></i></span>
-  <%= form.text_field :link %>
+  <%= form.text_field :link ,:style=>'width:10em'%>
 </div>
-
+</td>
+<td style="padding-right:20px">
 	<h3>Price</h3>
-  <%= form.text_field :price %>
+	<div class="input-prepend">
+	<span class="add-on"><i class="icon-tag"></i></span>
+ 	<%= form.text_field :price,:style=>'width:4em' %>
+	</div>
+</td>
+</tr>
+</table>
 
 	<h3>Description</h3>
-  <%= form.text_field :description %>
+  <%= form.text_area :description,:style=>'height:100px;width:235px' %>
 	<br>
 	<br>
 	<h3>Upload Your File(s)</h3>
@@ -80,17 +91,32 @@
 <div class="span6">
 <div class="row">
 	<div class="span3">
-		<h3>Share this link</h3>
-		(click to copy)
+		<h3>Share this link (Shop's URL)</h3>
+		(click the grey area to copy)
 	</div>
-	<div class="span3">
-		<%= link_to 'Select', "#{@encrypted_link}", :class=>"btn btn-info btn-large",:target=>'_blank' %>
-		<%= link_to 'Preview', "#{@encrypted_link}", :class=>"btn btn-info btn-large",:target=>'_blank' %>
+	<div class="span3" style="width:17%;float:right">
+		<a href="<%= @encrypted_link%>", class="btn btn-info btn-large",target='_blank'>
+			<i class="icon-search"></i> Preview
+		</a>
 	</div>
 </div>
-
-<pre id="copy" class="prettyprint linenums"><font style="font-size:1.5em"><%= @encrypted_link %></font>
-</pre>
+<table width="100%">
+<tr id='copy'>
+<td id='copy' style="padding:0.5em;background-color:#F5F5F5;-moz-border-radius: 5px;border-radius: 5px;border:1px solid #ccc">
+<font style="font-size:1.25em"><%= @encrypted_link %>
+</td>
+<td id='copy'>
+</td>
+<td style="float:right" id='copy'>
+</td>
+<td style="float:right" id='copy'>
+		<!--<%= link_to 'Select', "#", :class=>"btn btn-info btn-large",:target=>'_blank' %>-->
+</td>
+</tr>
+</table>
+<br>
+<!--<pre id="copy" class="prettyprint linenums"><font style="font-size:1.5em"><%= @encrypted_link %></font>
+</pre>-->
 <!--<a id="copy" name="copy" value="Copy to Clipboard" class="btn btn-info btn-large">Select</a>-->
 
 <script>
@@ -132,7 +158,9 @@
 		<h3>Picture Preview</h3>
 		<%= image_tag @product.picture.url(:thumb) %>
 	<% else %>
-		You don't have a preview, you can
+		You don't have a preview, you can 
+	<a href='#' onclick='$("#upload_preview").show(500);'>Upload a Preview</a>
+	<div style="display:none" id="upload_preview">
 	<br>
 	<!--<button class="btn btn-info btn-large">Stats</button>-->
 <h3>Upload a Preview</h3>
@@ -142,9 +170,12 @@
 	<%= form.file_field :picture %>
 	</p>
 	<!--<%= form.submit "Submit" %>-->
-	<input type="Submit" class="btn" id="product_submit" name="commit" value="Upload"/>
+	<input type="Submit" class="btn" id="product_submit" name="commit" value="Upload the preview"/>
 	<% end %>
+	</div>
 <% end %>
+<br>
+<br>
 <% if @downloadables %>
 <!--show this if the user have stuff to sell-->
 	<h3>File List</h3>
@@ -157,7 +188,7 @@
 				<td>
 					<%= form_for :product, @product, :url =>{ :action => "update"},  :html => { :multipart => true,:method=>"put" } do |form| %>
 					<%= hidden_field_tag(:delete_attachment, downloadable.id) %>
-					<button type="Submit" class="btn btn-danger" id="product_submit" name="commit">delete</button>
+					<button type="Submit" class="btn" id="product_submit" name="commit">delete</button>
 					<% end %>
 				</td>
 			</tr>

@@ -1,7 +1,7 @@
 <%= render "single_shop_header" %>
 <div class="container">
 <h1>
-Download Bay
+Bockie Bay
 </h1>
 <hr>
 <div class="row">
@@ -16,14 +16,19 @@ Download Bay
 <hr>
 <h2><%= link_to "#{@product.link}", @product.link %><h2>
 <br>
-
-<% if @product.picture_file_name %>
 </div>
+<!-- holder for experimental purposes. Doesn't do anything -->
+<% if @product.picture_file_name %>
+<!--<%= link_to "#{@product.picture_path}", @product.picture_path %>-->
+<!--<%= link_to 'Raw blast output', @product.download_path, :class=>'btn btn-success btn-large' %>-->
+<!--<%= link_to 'Download', @product.download_path, :class=>'btn btn-success btn-large' %>-->
+<% end %>
+
+
 <div class="span6">
 <h1>Your Files</h1>
 <hr>
-<!--<%= link_to "#{@product.picture_path}", @product.picture_path %>-->
-<!--<%= link_to 'Raw blast output', @product.download_path, :class=>'btn btn-success btn-large' %>-->
+<% if @downloadables %>
 <table>
 <% if @downloadables %>
 	<% @downloadables.each do |downloadable| %>
@@ -40,7 +45,6 @@ Download Bay
 	<% end %>
 <% end %>
 </table>
-<!--<%= link_to 'Download', @product.download_path, :class=>'btn btn-success btn-large' %>-->
 <% end %>
 
 </div>

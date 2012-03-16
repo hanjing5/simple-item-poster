@@ -1,40 +1,23 @@
 <!-- Company show page -->
-<div class="row">
-	<div class="span4">
+<table width="100%">
+<tr>
+<td>
 	<% if current_company.name %>
 		<h1>Welcome, <%= current_company.name.capitalize %>!</h1>
 	<% else %>
 		<h1>Welcome</h1>
 	<% end %>
-	</div>
-	<div class="span4 offset4">
-		<h2>Total: <%= @products_count %></h2>
-	</div>
-</div>
+</td>
+<td style="float:right">
+		<font style='font-size:1.5em'><%= @products_count %> Products</font>
+		<%= link_to "Add Product", company_product_path(current_company, "new"), :class=>"btn btn-success btn-large" %>
+</td>
+</tr>
+</table>
 <hr>
 <%= render 'shared/info' %>
-<table style="width:100%; text-align:center">
-	<tbody>
-		<tr>
-			<td style="width:33%">
-<!--<div class="products-previews">
-</div>-->
-			</td>
-		</tr>
-	</tbody>
-</table>
 
-<div class="row">
-	<div class="span4">
-		<h2>List of Products</h2>
-	</div>
-    <div class="span4 offset4" style="text-align:right">
-<%= link_to "Add Product", company_product_path(current_company, "new"), :class=>"btn btn-success btn-large" %>
-	</div>
-</div>
-<hr>
-
-<table class="table" style="width:100%; text-align:center; font-size:1.5em; ">
+<table class="table" style="width:100%; font-size:1.5em; ">
 	<thead>
         <tr>
                 <th style="padding:0.5em">
@@ -65,12 +48,14 @@
         <td style="padding:0.5em">
         <!--<%= image_tag product.picture.url %>-->
         <!--<%= image_tag product.picture.url(:medium) %>-->
+				<% if product.picture_file_name %>
         <%= image_tag product.picture.url(:thumb) %>
+				<% end %>
 				</td>
         <td style="padding:0.5em">
         <%= link_to "#{product.name}", edit_company_product_path(current_company, product.id) %>
         </td>
-        <td style="padding:0.5em;background-color:#ccc;-moz-border-radius: 5px;border-radius: 5px;" id="copy">
+        <td style="padding-left:0.5em; background-color:#F5F5F5;-moz-border-radius: 5px;border-radius: 5px;border:1px solid #ccc" id="copy">
 				<font style="font-size:1em;" id="copy"><%= root_url + "g/" + product.encrypted_link %></font>
 
 				<script>
@@ -97,7 +82,7 @@
         <td style="padding:0.5em">
         <%= product.purchased %>
         </td>
-        <td style="padding:0.5em">
+        <td style="float:right">
 
         <%= link_to "delete", company_product_path(current_company, product.id) , :method => :delete, :confirm => "Are you sure you want to delete?", :class=>"btn btn-danger" %>
         </td>
