@@ -8,6 +8,7 @@
 </div>
 </div>
 <hr>
+<%= render 'shared/info' %>
 <div class="row">
 <div class="span6">
 <%= form_for :product, @product, :url =>{ :action => "update"},  :html => { :multipart => true,:method=>"put" } do |form| %>
@@ -153,7 +154,7 @@
 		<% end %>
 
 	</table>
+</div>
 <% end %>
 </div>
-
 </div>
