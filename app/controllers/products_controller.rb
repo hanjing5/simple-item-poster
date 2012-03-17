@@ -236,6 +236,20 @@ class ProductsController < ApplicationController
     @product.company_id = current_company.id
 
     if @product.save
+			# add the attachments first
+			puts params['attachment']
+			if params['attachment']
+				params['attachment'].each do |k, v|
+					puts v	
+					puts
+					@file = Attachment.new({'file'=>v})
+					@file.product_id = @product.id
+					puts
+					
+					@file.save
+				end
+			end
+
 			@product.encrypted_link = @product.id.to_s(36)
 			if @product.save
 				flash[:success] = "Submit Success!"

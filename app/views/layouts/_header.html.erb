@@ -11,7 +11,8 @@
 		
 		<% if company_signed_in? %>
 			<!--<li class=''><%= link_to "My Brand's Dashboard", current_company %><li>-->
-			<li class=''><%= link_to "Products", company_products_path(current_company) %><li>
+			<li class=''><%= link_to "Products List", company_products_path(current_company) %><li>
+			<%= link_to "Add Product", company_product_path(current_company, "new") %>
 			<li class=''><%= link_to "Account", account_companies_path %><li>
 			<li class=""><%= link_to "Logout", destroy_company_session_path, :method => :delete, :class => 'links' %></li>
 		<% else %>
