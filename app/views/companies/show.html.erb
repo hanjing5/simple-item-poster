@@ -26,6 +26,8 @@
                 <th style="padding:0.5em">
                 Link
                 </th>
+								<th>
+								</th>
                 <th style="padding:0.5em">
                 Price
                 </th>
@@ -46,7 +48,7 @@
         <%= link_to "#{product.name}", edit_company_product_path(current_company, product.id) %>
         </td>
         <td style="padding-left:0.5em; background-color:#F5F5F5;-moz-border-radius: 5px;border-radius: 5px;border:1px solid #ccc" id="copy">
-				<font style="font-size:1em;" id="copy"><%= root_url + "g/" + product.encrypted_link %></font>
+				<font style="font-size:1em;" id="copy"><a href='#'><%= root_url + "g/" + product.encrypted_link %></a></font>
 
 				<script>
 					//create client
@@ -62,6 +64,9 @@
 					//glue it to the button
 					clip.glue('copy');
 				</script>
+				</td>
+				<td id="copy">
+				<font color="#08c"><a href="#">copy</a></font>
 				</td>
         <td style="padding:0.5em">
         <%= number_to_currency product.price %>

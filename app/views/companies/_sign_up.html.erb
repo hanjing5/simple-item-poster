@@ -8,8 +8,26 @@
 <%= form_for("company", :url => company_session_path) do |f| %>
 
 <!--  <%= f.text_field :name, :placeholder=>"company name" %><br>-->
-  <%= f.text_field :email, :placeholder=>"email" %><br>
-  <%= f.password_field :password, :placeholder=>'password' %><br>
+<table>
+<tr>
+<td style="padding-right:1em">
+	<div class="input-prepend" >
+	<span class="add-on" style="height:1.9em;padding-top:1em;padding-right:0.9em;padding-left:0.9em"><i class="icon-envelope icon-large"></i></span>
+  <%= f.text_field :email, :placeholder=>"email",:style=>"font-size:1.75em;height:1.5em;width:15em" %>
+	</div>
+</td>
+<td style="padding-right:1em">
+	<div class="input-prepend">
+	<span class="add-on" style="height:1.9em;padding-top:1em;padding-right:0.9em;padding-left:0.9em"><i class="icon-key icon-large" ></i></span>
+  <%= f.password_field :password, :placeholder=>'password',:style=>"font-size:1.75em;height:1.5em;width:15em" %>
+	</div>
+</td>
 <!--  <%= f.password_field :password_confirmation, :placeholder=>'password confirmation' %><br>-->
-  <%= f.submit 'Start Selling', :class=>'btn btn-large btn-primary', :style=>"width:15em" %><br>
+</tr>
+<tr>
+<td>
+  <%= f.submit 'Start Selling »', :class=>'btn btn-large btn-primary', :style=>"width:15em;height:3em" %>
+</td>
+</tr>
+</table>
 <% end %>

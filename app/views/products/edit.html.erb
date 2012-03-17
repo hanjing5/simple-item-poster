@@ -37,15 +37,11 @@
 	<input type="submit" id="save" class="btn btn-success btn-large" value="Upload" />
 <% end %>-->
 
-<br>
-<!--<%= link_to "Home", company_path(current_company) %> | <%= link_to "Manage", company_products_path %>-->
-
 </div>
 <div class="span6">
 <div class="row">
 	<div class="span3">
 		<h3>Share this link (Shop's URL)</h3>
-		(click the grey area to copy)
 	</div>
 	<div class="span3" style="width:17%;float:right">
 		<a href="<%= @encrypted_link%>", class="btn btn-info btn-large",target='_blank'>
@@ -111,8 +107,7 @@
 		<h3>Picture Preview</h3>
 		<%= image_tag @product.picture.url(:thumb) %>
 	<% else %>
-		You don't have a preview picture, you can 
-	<a href='#' onclick='$("#upload_preview").show(500);'>Upload a Preview Picture</a>
+	<a href='#' onclick='$("#upload_preview").show(500);$(this).hide()'>Upload a Preview Picture</a>
 	<div style="display:none" id="upload_preview">
 	<br>
 	<!--<button class="btn btn-info btn-large">Stats</button>-->
@@ -131,6 +126,10 @@
 <br>
 <% if @downloadables %>
 <!--show this if the user have stuff to sell-->
+	<a href='#' onclick='$("#file_list").show(500);$(this).hide();'>
+		Show Current File List
+	</a>
+<div id="file_list" style="display:none">
 	<h3>File List</h3>
 	<table class="table">
 		<% @downloadables.each do |downloadable| %>
@@ -148,6 +147,7 @@
 		<% end %>
 	</table>
 <% end %>
+</div>
 
 </div>
 </div>
