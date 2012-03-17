@@ -107,11 +107,14 @@
 		<h3>Picture Preview</h3>
 		<%= image_tag @product.picture.url(:thumb) %>
 	<% else %>
-	<a href='#' onclick='$("#upload_preview").show(500);$(this).hide()'>Upload a Preview Picture</a>
+	<a href='#' onclick='$("#upload_preview").show(500);$(this).hide()' id="show_upload_preview">Upload a Preview Picture</a>
 	<div style="display:none" id="upload_preview">
 	<br>
 	<!--<button class="btn btn-info btn-large">Stats</button>-->
 <h3>Upload a Preview</h3>
+		<a href='#' onclick='$("#upload_preview").hide(500);$("#show_upload_preview").show()'>
+			hide
+		</a>
 <%= form_for :product, @product, :url =>{ :action => "update"},  :html => { :multipart => true,:method=>"put" } do |form| %>
 	<%= hidden_field_tag(:company_id, current_company.id) %>
 	<p>
@@ -124,14 +127,17 @@
 <% end %>
 <br>
 <br>
-<% if @downloadables %>
+<% if @downloadables.count > 0 %>
 <!--show this if the user have stuff to sell-->
-	<a href='#' onclick='$("#file_list").show(500);$(this).hide();'>
+	<a href='#' onclick='$("#file_list").show(500);$(this).hide();' id="show_file_list">
 		Show Current File List
 	</a>
 <div id="file_list" style="display:none">
 	<h3>File List</h3>
-	<table class="table">
+		<a href='#' onclick='$("#file_list").hide(500);$("#show_file_list").show()'>
+			hide
+		</a>
+	<table class="table table-condensed">
 		<% @downloadables.each do |downloadable| %>
 			<tr>
 				<td>
@@ -145,9 +151,9 @@
 				</td>
 			</tr>
 		<% end %>
+
 	</table>
 <% end %>
 </div>
 
-</div>
 </div>

@@ -187,7 +187,12 @@ class ProductsController < ApplicationController
 	def update
 		@product = Product.find(params[:id])
 		if params['delete_attachment']
-			Attachment.find_by_id(params['delete_attachment']).delete	
+			@a = Attachment.find_by_id(params['delete_attachment'])
+			# paperclip delete file at path
+			@a.file=nil
+			@a.save
+			# delete the record of the attachment
+			@a.delete
 		end
 		puts params['attachment']
 		if params['attachment']
