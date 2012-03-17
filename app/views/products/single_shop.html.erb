@@ -4,20 +4,35 @@
 <div class="container_shop">
 <div class="row-fluid">
 <div class="span6" style="margin:1em">
+	<table style="width:100%">
+	<tr>
+	<td>
 	<h2>
 	<%= @product.name %>
 	</h2>
-	<font>
+	</td>
+	<td style="padding-top:0.5em;float:right">
+	<h3>
 	<%= number_to_currency @product.price %>
-	</font>
-	<br>
-	<img src='<%= @product.picture_path %>'>
+	</h3>
+	</td>
+	</tr>
+	</table>
+<a href="#" class="thumbnail">
+<% if @product.picture_file_name %>
+<img src='<%= @product.picture_path %>'>
+<% else %>
+<img src="http://placehold.it/380x300" alt="">
+<% end %>
+</a>
 	<br>
 	<%= @product.description %><br>
+<br>
+<br>
 </div>
 
 <div class="span5" style="margin:1em">
-	<div style="display:none" id='credit_card_form'>
+	<div style="display:none;width:100%;margin-top:5em" id='credit_card_form'>
 	<%= render 'credit_card_form' %>
 	</div>
 	<script>
@@ -26,7 +41,9 @@
 			$('#want_button').hide();
 		}		
 	</script>
-	<a href='#' onclick="showCreditCardForm()" class="btn btn-success btn-large" id='want_button' style="width=100%">
+
+	<a href='#' onclick="showCreditCardForm()" class="btn btn-success btn-large" id='want_button' style="width:100%;margin-top:5em">
+	<i class="icon-shopping-cart icon-large"></i>
 		Get this
 	</a>
 	<!--<div class="credit_card"></div>

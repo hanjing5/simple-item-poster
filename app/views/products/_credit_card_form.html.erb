@@ -7,12 +7,21 @@
 <%= form_for("card", :url => confirm_purchase_single_shop_create_path) do |f| %>
 	<%= hidden_field_tag :encrypted_link, @product.id.to_s(32) %>
 	<%= hidden_field_tag :price, @product.price %>
-  <%= f.text_field :number, :placeholder=>'Number: 4242 4242 4242 4242' %>
-  <%= f.text_field :cvc,:placeholder=>'CVC on the back of your card'%><br>
+<div class="input-prepend">
+<span class="add-on"><i class="icon-pencil"></i></span>
+  <%= f.text_field :number, :placeholder=>'Number: 4242 4242 4242 4242',:style=>'width:15em' %>
+  <%= f.text_field :cvc,:placeholder=>'123',:style=>'width:3em'%><br>
+</div>
   Expiration Date(MM/YYYY) <br>
-  <%= f.text_field :exp_month, :style=>'width:2em'%> / 
-  <%= f.text_field :exp_year, :style=>'width:4em'%><br>
-	<%= f.text_field :email,:placeholder=>'Email: so we can email it to you!' %><br>
+<div class="input-prepend">
+<span class="add-on"><i class="icon-calendar"></i></span>
+  <%= f.text_field :exp_month, :style=>'width:2em',:placeholder=>'01'%> / 
+  <%= f.text_field :exp_year, :style=>'width:4em',:placeholder=>'2015'%><br>
+</div>
+<div class="input-prepend">
+<span class="add-on"><i class="icon-envelope"></i></span>
+	<%= f.text_field :email,:placeholder=>'Email: so we can email it to you.' ,:style=>'width:15em'%>
+</div>
 	<p>Spam are for jerks and jerks we are not.</p>
   <%= f.submit 'Buy It!', :class=>'btn btn-large btn-success', :style=>"width:15em" %><br>
 <% end %>
