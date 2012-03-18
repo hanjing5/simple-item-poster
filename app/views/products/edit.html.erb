@@ -14,6 +14,26 @@
 <%= form_for :product, @product, :url =>{ :action => "update"},  :html => { :multipart => true,:method=>"put" } do |form| %>
 
 	<%= render 'product_form', :form => form %>
+<a href="#" id="show_file_attachments" onclick="$('#file_attachments').show(150);$(this).hide();">attach more files</a>
+
+<div style="display:none" id="file_attachments">
+	<h3>Attach More Files</h3>
+	Max 25mb <a href="#" onclick="$('#file_attachments').hide(150);$('#show_file_attachments').show();">hide</a>
+	<!--<p>
+	(Optional unless you are selling an uploaded file)
+	<br>
+	<%= form.file_field :picture %>-->
+	<input type="button" id="button" class="btn" value="Attach More Files" />
+	<br>
+	<!--<input type="submit" id="save" class="btn btn-success btn-large" value="Upload" />
+	</p>-->
+</div>
+  <br>
+	<br>
+
+<!--    <%= form.submit "Submit" %>-->
+<button type="Submit" class="btn btn-success btn-large" id="product_submit" name="commit" style="width:10em">Update</button>
+
 <% end %>
 
 
@@ -86,18 +106,22 @@
 <!-- share on fb button -->
 <!-- share on twitter button -->
 <!--Shared Link Area-->
-<a href="http://twitter.com/home?status=Buy <%= @product.name %> on Bockie.com <%= @encrypted_link %>" target="_blank" title="Click to share this post on Twitter">
+<a href="#" onclick='javascript:window.open("http://twitter.com/home?status=Buy <%= @product.name %> on Bockie.com <%= @encrypted_link %>","share","width=500,height=300,scrollbars=yes");' title="Click to share this post on Twitter">
 	<%= image_tag 'shareontwitter.png' %>
 </a>
-<a href="http://twitter.com/home?status=Buy <%= @product.name %> on Bockie.com <%= @encrypted_link %>" target="_blank" title="Click to share this post on Twitter">
+<!--<a href="http://www.facebook.com/dialog/feed?Yp=Buy <%= @product.name %> on Bockie.com <%= @encrypted_link %>" target="_blank" title="Click to share this post on Twitter">
+<a href="http://www.facebook.com/dialog/feed?app_id=136994213093359&name=game&caption=Just $2.&redirect_uri=http://bockie.herokuapp.com&message=Buy" target="_blank" title="Click to share this post on Twitter">
+	<%= image_tag 'shareonfb.png' %>
+</a>-->
+<a href="#" onclick='javascript:window.open("http://www.facebook.com/dialog/feed?app_id=136994213093359&name=game&caption=Only <%= number_to_currency @product.price %>.&redirect_uri=http://bockie.herokuapp.com&display=popup&message=Buy%20game%20on%20link%21&link=<%= @encrypted_link %>","Share","width=500,height=300,scrollbars=yes");' >
 	<%= image_tag 'shareonfb.png' %>
 </a>
 
-<!--<a href="javascript:window.open('http://www.facebook.com/dialog/feed?app_id=114816261931958&name=game&caption=Just $2.&redirect_uri=https://gamertiser.com/links&amp;display=popup&amp;message=Buy%20game%20on%20link%21&amp;link=https%3A%2F%2Fgamertiser.com%2Fl%2FUWo%22,%22Share%22,%22width=500,height=250,scrollbars=yes%22);" 
+<!--<a href="javascript:window.open('http://www.facebook.com/dialog/feed?app_id=114816261931958&name=game&caption=Just $2.&redirect_uri=https://gamertiser.com/links&amp;display=popup&amp;message=Buy%20game%20on%20link%21&amp;link=https%3A%2F%2Fgamertiser.com%2Fl%2FUWo%22,%22Share%22,%22width=150,height=150,scrollbars=yes%22);" 
 	class="btn btn-info btn-large">
 	Share on Facebook
 </a>
-<a href="javascript:window.open('http://twitter.com/share?text=Buy game on Gumroad &url=https://gamertiser.com/l/UWo/','Share','width=500,height=250,scrollbars=yes')" 
+<a href="javascript:window.open('http://twitter.com/share?text=Buy game on Gumroad &url=https://gamertiser.com/l/UWo/','Share','width=150,height=150,scrollbars=yes')" 
 	class="btn btn-info btn-large" target='none'>
 		Share on Tweet
 </a>-->
@@ -108,12 +132,12 @@
 		<h3>Picture Preview</h3>
 		<%= image_tag @product.picture.url(:thumb) %>
 	<% else %>
-	<a href='#' onclick='$("#upload_preview").show(500);$(this).hide()' id="show_upload_preview">Upload a Preview Picture</a>
+	<a href='#' onclick='$("#upload_preview").show(150);$(this).hide()' id="show_upload_preview">Upload a Preview Picture</a>
 	<div style="display:none" id="upload_preview">
 	<br>
 	<!--<button class="btn btn-info btn-large">Stats</button>-->
 <h3>Upload a Preview</h3>
-		<a href='#' onclick='$("#upload_preview").hide(500);$("#show_upload_preview").show()'>
+		<a href='#' onclick='$("#upload_preview").hide(150);$("#show_upload_preview").show()'>
 			hide
 		</a>
 <%= form_for :product, @product, :url =>{ :action => "update"},  :html => { :multipart => true,:method=>"put" } do |form| %>
@@ -130,12 +154,12 @@
 <br>
 <% if @downloadables.count > 0 %>
 <!--show this if the user have stuff to sell-->
-	<a href='#' onclick='$("#file_list").show(500);$(this).hide();' id="show_file_list">
-		Show Current File List
+	<a href='#' onclick='$("#file_list").show(150);$(this).hide();' id="show_file_list">
+		Show Current File List: <%= pluralize(@downloadables.count, 'file')%>
 	</a>
 <div id="file_list" style="display:none">
 	<h3>File List</h3>
-		<a href='#' onclick='$("#file_list").hide(500);$("#show_file_list").show()'>
+		<a href='#' onclick='$("#file_list").hide(150);$("#show_file_list").show()'>
 			hide
 		</a>
 	<table class="table table-condensed">

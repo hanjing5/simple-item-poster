@@ -75,7 +75,7 @@ class CompaniesController < ApplicationController
 
 
 	def account
-		redirect_to edit_password_companies_path
+		redirect_to bank_companies_path
 	end
 
 end

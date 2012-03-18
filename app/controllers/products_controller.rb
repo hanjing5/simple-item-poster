@@ -185,25 +185,32 @@ class ProductsController < ApplicationController
 	# product he/she is trying to sell
 	###########################################################
 	def update
+
 		@product = Product.find(params[:id])
+		
+		# sub section, delete product only
 		if params['delete_attachment']
 			@a = Attachment.find_by_id(params['delete_attachment'])
+			@attachment_name = @a.file_file_name
 			# paperclip delete file at path
 			@a.file=nil
-			@a.save
 			# delete the record of the attachment
-			@a.delete
+			if @a.save and @a.delete
+				flash[:success]="Attachment #{@attachment_name} successfully deleted."
+				return redirect_to edit_company_product_path
+			else
+				flash[:error]="Failed to delete #{@attachment_name}. Please try again."
+				return redirect_to edit_company_product_path
+			end
 		end
-		puts params['attachment']
+
+		# preppare the attachment
 		if params['attachment']
 			params['attachment'].each do |k, v|
 				puts v	
-				puts
 				@file = Attachment.new({'file'=>v})
 				@file.product_id = @product.id
-				puts
 				
-				@file.save
 			end
 		end
 
@@ -215,7 +222,7 @@ class ProductsController < ApplicationController
 			@product.save
 
 		end
-			if @product.update_attributes(params[:product])
+			if @product.update_attributes(params[:product]) and @file.save
 				flash[:success]="Update Success!"
 				redirect_to edit_company_product_path
 			else
@@ -257,7 +264,7 @@ class ProductsController < ApplicationController
 
 			@product.encrypted_link = @product.id.to_s(36)
 			if @product.save
-				flash[:success] = "Submit Success!"
+				flash[:success] = "Success! Shop created. Share the link on the right to start selling."
 				redirect_to edit_company_product_path(current_company.id, @product.id )
 			else
 				flash[:error]="Product didn't save properly"

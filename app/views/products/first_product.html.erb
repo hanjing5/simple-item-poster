@@ -2,5 +2,19 @@
 <hr>
 <%= form_for :product, @product, :url =>{ :action => "create"},  :html => { :multipart => true} do |form| %>
 <%= render 'product_form', :form=>form %>
+	<h3>Attach Your File(s)</h3>
+	Max 25mb
+	<!--<p>
+	(Optional unless you are selling an uploaded file)
+	<br>
+	<%= form.file_field :picture %>-->
+	<input type="button" id="button" class="btn" value="Attach More Files" />
+	<br>
+	<!--<input type="submit" id="save" class="btn btn-success btn-large" value="Upload" />-->
+	</p>
+  <br>
+<!--    <%= form.submit "Submit" %>-->
+<button type="Submit" class="btn btn-success btn-large" id="product_submit" name="commit" style="width:10em">Save</button>
+
 <% end %>
 

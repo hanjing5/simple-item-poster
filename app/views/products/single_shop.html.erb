@@ -20,9 +20,9 @@
 	</table>
 <a href="#" class="thumbnail">
 <% if @product.picture_file_name %>
-<img src='<%= @product.picture_path %>'>
+	<img src='<%= @product.picture_path %>' height="380">
 <% else %>
-<img src="http://placehold.it/380x300" alt="">
+	<img src="http://placehold.it/380x300" alt="">
 <% end %>
 </a>
 	<br>
