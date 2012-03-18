@@ -119,7 +119,10 @@ class ProductsController < ApplicationController
 		end
 	end
 
+	#################################################
+  # Show the product via get request
 	# for the single shop purchases
+	#################################################
 	def purchase_single_success		
 		@i = Invoice.find(params[:id].to_i(32))
   	@digest = Digest::MD5.hexdigest("#{@i.id}#{@i.credit_card_token}#{params[:encrypted_link]}#{@i.created_at}")
@@ -144,6 +147,10 @@ class ProductsController < ApplicationController
 	end
 
 
+	###########################################################
+	# attempt to use ruby to force a product download
+	# WARNING: deprecated
+	###########################################################
  	def download
 		@product = Product.find(params[:encrypted_link].to_i(32))
 		@product['picture_path'] = picture_path_builder(@product) + @product.picture_file_name
@@ -240,7 +247,10 @@ class ProductsController < ApplicationController
 			end
 	end
 
-	# GET 
+	#################################################
+  # Show the product via get request
+	# WARNING: deprecated
+	#################################################
 	def show
 		respond_to do |format|
 			format.html
@@ -248,10 +258,17 @@ class ProductsController < ApplicationController
 	end
 
 
+	#################################################
+  # Show the product via get request
+	# WARNING: deprecated
+	#################################################
   def new
     @product = Product.new
   end
 
+	#################################################
+  # create a new product
+	#################################################
   def create
     @product = Product.new(params[:product])
     @product.company_id = current_company.id
@@ -285,11 +302,17 @@ class ProductsController < ApplicationController
     end
   end
 
+	#################################################
   # Where we take people the first time they sign on
+	#################################################
   def first_product
     @product = Product.new
   end
 
+	#################################################
+  # product index page
+	# should redirected to company's index page
+	#################################################
 	def index
 		redirect_to company_root_path
 	end
@@ -356,6 +379,10 @@ class ProductsController < ApplicationController
 	end
 
 
+	###########################################################
+	# increment clickthrough via REST api
+	# WARNING: deprecated
+	###########################################################
 	def update_product_api
 		respond_to do |format|
 			format.js do	
@@ -369,7 +396,11 @@ class ProductsController < ApplicationController
 	end
 
 
-	# displays a page of inventory
+	###########################################################
+	# displays a page of inventory, original made for games
+	# multi-store
+	# WARNING: deprecated
+	###########################################################
 	def inventory_display
 		# give a record number, display that may products random products
 		@products = []
@@ -439,6 +470,10 @@ class ProductsController < ApplicationController
 		end
 	end
 
+	###########################################################
+	# create a purchase via REST call
+	# WARNING: deprecated
+	###########################################################
 	def api_purchase_create
 		# user token doesn't exist
 		# token is test case
@@ -501,7 +536,10 @@ class ProductsController < ApplicationController
 		end
 	end
 
+	###########################################################
   # returns the most recent purchase
+	# WARNING: deprecated
+	###########################################################
   def api_invoice_token
 	# token doesn't exist
 	# token is test case
@@ -536,11 +574,16 @@ class ProductsController < ApplicationController
   end
 	
 
+	#################################################
 	# for the store
+	#################################################
 	def purchase_success
 		render :layout=>false
 	end
 
+	#################################################
+	#
+	#################################################
 	def success_prompt
 		render :layout => false
 	end
