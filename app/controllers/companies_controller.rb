@@ -6,6 +6,14 @@ class CompaniesController < ApplicationController
 	@toolbar_hash = {:company => 'active'}
 	@company = current_company
 	@products_count = @company.products.count
+	@products_earnings = 0
+	@company.invoices.each do |i|
+		@products_earnings += i.price
+	end
+	@products_view = 0
+	@company.products.each do |p|
+		@products_view += p.displayed
+	end
     
     if @products_count == 0
       # if you dont have a product, we want to add a product before 

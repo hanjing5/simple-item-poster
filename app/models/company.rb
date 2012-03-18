@@ -11,6 +11,7 @@ class Company < ActiveRecord::Base
   has_many :ads
   has_many :coupons
   has_many :products
+	has_many :invoices,:through=>:products
 end
 
 # == Schema Information

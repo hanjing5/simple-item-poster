@@ -1,4 +1,7 @@
 class Invoice < ActiveRecord::Base
+	belongs_to :company, :through=>:product
+	belongs_to :product
+
   validates :product_id, :presence => true
   validates :credit_card_token, :presence => true
   validates :price, :presence => true

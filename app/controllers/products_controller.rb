@@ -225,7 +225,12 @@ class ProductsController < ApplicationController
 				# do not allow upload
 				@file_size = @file.file_file_size
 				@current_file_sizes = get_total_file_size(current_company)
-				@file.save
+				if @file_size + @current_file_sizes > 100.megabytes
+					@tmp_flash_message = ' Upload failed. You have too many files'
+					break
+				else
+					@file.save
+				end
 				
 			end
 		end
@@ -238,11 +243,11 @@ class ProductsController < ApplicationController
 			@product.save
 
 		end
-			if @product.update_attributes(params[:product])
+			if @product.update_attributes(params[:product]) and @tmp_flash_message.nil?
 				flash[:success]="Update Success!"
 				redirect_to edit_company_product_path
 			else
-				flash[:error]="Failed to updated!"
+				flash[:error]="Failed to updated!" + @tmp_flash_message
 				redirect_to edit_company_product_path
 			end
 	end

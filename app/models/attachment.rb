@@ -18,6 +18,6 @@ class Attachment < ActiveRecord::Base
 	
 	attr_accessible :product_id, :file
 
-	validates_attachment_size :file, :less_than => 25.megabytes
+	validates_attachment_size :file, :less_than => 100.megabytes
 end
 
