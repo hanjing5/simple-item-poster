@@ -173,7 +173,9 @@ class ProductsController < ApplicationController
 				puts downloadable['download_path']
 			end
 		end
-
+		
+		@total_file_size = get_total_file_size(current_company)
+	
 		@encrypted_link = make_encrypted_link(@product.encrypted_link)
 		if @product.nil?
 			@new = true
@@ -204,12 +206,19 @@ class ProductsController < ApplicationController
 			end
 		end
 
-		# preppare the attachment
+		# prepare the attachment
 		if params['attachment']
+			# loop through all the attachments
 			params['attachment'].each do |k, v|
 				puts v	
 				@file = Attachment.new({'file'=>v})
 				@file.product_id = @product.id
+			
+				# check attachment size, if the user has over 100 total mb total
+				# do not allow upload
+				@file_size = @file.file_file_size
+				@current_file_sizes = get_total_file_size(current_company)
+				@file.save
 				
 			end
 		end
@@ -222,7 +231,7 @@ class ProductsController < ApplicationController
 			@product.save
 
 		end
-			if @product.update_attributes(params[:product]) and @file.save
+			if @product.update_attributes(params[:product])
 				flash[:success]="Update Success!"
 				redirect_to edit_company_product_path
 			else
@@ -281,27 +290,36 @@ class ProductsController < ApplicationController
     @product = Product.new
   end
 
-   def index
+	def index
 		redirect_to company_root_path
-    #if params[:company_id]
-    #  @company = Company.find(params[:company_id])
-    #  @products = @company.products
-    #else
-    #  @products = Product.all
-    #end
-   end
+	end
 
+	#################################################
+  # destroy/delete the product
+	#################################################
 	def destroy
 		@product = Product.find(params[:id])
 		@company_id = @product.company_id
 	  @company = Company.find(@company_id)
-  	@product.destroy
+		
+		# kill the attachments first
+		@product.attachments.each do |a|
+			# delete the actual file
+			a.file=nil
+			a.save
+			# delete the record of the attachment
+			a.delete
+		end
 
+  	@product.destroy
+		flash[:success] = "#{@product.name} deleted."
     redirect_to company_products_path(@company)
 	end
 
-    # Pulls a random product record from the database 
+	#################################################
+  # Pulls a random product record from the database 
 	# TODO: add filtering
+	#################################################
 	def random_api
 		# get a random record number
 		offset = rand(Product.count)
@@ -575,5 +593,15 @@ class ProductsController < ApplicationController
 						:ip => @ip,
 						symbol => true
 					)
+				end
+			
+				def get_total_file_size(c)
+					@size = 0
+					c.products.each do |p|
+						p.attachments.each do |a|
+							@size += a.file_file_size
+						end
+					end 
+					return @size
 				end
 end

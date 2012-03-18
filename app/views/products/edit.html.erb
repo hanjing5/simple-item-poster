@@ -2,6 +2,7 @@
 <div class="span4">
 
 <h1>Edit</h1>
+<h3><%= @total_file_size %></h3>
 </div>
 <div class="span4 offset4">
 	<h3>Price: <%= number_to_currency @product.price %> - Sold: <%= @product.purchased %> - Earnings: <%= number_to_currency(@product.price * @product.purchased) %></h3>
