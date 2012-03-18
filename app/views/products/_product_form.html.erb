@@ -5,8 +5,8 @@
 <td style="padding-right:20px">
 	<h3>Product Name</h3>
 	<div class="input-prepend">
-	<span class="add-on"><i class="icon-file"></i></span>
-		<%= form.text_field :name ,:style=>'width:10em',:placeholder=>'name of the product'%>
+	<span class="add-on"style="height:1.9em;padding-top:1em;padding-right:0.9em;padding-left:0.9em"><i class="icon-file icon-large"></i></span>
+		<%= form.text_field :name ,:style=>'width:6em;font-size:1.75em;height:1.5em;"',:placeholder=>'Pretty Picture'%>
 	</div>
 <!--	<h3>Product Type</h3>
 	<%= form.collection_select(:product_type, Type.all, :name,:name, {:prompt => 'Select Type'},:style => "width: 175px" ) %>-->
@@ -14,22 +14,22 @@
 <td style="padding-right:20px">
 	<h3>Link</h3>
 <div class="input-prepend">
-<span class="add-on"><i class="icon-home"></i></span>
-  <%= form.text_field :link ,:style=>'width:10em',:placeholder=>'link of the product'%>
+<span class="add-on"style="height:1.9em;padding-top:1em;padding-right:0.9em;padding-left:0.9em"><i class="icon-home icon-large"></i></span>
+  <%= form.text_field :link ,:style=>'width:10em;font-size:1.75em;height:1.5em;"',:placeholder=>'link of the product'%>
 </div>
 </td>
 <td style="padding-right:20px">
 	<h3>Price</h3>
 	<div class="input-prepend">
-	<span class="add-on"><i class="icon-tag"></i></span>
- 	<%= form.text_field :price,:style=>'width:4em',:placeholder=>1.00 %>
+	<span class="add-on"style="height:1.9em;padding-top:1em;padding-right:0.9em;padding-left:0.9em;"><font size="3em">$</font></span>
+ 	<%= form.text_field :price,:style=>'width:3em;font-size:1.75em;height:1.5em;"',:placeholder=>1.00 %>
 	</div>
 </td>
 </tr>
 </table>
 
 	<h3>Description</h3>
-  <%= form.text_area :description,:style=>'height:100px;width:35em',:placeholder=>'A description for the stuff you are selling' %>
+  <%= form.text_area :description,:style=>'height:100px;width:27em;font-size:1.75em',:placeholder=>'A description for the stuff you are selling' %>
 	<br>
 	<br>
 

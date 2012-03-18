@@ -9,8 +9,11 @@
 	<% end %>
 </td>
 <td style="float:right">
-		<font style='font-size:1.5em'><%= @products_count %> Products</font>
+		<font style='font-size:1.25em;margin-right:1em'>Products: <%= @products_count %></font>
+		<font style='font-size:1.25em;margin-right:1em'>Views: <%= @products_view %></font>
+		<font style='font-size:1.25em;margin-right:1em'>Earnings: <%= number_to_currency @products_earnings %></font>
 		<%= link_to "Add Product", company_product_path(current_company, "new"), :class=>"btn btn-success btn-large" %>
+
 </td>
 </tr>
 </table>

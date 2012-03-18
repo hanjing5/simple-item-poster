@@ -2,7 +2,6 @@
 <div class="span4">
 
 <h1>Edit</h1>
-<h3><%= @total_file_size %></h3>
 </div>
 <div class="span4 offset4">
 	<h3>Price: <%= number_to_currency @product.price %> - Sold: <%= @product.purchased %> - Earnings: <%= number_to_currency(@product.price * @product.purchased) %></h3>
@@ -11,7 +10,7 @@
 <hr>
 <%= render 'shared/info' %>
 <div class="row">
-<div class="span6">
+<div class="span7">
 <%= form_for :product, @product, :url =>{ :action => "update"},  :html => { :multipart => true,:method=>"put" } do |form| %>
 
 	<%= render 'product_form', :form => form %>
@@ -60,25 +59,25 @@
 <% end %>-->
 
 </div>
-<div class="span6">
+<div class="span5">
 <div class="row">
 	<div class="span3">
 		<h3>Share this link (Shop's URL)</h3>
 	</div>
-	<div class="span3" style="width:17%;float:right">
-		<a href="<%= @encrypted_link%>", class="btn btn-info btn-large", target="_blank">
-			<i class="icon-search"></i> Preview
-		</a>
+	<div class="span3" style="width:17%;float:right;margin-top:0px;padding-top:0px;margin-bottom:5px">
 	</div>
 </div>
 <table width="100%">
-<tr id='copy'>
+<tr>
 <td id='copy' style="padding:0.5em;background-color:#F5F5F5;-moz-border-radius: 5px;border-radius: 5px;border:1px solid #ccc">
-<font style="font-size:1.25em"><%= @encrypted_link %>
+<font style="font-size:1.25em"><%= @encrypted_link %></font>
 </td>
 <td id='copy'>
 </td>
-<td style="float:right" id='copy'>
+<td style="float:right">
+		<a href="<%= @encrypted_link%>", class="btn btn-info btn-large", target="_blank">
+			<i class="icon-search"></i> Preview
+		</a>
 </td>
 <td style="float:right" id='copy'>
 		<!--<%= link_to 'Select', "#", :class=>"btn btn-info btn-large",:target=>'_blank' %>-->
@@ -160,6 +159,7 @@
 	</a>
 <div id="file_list" style="display:none">
 	<h3>File List</h3>
+	total: <%=  number_to_human_size @total_file_size %> 
 		<a href='#' onclick='$("#file_list").hide(150);$("#show_file_list").show()'>
 			hide
 		</a>
@@ -170,9 +170,12 @@
 					<%= link_to downloadable.file_file_name, downloadable.download_path %>
 				</td>
 				<td>
+				<%= number_to_human_size downloadable.file_file_size %>
+				</td>
+				<td>
 					<%= form_for :product, @product, :url =>{ :action => "update"},  :html => { :multipart => true,:method=>"put" } do |form| %>
 					<%= hidden_field_tag(:delete_attachment, downloadable.id) %>
-					<button type="Submit" class="btn" id="product_submit" name="commit">delete</button>
+					<button type="Submit" class="btn" id="product_submit" data-confirm="Are you sure you want to delete <%= downloadable.file_file_name%>?" name="commit">delete</button>
 					<% end %>
 				</td>
 			</tr>
