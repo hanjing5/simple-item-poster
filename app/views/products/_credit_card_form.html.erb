@@ -1,4 +1,5 @@
 <h2>Checkout</h2>
+<br>
 <% if flash[:notice] %>
 	<p class="notice"><%= flash[:notice] %></p>
 <% end %>
@@ -8,7 +9,7 @@
 <%= form_for("card", :url => confirm_purchase_single_shop_create_path) do |f| %>
 	<%= hidden_field_tag :encrypted_link, @product.id.to_s(32) %>
 	<%= hidden_field_tag :price, @product.price %>
-	<table style="margin-right:auto;margin-left:auto;float:center">
+	<table style="margin-right:auto;margin-left:auto;float:center;">
 	<tr>
 		<td style="text-align:left" colspan='2'>
 			<h4>
@@ -18,7 +19,7 @@
 	</tr>
 	<tr>
 		<td style="text-align:left" colspan='2'>
-			<%= f.text_field :number, :placeholder=>'4242424242424242',:style=>'width:10em;font-size:1.75em;height:1.5em;"' %>
+			<%= f.text_field :number, :placeholder=>'4242424242424242',:style=>'width:11em;font-size:1.75em;height:1.5em;"' %>
 		</td>
 	</tr>
 	<tr>
@@ -51,11 +52,11 @@
 	</tr>
 	<tr>
 		<td style="text-align:left" colspan='2'>
-		<%= f.text_field :email,:placeholder=>'who do we email this to' ,:style=>'width:10em;font-size:1.75em;height:1.5em;"'%>
+		<%= f.text_field :email,:placeholder=>'who do we email this to' ,:style=>'width:11em;font-size:1.75em;height:1.5em;"'%>
 		</td>
 	</tr>
 	</table>
 	<p>Spam are for jerks and jerks we are not.</p>
-  <%= f.submit "Buy It!", :class=>'btn btn-large btn-success', :style=>"width:15em" %><br>
+  <%= f.submit "Buy It!", :class=>'btn btn-large btn-success', :style=>"width:17em" %><br>
 <%= image_tag "visa_mastercard.jpg",:size=>"180x90" %> 
 <% end %>
