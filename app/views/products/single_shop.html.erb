@@ -2,53 +2,32 @@
 <div id="myoutercontainer" style='position:relative'>
 <!--	<div id="myinnercontainer" style='position:absolute; top:50%; margin-top:5%' >-->
 <div class="container_shop">
-<div class="row-fluid">
-<div class="span6" style="margin:1em">
-	<table style="width:100%">
-	<tr>
-	<td>
-	<h2>
-	<%= @product.name %>
-	</h2>
-	</td>
-	<td style="padding-top:0.5em;float:right">
-	<h3>
-	<%= number_to_currency @product.price %>
-	</h3>
-	</td>
-	</tr>
-	</table>
-<a href="#" class="thumbnail">
-<% if @product.picture_file_name %>
-	<img src='<%= @product.picture_path %>' height="380">
-<% else %>
-	<img src="http://placehold.it/380x300" alt="">
-<% end %>
-</a>
 	<br>
-	<%= @product.description %><br>
-<br>
-<br>
-</div>
+	<table style="margin:2em;padding-top:4em;width:100%">
+		<tr>
+			<td style="width:40%;margin-top:4em;">
+				<%= render "product_info" %>
+			</td>
 
-<div class="span5" style="margin:1em">
-	<div style="display:none;width:100%;margin-top:5em" id='credit_card_form'>
-	<%= render 'credit_card_form' %>
-	</div>
-	<script>
-		function showCreditCardForm() {
-			$('#credit_card_form').show(500);
-			$('#want_button').hide();
-		}		
-	</script>
+			<td style="margin-top:4em;text-align:center">
+				<div style="display:none;" id='credit_card_form'>
+					<%= render 'credit_card_form' %>
+				</div>
 
-	<a href='#' onclick="showCreditCardForm()" class="btn btn-success btn-large" id='want_button' style="width:100%;margin-top:5em">
-	<i class="icon-shopping-cart icon-large"></i>
-		Get this
-	</a>
-	<!--<div class="credit_card"></div>
-	<%= link_to 'I want this', confirm_purchase_single_shop_with_credit_card_path(:product_id=>@product.id.to_s(32)), :method => :get, :remote=>true, :class=>'btn btn-success btn-large',:id=>'want_button' %>-->
-</div>
-</div>
+				<a href='#' onclick="showCreditCardForm()" class="btn btn-success btn-large" id='want_button' style="">
+					<i class="icon-shopping-cart icon-large"></i>
+					Get this
+				</a>
+
+				<script>
+					function showCreditCardForm() {
+						$('#credit_card_form').show(500);
+						$('#want_button').hide();
+					}		
+				</script>
+			</td>
+		</tr>
+	</table>
+<br>
 </div>
 </div>

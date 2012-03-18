@@ -23,7 +23,7 @@
 	(Optional unless you are selling an uploaded file)
 	<br>
 	<%= form.file_field :picture %>-->
-	<input type="button" id="button" class="btn" value="Attach More Files" />
+	<input type="button" id="file_button" class="btn" value="Attach More Files" />
 	<br>
 	<!--<input type="submit" id="save" class="btn btn-success btn-large" value="Upload" />
 	</p>-->
@@ -128,34 +128,47 @@
 
 <br>	
 <br>
-	<% if @product.picture_file_name %>
-		<h3>Picture Preview</h3>
-		<%= image_tag @product.picture.url(:thumb) %>
-	<% else %>
-	<a href='#' onclick='$("#upload_preview").show(150);$(this).hide()' id="show_upload_preview">Upload a Preview Picture</a>
-	<div style="display:none" id="upload_preview">
+
+	<% if @product_previews.count > 0 %>
+		<h3>Preview Pictures</h3>
+		<table>
+		<tbody>
+			<tr>
+		<% @product_previews.each do |p| %>
+				<td>
+					<%= image_tag p.picture.url(:thumb) %><br>
+					<%= form_for @product,:as=>:product, :url =>{ :action => "update"},  :html => { :multipart => true,:method=>"put" } do |form| %>
+						<%= hidden_field_tag(:delete_preview, p.id) %>
+						<button type="Submit" class="btn" id="product_submit" data-confirm="Are you sure you want to delete <%= p.picture_file_name%>?" name="commit" style="width:100%">delete</button>
+					<% end %>
+				</td>
+		<% end %>
+			</tr>
+		</tbody>
+		</table>
 	<br>
-	<!--<button class="btn btn-info btn-large">Stats</button>-->
-<h3>Upload a Preview</h3>
-		<a href='#' onclick='$("#upload_preview").hide(150);$("#show_upload_preview").show()'>
-			hide
-		</a>
-<%= form_for :product, @product, :url =>{ :action => "update"},  :html => { :multipart => true,:method=>"put" } do |form| %>
-	<%= hidden_field_tag(:company_id, current_company.id) %>
-	<p>
-	<%= form.file_field :picture %>
-	</p>
-	<!--<%= form.submit "Submit" %>-->
-	<input type="Submit" class="btn" id="product_submit" name="commit" value="Upload the preview"/>
 	<% end %>
-	</div>
-<% end %>
-<br>
-<br>
+
+	<% if @product_previews.count < 6 %>
+		<a href='#' onclick='$("#upload_preview").show(150);$(this).hide()' id="show_upload_preview">upload preview pictures</a>
+		<div style="display:none" id="upload_preview">
+			<!--<button class="btn btn-info btn-large">Stats</button>-->
+			<h3>Upload Preview Pictures</h3>
+			<a href='#' onclick='$("#upload_preview").hide(150);$("#show_upload_preview").show()'>
+				hide
+			</a>
+			<%= form_for @product, :as=>:product, :url =>{ :action => "update"},  :html => { :multipart => true,:method=>"put" } do |form| %>
+				<input type="button" id="preview_button" class="btn" value="attach more previews" />
+				<br>
+				<button type="Submit" class="btn btn-primary" id="product_submit" name="commit" style="width:10em">Upload</button>
+			<% end %>
+		</div><br><br>
+	<% end %>
+
 <% if @downloadables.count > 0 %>
 <!--show this if the user have stuff to sell-->
 	<a href='#' onclick='$("#file_list").show(150);$(this).hide();' id="show_file_list">
-		Show Current File List: <%= pluralize(@downloadables.count, 'file')%>
+		show attached files: <%= pluralize(@downloadables.count, 'file')%>
 	</a>
 <div id="file_list" style="display:none">
 	<h3>File List</h3>

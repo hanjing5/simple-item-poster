@@ -24,6 +24,7 @@
 class Product < ActiveRecord::Base
 	belongs_to :company
 	has_many :attachments
+	has_many :previews
 	has_many :invoices
 
 	#has_attached_file :picture, :styles => { :medium => "300x300>", :thumb => "100x100>" }

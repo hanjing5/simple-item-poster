@@ -1,38 +1,19 @@
 <%= render "single_shop_header" %>
-<div class="container">
-<table style='text-align:center' align='center' style="height:50em">
-	<tbody>
-		<tr style="height:50em">
-			<td style="text-align:center;border-top:0px solid #C0C0C0;">
-				<img src='<%= @product.picture_path %>' width='90%' height='90%'>
+<div id="myoutercontainer" style='position:relative'>
+<!--	<div id="myinnercontainer" style='position:absolute; top:50%; margin-top:5%' >-->
+<div class="container_shop">
+	<br>
+	<table style="margin:2em;padding-top:4em;width:100%">
+		<tr>
+			<td style="width:40%;margin-top:4em;">
+				<%= render "product_info" %>
 			</td>
-		<td style="width:2em">
-		</td>
-			<td style="text-align:center;border-top:0px solid #C0C0C0;width:20em;">
-				<br>
-				<h1><%= @product.name %><h1>
 
-				<h1 style="color:#E56717">
-					<%= number_to_currency @product.price %>
-				</h1>
-				<p>
-				<%= @product.description %>
-				</p>
-				<br>
-				<br>
-				<div style="" id='credit_card_form'>
-				<%= render 'credit_card_form' %>
-				</div>
-				<a href='#' onclick="$('#credit_card_form').show(500);$('#want_button').hide();" class="btn btn-success btn-large" id='want_button' style="display:none">
-					Get this
-				</a>
-
-				<!--<div class="credit_card"></div>
-				<%= link_to 'I want this', confirm_purchase_single_shop_with_credit_card_path(:product_id=>@product.id.to_s(32)), :method => :get, :remote=>true, :class=>'btn btn-success btn-large',:id=>'want_button',:style=>'display:none' %>-->
-
+			<td style="margin-top:4em;text-align:center">
+					<%= render 'credit_card_form' %>
 			</td>
 		</tr>
-	</tbody>
-</table>
+	</table>
+<br>
 </div>
-<%= render "single_shop_footer" %>
+</div>

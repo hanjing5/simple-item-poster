@@ -186,7 +186,7 @@ $.ajaxTransport('jsonpi', function(opts, originalOptions, jqXHR) {
 // public/javascripts/application.js
 
 $(document).ready(function() {
-  $("#button").bind("click", function() {
+  $("#file_button").bind("click", function() {
     /* Generating unique id
     */
     var rand = Math.random().toString().split(".")[1];
@@ -196,6 +196,23 @@ $(document).ready(function() {
 
   /* Pushing the first input to the DOM
   */
-  $("#button").trigger("click");
+  $("#file_button").trigger("click");
+
+  $("#preview_button").bind("click", function() {
+    /* Generating unique id
+    */
+    var rand = Math.random().toString().split(".")[1];
+    var input = '<input type="file" name="preview['+rand+']" />'
+    $(this).before('<br/>' + input + '<br/>' );
+  });
+
+  /* Pushing the first input to the DOM
+  */
+  $("#preview_button").trigger("click");
+
+
+    $('.carousel').carousel({
+    	interval: 100
+    })
 
 });

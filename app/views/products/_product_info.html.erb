@@ -1,0 +1,44 @@
+	<table style="width:300px">
+	<tr>
+		<td>
+			<h2>
+				<%= @product.name %>
+			</h2>
+		</td>
+		<td style="padding-top:0.5em;float:right">
+			<h3>
+				<%= number_to_currency @product.price %>
+			</h3>
+		</td>
+	</tr>
+	</table>
+	
+	<% if @product_previews.count > 0 %>
+		<!-- picture previews -->
+		<div id="myCarousel" class="carousel" style="width:350px">
+		<!-- Carousel items -->
+		<div class="carousel-inner" style="width:350px">
+			<div class="active item">
+				<a href="#" class="thumbnail">
+					<img src='<%= @product_previews.first.picture.url(:medium) %>' height="300px" width="300px">
+				</a>
+			</div>
+			<% @product_previews.each do |pp| %>
+				<div class="item">
+					<a href="#" class="thumbnail">
+						<img src='<%= pp.picture.url(:medium) %>' height="300px" width="300px">
+					</a>
+				</div>
+			<% end %>
+		</div>
+	<% else %>
+		<!-- place holder picture preview -->
+		<a href="#" class="thumbnail">
+			<img src='/images/placeholder.jpg' height="300px" width="300px">
+		</a>
+	<% end %>
+	<br>
+	<%= @product.description %>
+	<br>
+	<br>
+	<br>

@@ -26,6 +26,8 @@ class ProductsController < ApplicationController
 		# sophisticated stats database increment
 		create_stats(@product, :impression)
 
+		@product_previews = @product.previews.all	
+
 		if @product.picture_file_name
 			@product['picture_path'] = picture_path_builder(@product) + @product.picture_file_name
 		end
@@ -40,24 +42,28 @@ class ProductsController < ApplicationController
 	###########################################################
 	def single_shop_with_credit_card
 
+		@product_id = params[:encrypted_link].to_i(32)
+		@product = Product.find(@product_id)
 		# sophisticated stats database increment
 		create_stats(@product, :click_through)
 
 		respond_to do |format|
 			format.js do
-				@product = Product.find(params[:product_id].to_i(32))
 				return
 			end
 			format.html do
-				@product_id = params[:encrypted_link].to_i(32)
-				@product = Product.find(@product_id)
 				@product.increment!(:displayed)
 				@product['picture_path'] = ''
+				
+				# prepare the product previews
+				@product_previews = @product.previews.all	
+
 				if @product.picture_file_name
 					@product['picture_path'] = picture_path_builder(@product) + @product.picture_file_name
 				end
 				render :layout => false	
 				return
+
 			end
 		end
 	end
@@ -184,6 +190,11 @@ class ProductsController < ApplicationController
 		@total_file_size = get_total_file_size(current_company)
 	
 		@encrypted_link = make_encrypted_link(@product.encrypted_link)
+
+		@product_previews = @product.previews.all	
+		
+		# detect if the user has no product and bump him to the correct
+		# page
 		if @product.nil?
 			@new = true
 		end
@@ -232,6 +243,30 @@ class ProductsController < ApplicationController
 					@file.save
 				end
 				
+			end
+		end
+		if params['preview']
+			# loop through all the attachments
+			params['preview'].each do |k, v|
+				puts v	
+				@picture = Preview.new({'picture'=>v})
+				@picture.product_id = @product.id
+				@picture.save
+			end
+		end
+
+		if params['delete_preview']
+			@p = Preview.find_by_id(params['delete_preview'])
+			@preview_name = @p.picture_file_name
+			# paperclip delete file at path
+			@p.picture=nil
+			# delete the record of the attachment
+			if @p.save and @p.delete
+				flash[:success]="Preview #{@preview_name} successfully deleted."
+				return redirect_to edit_company_product_path
+			else
+				flash[:error]="Failed to delete #{@preview_name}. Please try again."
+				return redirect_to edit_company_product_path
 			end
 		end
 
