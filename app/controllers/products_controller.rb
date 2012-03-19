@@ -99,17 +99,35 @@ class ProductsController < ApplicationController
 		# fire up an invoice 
 		@client_ip = request.remote_ip  
 
+		# lets make the purchase via stripe's API	
+		# create the customer, we will charge them later
+		customer = Stripe::Customer.create(
+			:card=>@token,
+			:description=>params[:card][:email]
+		)
 		@i = Invoice.new(
 			:email => params[:card][:email],
 			:buyer_ip=>@client_ip,
 			:product_id =>@product.id,
 			:credit_card_token=>@token,
 			:price=>@product.price
+			:stripe_customer_id=>customer.id
 		)
 
 
+		
 		if @i.save
 			puts 'we saved the token'
+			
+			#charge = Stripe::Charge.create(
+			#	:amount =>@i.price,
+			#	:currency=>"usd",
+			#	:card=>@i.token,
+			#	:description=>"#{@i.name}, #{@i.buyer_id}, #{@product.id}"
+			#)
+			#@i.paid = true
+			#@i.save				
+
 			# we pass the invoice id so purchase single success have a way to get the invoice
   		@digest = Digest::MD5.hexdigest("#{@i.id}#{@i.credit_card_token}#{params[:encrypted_link]}#{@i.created_at}")
 			
