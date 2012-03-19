@@ -10,6 +10,7 @@ end
 
 
 
+
 # == Schema Information
 #
 # Table name: invoices
@@ -24,5 +25,7 @@ end
 #  updated_at          :datetime
 #  buyer_ip            :string(255)
 #  email               :string(255)
+#  dispute             :boolean(1)      default(FALSE)
+#  paid                :boolean(1)      default(FALSE)
 #
 

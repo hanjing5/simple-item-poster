@@ -93,8 +93,10 @@ class ProductsController < ApplicationController
 		@product = Product.find(params[:encrypted_link].to_i(32))
 
 		# catch token and store that
-		@token = response.zip[7][0][1]
+		#@token = response.zip[7][0][1]
+		@token = response.id
 		puts @token
+		puts
 
 		# fire up an invoice 
 		@client_ip = request.remote_ip  
@@ -107,40 +109,40 @@ class ProductsController < ApplicationController
 		)
 	
 		if customer.id
-		@i = Invoice.new(
-			:email => params[:card][:email],
-			:buyer_ip=>@client_ip,
-			:product_id =>@product.id,
-			:credit_card_token=>@token,
-			:price=>@product.price,
-			:stripe_customer_id=>customer.id
-		)
-		
-		if @i.save
-			puts 'we saved the token'
+			@i = Invoice.new(
+				:email => params[:card][:email],
+				:buyer_ip=>@client_ip,
+				:product_id =>@product.id,
+				:credit_card_token=>@token,
+				:price=>@product.price,
+				:stripe_customer_id => customer.id
+			)
 			
-			#charge = Stripe::Charge.create(
-			#	:amount =>@i.price,
-			#	:currency=>"usd",
-			#	:card=>@i.token,
-			#	:description=>"#{@i.name}, #{@i.buyer_id}, #{@product.id}"
-			#)
-			#@i.paid = true
-			#@i.save				
+			if @i.save
+				puts 'we saved the token'
+				
+				#charge = Stripe::Charge.create(
+				#	:amount =>@i.price,
+				#	:currency=>"usd",
+				#	:card=>@i.token,
+				#	:description=>"#{@i.name}, #{@i.buyer_id}, #{@product.id}"
+				#)
+				#@i.paid = true
+				#@i.save				
 
-			# we pass the invoice id so purchase single success have a way to get the invoice
-  		@digest = Digest::MD5.hexdigest("#{@i.id}#{@i.credit_card_token}#{params[:encrypted_link]}#{@i.created_at}")
-			
-			# increment simple reporting
-			@product.increment!(:purchased)
-			# sophisticated stats database increment
-			create_stats(@product, :purchase)
+				# we pass the invoice id so purchase single success have a way to get the invoice
+				@digest = Digest::MD5.hexdigest("#{@i.id}#{@i.credit_card_token}#{params[:encrypted_link]}#{@i.created_at}")
+				
+				# increment simple reporting
+				@product.increment!(:purchased)
+				# sophisticated stats database increment
+				create_stats(@product, :purchase)
 
-			redirect_to :action=>'purchase_single_success', :layout=>false, :id=>@i.id.to_s(32), :encrypted_link=>params[:encrypted_link], :success => @digest
-		else
-			puts 'we could not save the token'
-			return redirect_to :action=>'single_shop_with_credit_card', :layout=>false, :encrypted_link=>params[:encrypted_link]
-		end
+				redirect_to :action=>'purchase_single_success', :layout=>false, :id=>@i.id.to_s(32), :encrypted_link=>params[:encrypted_link], :success => @digest
+			else
+				puts 'we could not save the token'
+				return redirect_to :action=>'single_shop_with_credit_card', :layout=>false, :encrypted_link=>params[:encrypted_link]
+			end
 		else
 			puts 'Getting stripe token customer id failed.'
 			return redirect_to :action=>'single_shop_with_credit_card', :layout=>false, :encrypted_link=>params[:encrypted_link]

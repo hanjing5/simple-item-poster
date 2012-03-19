@@ -169,7 +169,7 @@ ActiveRecord::Schema.define(:version => 20120319090038) do
     t.string   "email"
     t.boolean  "dispute",                                           :default => false
     t.boolean  "paid",                                              :default => false
-    t.integer  "stripe_customer_id"
+    t.string   "stripe_customer_id"
   end
 
   create_table "payments", :force => true do |t|
