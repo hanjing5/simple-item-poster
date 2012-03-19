@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120318032645) do
+ActiveRecord::Schema.define(:version => 20120319090038) do
 
   create_table "ad_stats", :force => true do |t|
     t.integer  "ad_id"
@@ -169,6 +169,7 @@ ActiveRecord::Schema.define(:version => 20120318032645) do
     t.string   "email"
     t.boolean  "dispute",                                           :default => false
     t.boolean  "paid",                                              :default => false
+    t.integer  "stripe_customer_id"
   end
 
   create_table "payments", :force => true do |t|

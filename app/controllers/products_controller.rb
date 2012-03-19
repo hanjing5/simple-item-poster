@@ -105,16 +105,16 @@ class ProductsController < ApplicationController
 			:card=>@token,
 			:description=>params[:card][:email]
 		)
+	
+		if customer.id
 		@i = Invoice.new(
 			:email => params[:card][:email],
 			:buyer_ip=>@client_ip,
 			:product_id =>@product.id,
 			:credit_card_token=>@token,
-			:price=>@product.price
+			:price=>@product.price,
 			:stripe_customer_id=>customer.id
 		)
-
-
 		
 		if @i.save
 			puts 'we saved the token'
@@ -139,7 +139,11 @@ class ProductsController < ApplicationController
 			redirect_to :action=>'purchase_single_success', :layout=>false, :id=>@i.id.to_s(32), :encrypted_link=>params[:encrypted_link], :success => @digest
 		else
 			puts 'we could not save the token'
-			redirect_to :action=>'single_shop_with_credit_card', :layout=>false, :encrypted_link=>params[:encrypted_link]
+			return redirect_to :action=>'single_shop_with_credit_card', :layout=>false, :encrypted_link=>params[:encrypted_link]
+		end
+		else
+			puts 'Getting stripe token customer id failed.'
+			return redirect_to :action=>'single_shop_with_credit_card', :layout=>false, :encrypted_link=>params[:encrypted_link]
 		end
 	end
 
