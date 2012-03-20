@@ -6,9 +6,9 @@ class Preview < ActiveRecord::Base
 			:s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
 			#:path => "/:style/:id/:filename",
 			#:url  => '/:style/:id/:style/:basename.:extension',
-			:url => "/system/:hash.:extension",
-			:hash_secret => "superlongsecret",
-			:bucket=>'bockie'
+			:url => "/system/:style/:hash.:extension",
+			:hash_secret => "wtfisthisbullshit11",
+			:bucket => "#{Configuration.bucket_name}"
 #{
 #    :url => "/system/:hash.:extension",
 #    :hash_secret => "longSecretString"

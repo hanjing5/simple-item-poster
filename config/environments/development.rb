@@ -40,5 +40,11 @@ Adserver::Application.configure do
 		:user_name          => 'gamertisers@gmail.com',                           
 		:password           => 'wtfisthisbullshit11'                             
 	} 
+
+	# s3 buckets
+	config.after_initialize do
+		Configuration.bucket_name = 'bockie'
+	end
+
 end
 

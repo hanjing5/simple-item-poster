@@ -13,7 +13,12 @@
 	</tr>
 	</table>
 	
-	<% if @product_previews.count > 0 %>
+	
+	<% if @product_previews.count == 1 %>
+		<a href="#" class="thumbnail">
+			<img src='<%= @product_previews.first.picture.url(:medium) %>' height="300px" width="300px">
+		</a>
+	<% elsif @product_previews.count > 0 %>
 		<!-- picture previews -->
 		<div id="myCarousel" class="carousel" style="width:350px">
 		<!-- Carousel items -->

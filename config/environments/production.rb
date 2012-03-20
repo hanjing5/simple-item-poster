@@ -66,4 +66,8 @@ Adserver::Application.configure do
 	} 
 
 
+	# s3 buckets
+	config.after_initialize do
+		Configuration.bucket_name = 'bockie_production'
+	end
 end

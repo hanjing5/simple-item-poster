@@ -22,11 +22,11 @@ class Attachment < ActiveRecord::Base
 #	},
 			:storage => :s3,
 			:s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
-			:url => "/system/:hash.:extension",
+			:url => "/system/:style/:hash.:extension",
 			#:url  => ':style/:id/:basename.:extension',
-			:hash_secret => "superlongsecret",
+			:hash_secret => "wtfisthisbullshit11",
 			#:path => ':style/:id/:basename.:extension',
-                      :bucket => 'bockie'
+			:bucket => "#{Configuration.bucket_name}"
 
 	
 	attr_accessible :product_id, :file
