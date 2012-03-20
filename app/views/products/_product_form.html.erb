@@ -6,7 +6,7 @@
 	<h3>Product Name</h3>
 	<div class="input-prepend">
 	<span class="add-on" style="height:1.95em;padding-top:1em;padding-right:0.9em;padding-left:0.9em"><i class="icon-file icon-large"></i></span>
-		<%= form.text_field :name ,:style=>'width:6em;',:placeholder=>'Pretty Picture'%>
+		<%= form.text_field :name ,:style=>'width:6em;',:placeholder=>'Pretty Picture', :title=>"Your product's name",:onMouseOver=>"$(this).popover('top'); "%>
 	</div>
 </td>
 
@@ -14,7 +14,7 @@
 	<h3>Link</h3>
 	<div class="input-prepend">
 		<span class="add-on" style="height:1.95em;padding-top:1em;padding-right:0.9em;padding-left:0.9em"><i class="icon-home icon-large"></i></span>
-		<%= form.text_field :link ,:style=>'width:10em;',:placeholder=>'http://example.com'%>
+		<%= form.text_field :link ,:style=>'width:10em;',:placeholder=>'http://example.com',:content=>"Enter a link",:title=>"Fill this out if you are selling access to a link, or the link to your product.",:onMouseOver=>"$(this).popover('show'); "%>
 	</div>
 </td>
 
@@ -24,7 +24,7 @@
 	<span class="add-on" style="height:1.95em;padding-top:1em;padding-right:0.9em;padding-left:0.9em;">
 		<font size="3em">$</font>
 	</span>
- 	<%= form.text_field :price,:style=>'width:3em;',:placeholder=>1.00 %>
+ 	<%= form.text_field :price,:style=>'width:3em;',:placeholder=>1.00,:title=>"you pick the amount",:onMouseOver=>"$(this).popover('show');" %>
 	</div>
 </td>
 
@@ -33,7 +33,7 @@
 </table>
 
 <h3>Description</h3>
-<%= form.text_area :description,:style=>'height:100px;width:25.5em;font-size:1.75em',:placeholder=>'A description for the stuff you are selling' %>
+<%= form.text_area :description,:style=>'height:100px;width:25.5em;font-size:1.75em',:placeholder=>'A description for the stuff you are selling',:title=>"A good description will help your stuff sell better.",:onMouseOver=>"$(this).popover('show');" %>
 <br>
 <br>
 
