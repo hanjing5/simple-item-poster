@@ -69,13 +69,13 @@
 </div>
 <table width="100%">
 <tr>
-<td id='copy' style="padding:0.5em;background-color:#F5F5F5;-moz-border-radius: 5px;border-radius: 5px;border:1px solid #ccc">
-<font style="font-size:1.25em"><%= @encrypted_link %></font>
+<td id='copy' style="">
+<input style="width:15em;" id="shop_link" value="<%= @encrypted_link %>">
 </td>
 <td id='copy'>
 </td>
 <td style="float:right">
-		<a href="<%= @encrypted_link%>", class="btn btn-info btn-large", target="_blank">
+		<a href="<%= root_url+'g/'+ @product.encrypted_link%>", class="btn btn-info btn-large", target="_blank">
 			<i class="icon-search"></i> Preview
 		</a>
 </td>
@@ -85,23 +85,8 @@
 </tr>
 </table>
 <br>
-<!--<pre id="copy" class="prettyprint linenums"><font style="font-size:1.5em"><%= @encrypted_link %></font>
-</pre>-->
-<!--<a id="copy" name="copy" value="Copy to Clipboard" class="btn btn-info btn-large">Select</a>-->
-
 <script>
-	//create client
-	var clip = new ZeroClipboard.Client();
-	//event
-	clip.addEventListener('mousedown',function() {
-		//clip.setText(document.getElementById('box-content').html());
-		clip.setText("<%= @encrypted_link %>");
-	});
-	clip.addEventListener('complete',function(client,text) {
-		alert('Copied to Clipboard: ' + text);
-	});
-	//glue it to the button
-	clip.glue('copy');
+	CustomClipper('copy','shop_link');
 </script>
 <!-- share on fb button -->
 <!-- share on twitter button -->

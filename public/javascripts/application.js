@@ -182,8 +182,29 @@ $.ajaxTransport('jsonpi', function(opts, originalOptions, jqXHR) {
 }(window.jQuery)
 
 
+function SelectAll(id)
+{
+    document.getElementById(id).focus();
+    document.getElementById(id).select();
+}
 
-// public/javascripts/application.js
+function CustomClipper(id_of_button,id_of_value) {
+	//stuff that allows click to copy
+	//create client                                                
+	var clip = new ZeroClipboard.Client();
+	//event
+	clip.addEventListener('mousedown',function() {                 
+		//clip.setText(document.getElementById('box-content').html());
+		clip.setText($('#'+id_of_value).val());
+		//clip.setText("<%= root_url + 'g/' + product.encrypted_link %>");
+	});                                                            
+	clip.addEventListener('complete',function(client,text) {       
+		SelectAll(id_of_value);                                      
+		alert('Copied to Clipboard: ' + text);                       
+	});                                                            
+	//glue it to the button                                        
+	clip.glue(id_of_button); 
+}
 
 $(document).ready(function() {
   $("#file_button").bind("click", function() {
@@ -209,10 +230,9 @@ $(document).ready(function() {
   /* Pushing the first input to the DOM
   */
   $("#preview_button").trigger("click");
-
-
     $('.carousel').carousel({
     	interval: 100
     })
 
 });
+

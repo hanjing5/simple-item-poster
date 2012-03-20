@@ -28,8 +28,6 @@
                 <th style="padding:0.5em">
                 Link
                 </th>
-								<th>
-								</th>
                 <th style="padding:0.5em">
                 Price
                 </th>
@@ -49,26 +47,12 @@
         <td style="padding:0.5em">
         <%= link_to "#{product.name}", edit_company_product_path(current_company, product.id) %>
         </td>
-        <td style="padding-left:0.5em; background-color:#F5F5F5;-moz-border-radius: 5px;border-radius: 5px;border:1px solid #ccc" id="copy">
-				<font style="font-size:1em;" id="copy"><a href='#'><%= root_url + "g/" + product.encrypted_link %></a></font>
+        <td id="copy">
+				<input style="width:15em;height:1.25em;font-size:1em" id="shop_link" value="<%= root_url + "g/" + product.encrypted_link %>">
 
-				<script>
-					//create client
-					var clip = new ZeroClipboard.Client();
-					//event
-					clip.addEventListener('mousedown',function() {
-						//clip.setText(document.getElementById('box-content').html());
-						clip.setText("<%= root_url + 'g/' + product.encrypted_link %>");
-					});
-					clip.addEventListener('complete',function(client,text) {
-						alert('Copied to Clipboard: ' + text);
-					});
-					//glue it to the button
-					clip.glue('copy');
-				</script>
-				</td>
-				<td id="copy">
-				<font color="#08c"><a href="#">copy</a></font>
+					<script>
+						CustomClipper('copy','shop_link');
+					</script>
 				</td>
         <td style="padding:0.5em">
         <%= number_to_currency product.price %>
