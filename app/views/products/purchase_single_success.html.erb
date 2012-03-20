@@ -36,10 +36,10 @@ Bockie Bay
 <td>
 		<h2><%= link_to downloadable.file_file_name, downloadable.download_path %></h2>
 </td>
-<td>
+<td width="2em">
 </td>
 <td>
-		<%= link_to 'Download', downloadable.download_path, :class=>'btn btn-success btn-large' %><br>
+		<%= link_to "Download", downloadable.file.url, :class=>'btn btn-success btn-large' %>
 </td>
 <tr>
 	<% end %>

@@ -5,7 +5,7 @@
 <hr>
 <%= form_for(current_company, :as => 'company', :url => company_path(current_company.id), :html => { :method => :put }) do |f| %>
 
-  <%= f.text_field :paypal_email, :placeholder=>'Paypal Email' %>
+  <%= f.text_field :paypal_email, :placeholder=>'Paypal Email', :style=>'width:13em;font-size:1.75em;height:1.5em;' %>
 
   <%= f.submit "Save", :class=>'btn btn-success btn-large'%>
 <% end %>

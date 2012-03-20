@@ -14,11 +14,24 @@
 class Attachment < ActiveRecord::Base
 	belongs_to :product
 
-	has_attached_file :file
+	has_attached_file :file, 
+
+#	{
+#		:url => "/system/:hash.:extension",
+#		:hash_secret => "longSecretString"
+#	},
+			:storage => :s3,
+			:s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
+			:url => "/system/:hash.:extension",
+			#:url  => ':style/:id/:basename.:extension',
+			:hash_secret => "superlongsecret",
+			#:path => ':style/:id/:basename.:extension',
+                      :bucket => 'bockie'
+
 	
 	attr_accessible :product_id, :file
 
-	validates_attachment_size :file, :less_than => 100.megabytes
+	validates_attachment_size :file, :less_than => 25.megabytes
 end
 
 

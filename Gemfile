@@ -5,6 +5,8 @@ gem 'rake', '0.9.2.2'
 gem "builder"
 gem 'gravatar_image_tag', '~>1.0.0'
 gem 'will_paginate' , "~> 3.0.0"
+gem 'aws-s3'
+gem 'aws-sdk'
 #gem "thinking-sphinx", "~>2.0.4"
 #gem "flying-sphinx" , "~>0.6.0"
 gem "jquery-rails", "~> 1.0.19"

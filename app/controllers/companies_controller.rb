@@ -2,24 +2,26 @@ class CompaniesController < ApplicationController
   before_filter :authorize_current_company
 
   def show
-    
-	@toolbar_hash = {:company => 'active'}
-	@company = current_company
-	@products_count = @company.products.count
-	@products_earnings = 0
-	@company.invoices.each do |i|
-		@products_earnings += i.price
-	end
-	@products_view = 0
-	@company.products.each do |p|
-		@products_view += p.displayed
-	end
+		@products_list = 'active'			
+		@toolbar_hash = {:company => 'active'}
+		@company = current_company
+		@products_count = @company.products.count
+		@products_earnings = 0
+
+		@company.invoices.each do |i|
+			@products_earnings += i.price
+		end
+		@products_view = 0
+
+		@company.products.each do |p|
+			@products_view += p.displayed
+		end
     
     if @products_count == 0
       # if you dont have a product, we want to add a product before 
       # accessing your stats
-	redirect_to first_product_company_products_path(current_company.id)
-	return
+			redirect_to first_product_company_products_path(current_company.id)
+			return
     end
 
     @correct_company = false
@@ -30,6 +32,7 @@ class CompaniesController < ApplicationController
   end
 
   def new
+		@new = 'active'
     @toolbar_hash = {:company => 'active'}
   	@company = Company.new
   end
@@ -41,7 +44,6 @@ class CompaniesController < ApplicationController
       else
         render 'companies/new'
       end
-
   end
 
   def index
@@ -74,10 +76,12 @@ class CompaniesController < ApplicationController
 	end
 
 	def edit_password
+		@account='active'
 		@header_edit_password = 'active'
 	end
 
 	def bank
+		@account='active'
 		@header_bank = 'active'
 	end
 

@@ -260,8 +260,8 @@ class ProductsController < ApplicationController
 				# do not allow upload
 				@file_size = @file.file_file_size
 				@current_file_sizes = get_total_file_size(current_company)
-				if @file_size + @current_file_sizes > 100.megabytes
-					@tmp_flash_message = ' Upload failed. You have too many files'
+				if @file_size + @current_file_sizes > 25.megabytes
+					@tmp_flash_message = ' Upload failed. You have too many files or total upload file size is greater than 24 mb.'
 					break
 				else
 					@file.save
@@ -327,6 +327,7 @@ class ProductsController < ApplicationController
 	# WARNING: deprecated
 	#################################################
   def new
+		@new = 'active'
     @product = Product.new
   end
 

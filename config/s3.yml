@@ -1,0 +1,12 @@
+development:
+  bockie: bockie_dev
+  access_key_id: AKIAIYNGOFHLH5736P2Q
+  secret_access_key: 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
+test:
+  bockie: bockie_test
+  access_key_id: AKIAIYNGOFHLH5736P2Q
+  secret_access_key: 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
+production:
+  bockie: bockie_pro
+  access_key_id: AKIAIYNGOFHLH5736P2Q
+  secret_access_key: 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

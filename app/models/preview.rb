@@ -1,7 +1,18 @@
 class Preview < ActiveRecord::Base
 	belongs_to :product
 
-	has_attached_file :picture, :styles => { :medium => "300x300>", :thumb => "75x75>" }
+	has_attached_file :picture, :styles => { :medium => "300x300>", :thumb => "75x75>" },
+			:storage => :s3,
+			:s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
+			#:path => "/:style/:id/:filename",
+			#:url  => '/:style/:id/:style/:basename.:extension',
+			:url => "/system/:hash.:extension",
+			:hash_secret => "superlongsecret",
+			:bucket=>'bockie'
+#{
+#    :url => "/system/:hash.:extension",
+#    :hash_secret => "longSecretString"
+#}
 	
 	attr_accessible :product_id, :picture
 

@@ -6,14 +6,16 @@
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="/" >Bockie</a>
+      <a class="brand" href="/" style="padding:0;margin:0" >
+			<%= image_tag "logo_small.png" %>
+			</a>
       <ul class="nav" style="float:right">
 		
 		<% if company_signed_in? %>
 			<!--<li class=''><%= link_to "My Brand's Dashboard", current_company %><li>-->
-			<li class=''><%= link_to "Products List", company_products_path(current_company) %><li>
-			<%= link_to "Add Product", company_product_path(current_company, "new") %>
-			<li class=''><%= link_to "Account", account_companies_path %><li>
+			<li class="<%= @products_list %>"><%= link_to "Products List", company_products_path(current_company) %><li>
+			<li class="<%= @new %>"><%= link_to "Add Product", company_product_path(current_company, "new")%></li>
+			<li class="<%= @account %>"><%= link_to "Account", account_companies_path %><li>
 			<li class=""><%= link_to "Logout", destroy_company_session_path, :method => :delete, :class => 'links' %></li>
 		<% else %>
 			<!--<li class=""><%= link_to "Brand Partners", companies_path %></li>

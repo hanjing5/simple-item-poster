@@ -13,7 +13,7 @@
 <div class="span7">
 <%= form_for :product, @product, :url =>{ :action => "update"},  :html => { :multipart => true,:method=>"put" } do |form| %>
 
-	<%= render 'product_form', :form => form %>
+<%= render 'product_form', :form => form %>
 <a href="#" id="show_file_attachments" onclick="$('#file_attachments').show(150);$(this).hide();">attach more files</a>
 
 <div style="display:none" id="file_attachments">
@@ -180,7 +180,7 @@
 		<% @downloadables.each do |downloadable| %>
 			<tr>
 				<td>
-					<%= link_to downloadable.file_file_name, downloadable.download_path %>
+					<%= link_to downloadable.file_file_name, downloadable.file.url(:url) %>
 				</td>
 				<td>
 				<%= number_to_human_size downloadable.file_file_size %>
