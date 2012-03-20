@@ -68,5 +68,7 @@ Adserver::Application.configure do
 	# s3 buckets
 	config.after_initialize do
 		Configuration.bucket_name = 'bockie_production'
+		#stripe key
+		Configuration.stripe_key = 'qSvwxXrgCxbIlGFD1Ug0NNqixC7JnU8U'
 	end
 end

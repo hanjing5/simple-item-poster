@@ -75,7 +75,7 @@ class ProductsController < ApplicationController
 	def confirm_purchase_single_shop_create
 		# check for payment info
 		# send to stripe for a credit card token
-		Stripe.api_key = "9sir8teed4nvvwDoSOjBgy29k4pNy3iF"
+		Stripe.api_key = "#{Configuration.stripe_key}"
 		# get credit card info
 		# send to stripe and/or store it through post call
 		begin
