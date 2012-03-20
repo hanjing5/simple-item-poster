@@ -65,7 +65,6 @@ Adserver::Application.configure do
 		:password           => 'wtfisthisbullshit11'                             
 	} 
 
-
 	# s3 buckets
 	config.after_initialize do
 		Configuration.bucket_name = 'bockie_production'

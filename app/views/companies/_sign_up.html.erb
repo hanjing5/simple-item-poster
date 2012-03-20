@@ -8,17 +8,17 @@
 <%= form_for("company", :url => company_session_path) do |f| %>
 
 <!--  <%= f.text_field :name, :placeholder=>"company name" %><br>-->
-<table>
+<table style="width:65em">
 <tr>
 <td style="padding-right:1em">
 	<div class="input-prepend" >
-	<span class="add-on" style="height:1.9em;padding-top:1em;padding-right:0.9em;padding-left:0.9em;border:1px solid #808080"><i class="icon-envelope icon-large"></i></span>
+	<span class="add-on" style="height:1.95em;padding-top:1em;padding-right:0.9em;padding-left:0.9em;border:1px solid #808080"><i class="icon-envelope icon-large"></i></span>
   <%= f.text_field :email, :placeholder=>"email",:style=>"width:15em;border:1px solid #808080" %>
 	</div>
 </td>
 <td style="padding-right:1em">
 	<div class="input-prepend">
-	<span class="add-on" style="height:1.9em;padding-top:1em;padding-right:0.9em;padding-left:0.9em;border:1px solid #808080"><i class="icon-key icon-large" ></i></span>
+	<span class="add-on" style="height:1.95em;padding-top:1em;padding-right:0.9em;padding-left:0.9em;border:1px solid #808080"><i class="icon-key icon-large" ></i></span>
   <%= f.password_field :password, :placeholder=>'password',:style=>"width:15em;border:1px solid #808080" %>
 	</div>
 </td>
