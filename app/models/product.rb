@@ -32,7 +32,7 @@ class Product < ActiveRecord::Base
 	
 	attr_accessible :company_id, :name, :description, :meta_data, :picture,:price,:product_type, :link
   validates :name, :presence => true
-  validates :link, :presence => true
+  #validates :link, :presence => true
   validates :price, :presence => true
 
 	accepts_nested_attributes_for :attachments, :allow_destroy => true
