@@ -1,5 +1,6 @@
 <h1>Add New Product</h1>
 <hr>
+<%= render 'shared/info' %>
 <%= form_for :product, @product, :url =>{ :action => "create"},  :html => { :multipart => true} do |form| %>
 	<%= render 'product_form', :form => form %>
 	<h3>Attach Your File(s)</h3>
