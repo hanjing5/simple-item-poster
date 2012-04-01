@@ -32,7 +32,9 @@
 	<br>
 
 <!--    <%= form.submit "Submit" %>-->
-<button type="Submit" class="btn btn-success btn-large" id="product_submit" name="commit" style="width:10em">Update</button>
+<button type="Submit" class="btn btn-success btn-large" id="product_submit" name="commit" style="width:10em" onclick="$(this).button('loading')">
+	Update
+</button>
 
 <% end %>
 
@@ -114,8 +116,8 @@
 <br>	
 <br>
 
-	<% if @product_previews.count > 0 %>
 		<h3>Preview Pictures</h3>
+	<% if @product_previews.count > 0 %>
 		<table>
 		<tbody>
 			<tr>
@@ -145,7 +147,9 @@
 			<%= form_for @product, :as=>:product, :url =>{ :action => "update"},  :html => { :multipart => true,:method=>"put" } do |form| %>
 				<input type="button" id="preview_button" class="btn" value="attach more previews" />
 				<br>
-				<button type="Submit" class="btn btn-primary" id="product_submit" name="commit" style="width:10em">Upload</button>
+				<button type="Submit" class="btn btn-primary" id="product_submit" name="commit" style="width:10em" onclick="$(this).button('loading')">
+					Upload
+				</button>
 			<% end %>
 		</div><br><br>
 	<% end %>

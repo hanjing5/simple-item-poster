@@ -3,19 +3,25 @@
 <%= render 'shared/info' %>
 <%= form_for :product, @product, :url =>{ :action => "create"},  :html => { :multipart => true} do |form| %>
 	<%= render 'product_form', :form => form %>
-	<h3>Attach Your File(s)</h3>
-	Max 25mb
+	<div title="Attach the file you want to sell. Max 25 mb." onMouseOver="$(this).popover({placement:'top'});">
+	<h3> 
+	Attach Your File(s)
+	</h3>
 	<!--<p>
 	(Optional unless you are selling an uploaded file)
 	<br>
-	<%= form.file_field :picture %>-->
-	<input type="button" id="file_button" class="btn" value="Attach More Files" />
+	<%= form.file_field :picture, :style=>"height:1em;width:10em;font-size:0.25em;" %>-->
+	<a id="file_button" href="#" value="Attach More Files" />Attach more files</a>
 	<br>
 	<!--<input type="submit" id="save" class="btn btn-success btn-large" value="Upload" />-->
 	</p>
+	</div>
         <br>
 <!--    <%= form.submit "Submit" %>-->
-<button type="Submit" class="btn btn-success btn-large" id="product_submit" name="commit" style="width:10em">Save</button>
+<span>
+<button onclick="$(this).button('loading');" type="Submit" class="btn btn-success btn-large" id="product_submit" name="commit" style="width:10em">
+Save</button>
+</span>
 
 <% end %>
 

@@ -5,10 +5,10 @@
 				<%= @product.name %>
 			</h2>
 		</td>
-		<td style="padding-top:0.5em;float:right">
-			<h3>
+		<td style="padding-top:0.5em;float:right;">
+			<h2>
 				<%= number_to_currency @product.price %>
-			</h3>
+			</h2>
 		</td>
 	</tr>
 	</table>
@@ -39,11 +39,13 @@
 	<% else %>
 		<!-- place holder picture preview -->
 		<a href="#" class="thumbnail">
-			<img src='/images/placeholder.jpg' height="300px" width="300px">
+			<img src='/images/placeholder_2.jpg' height="300px" width="300px">
 		</a>
 	<% end %>
 	<br>
+	<p style="font-size:1.75em;">
 	<%= @product.description %>
+	</p>
 	<br>
 	<br>
 	<br>

@@ -211,7 +211,7 @@ $(document).ready(function() {
     /* Generating unique id
     */
     var rand = Math.random().toString().split(".")[1];
-    var input = '<input type="file" name="attachment['+rand+']" />'
+    var input = '<input type="file" name="attachment['+rand+']" style="font-size:1em;padding:0;margin:0"/>'
     $(this).before('<br/>' + input + '<br/>' );
   });
 
@@ -223,7 +223,7 @@ $(document).ready(function() {
     /* Generating unique id
     */
     var rand = Math.random().toString().split(".")[1];
-    var input = '<input type="file" name="preview['+rand+']" />'
+    var input = '<input type="file" name="preview['+rand+']" style="font-size:1em;padding:0;margin:0"/>'
     $(this).before('<br/>' + input + '<br/>' );
   });
 

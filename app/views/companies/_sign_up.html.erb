@@ -8,21 +8,43 @@
 <%= form_for("company", :url => company_session_path) do |f| %>
 
 <!--  <%= f.text_field :name, :placeholder=>"company name" %><br>-->
-<table style="width:65em">
+<table style="width:65em" >
 <tr>
-<td style="padding-right:1em">
-	<div class="input-prepend" >
-	<span class="add-on" style="height:1.95em;padding-top:1em;padding-right:0.9em;padding-left:0.9em;border:1px solid #808080"><i class="icon-envelope icon-large"></i></span>
-  <%= f.text_field :email, :placeholder=>"email",:style=>"width:15em;border:1px solid #808080" %>
+<td style="padding-right:1em;">
+	<div class="input-prepend" style="margin-bottom:0px;" >
+	<span class="add-on" style="height:1.95em;padding-top:1em;padding-right:0.9em;padding-left:0.9em;margin-bottom:0px;">
+		<i class="icon-envelope icon-large"></i></span>
+  <%= f.text_field :email, :placeholder=>"email",
+		:id=>"user_email",
+		:style=>"width:16em;margin-bottom:0px;" %>
 	</div>
 </td>
-<td style="padding-right:1em">
-	<div class="input-prepend">
-	<span class="add-on" style="height:1.95em;padding-top:1em;padding-right:0.9em;padding-left:0.9em;border:1px solid #808080"><i class="icon-key icon-large" ></i></span>
-  <%= f.password_field :password, :placeholder=>'password',:style=>"width:15em;border:1px solid #808080" %>
+<td style="padding-right:1em;margin-bottom:0px;">
+	<div class="input-prepend"style="margin-bottom:0px;">
+	<span class="add-on" style="height:1.95em;padding-top:1em;padding-right:0.9em;padding-left:0.9em;margin-bottom:0px;">
+		<i class="icon-key icon-large" ></i></span>
+  <%= f.password_field :password, :placeholder=>'password',:style=>"width:15em;margin-bottom:0px;",:id=>"target" %>
+<script src="/javascripts/jquery.mailcheck.min.js"></script>
+<script src="/javascripts/checks/home.js"></script>
 	</div>
+</td>
+<td style="margin-bottom:0px;">
 </td>
 </tr>
+	<tr >
+		<td style="text-align:right;">
+			<font id="username_msg" style="display:none;margin-right:1.5em">
+			</font>
+		</td>
+
+		<td style="text-align:right">
+			<font id="pwd_msg" style="margin-right:1.5em">
+			</font>
+		</td>
+		<td>
+		<br>
+		</td>
+	</tr>
 <tr>
 <td>
   <%= f.submit 'Start Selling »', :class=>'btn btn-large btn-primary', :style=>"width:15em;height:3em" %>
