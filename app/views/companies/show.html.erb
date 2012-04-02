@@ -48,10 +48,11 @@
         <%= link_to "#{product.name}", edit_company_product_path(current_company, product.id) %>
         </td>
         <td id="copy">
-				<input style="width:15em;height:1.25em;font-size:1em" id="shop_link" value="<%= root_url + "g/" + product.encrypted_link %>">
+				<input style="width:15em;height:1.25em;font-size:1em" id="shop_link[<%= product.encrypted_link %>]" value="<%= root_url + "g/" + product.encrypted_link %>" onclick="SelectAll('shop_link['+ <%= product.encrypted_link %>+ ']')">
 
 					<script>
-						CustomClipper('copy','shop_link');
+				//  deprecated due to flash problems.
+				//	CustomClipper('copy','shop_link');
 					</script>
 				</td>
         <td style="padding:0.5em">

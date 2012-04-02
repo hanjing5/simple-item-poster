@@ -19,14 +19,8 @@
 <div style="display:none" id="file_attachments">
 	<h3>Attach More Files</h3>
 	Max 25mb <a href="#" onclick="$('#file_attachments').hide(150);$('#show_file_attachments').show();">hide</a>
-	<!--<p>
-	(Optional unless you are selling an uploaded file)
-	<br>
-	<%= form.file_field :picture %>-->
 	<input type="button" id="file_button" class="btn" value="Attach More Files" />
 	<br>
-	<!--<input type="submit" id="save" class="btn btn-success btn-large" value="Upload" />
-	</p>-->
 </div>
   <br>
 	<br>
@@ -37,28 +31,6 @@
 </button>
 
 <% end %>
-
-
-<!--deprecated testing for uploads -->
-<!--<%= form_for :attachment, @product, :url =>{ :action => "update"},  :html => { :multipart => true,:method=>"put" } do |form| %>
-	<%= hidden_field_tag(:company_id, current_company.id) %>
-	<h3>Upload Your File</h3>
-	<p>
-	(Optional unless you are selling an uploaded file)
-	<br>
-	<%= form.file_field :file %>
-	</p>
-	<br>
-	<button type="Submit" class="btn btn-success btn-large" id="product_submit" name="commit">Save</button>
-	</p>
-<% end %>-->
-
-
-<!--<%= form_for :update, :html => { :multipart => true, :id => "upload_form",:method=>"put" }, :url => { :action => "update" } do |f| %>
-	<input type="button" id="button" class="btn btn-primary" value="Attach More Files" />
-	<br>
-	<input type="submit" id="save" class="btn btn-success btn-large" value="Upload" />
-<% end %>-->
 
 </div>
 <div class="span5">
@@ -71,24 +43,25 @@
 </div>
 <table width="100%">
 <tr>
-<td id='copy' style="" title="Your product's name" onMouseOver="$(this).popover('show');">
-<input style="width:15em;" id="shop_link" value="<%= @encrypted_link %>" title="Your product's name" onMouseOver="$(this).popover('show');">
-</td>
-<td id='copy'>
-</td>
-<td style="float:right">
+	<td id='copy' style="" title="This is your shop's url. Share this link anywhere to allow your customer to access it." onMouseOver="$(this).popover({placement:'top'});">
+		<input style="width:15em;" id="shop_link" value="<%= @encrypted_link %>"  onclick="SelectAll('shop_link')">
+	</td>
+	<td id='copy'>
+	</td>
+	<td style="float:right">
 		<a href="<%= root_url+'g/'+ @product.encrypted_link%>", class="btn btn-info btn-large", target="_blank">
 			<i class="icon-search"></i> Preview
 		</a>
-</td>
-<td style="float:right" id='copy'>
-		<!--<%= link_to 'Select', "#", :class=>"btn btn-info btn-large",:target=>'_blank' %>-->
-</td>
+	</td>
+	<td style="float:right" id='copy'>
+			<!--<%= link_to 'Select', "#", :class=>"btn btn-info btn-large",:target=>'_blank' %>-->
+	</td>
 </tr>
 </table>
 <br>
 <script>
-	CustomClipper('copy','shop_link');
+//  deprecated due to flash problems.
+//	CustomClipper('copy','shop_link');
 </script>
 <!-- share on fb button -->
 <!-- share on twitter button -->
@@ -96,22 +69,9 @@
 <a href="#" onclick='javascript:window.open("http://twitter.com/home?status=Buy <%= @product.name %> on Bockie.com <%= @encrypted_link %>","share","width=500,height=300,scrollbars=yes");' title="Click to share this post on Twitter">
 	<%= image_tag 'shareontwitter.png' %>
 </a>
-<!--<a href="http://www.facebook.com/dialog/feed?Yp=Buy <%= @product.name %> on Bockie.com <%= @encrypted_link %>" target="_blank" title="Click to share this post on Twitter">
-<a href="http://www.facebook.com/dialog/feed?app_id=136994213093359&name=game&caption=Just $2.&redirect_uri=http://bockie.herokuapp.com&message=Buy" target="_blank" title="Click to share this post on Twitter">
-	<%= image_tag 'shareonfb.png' %>
-</a>-->
 <a href="#" onclick='javascript:window.open("http://www.facebook.com/dialog/feed?app_id=136994213093359&name=game&caption=Only <%= number_to_currency @product.price %>.&redirect_uri=http://bockie.herokuapp.com&display=popup&message=Buy%20game%20on%20link%21&link=<%= @encrypted_link %>","Share","width=500,height=300,scrollbars=yes");' >
 	<%= image_tag 'shareonfb.png' %>
 </a>
-
-<!--<a href="javascript:window.open('http://www.facebook.com/dialog/feed?app_id=114816261931958&name=game&caption=Just $2.&redirect_uri=https://gamertiser.com/links&amp;display=popup&amp;message=Buy%20game%20on%20link%21&amp;link=https%3A%2F%2Fgamertiser.com%2Fl%2FUWo%22,%22Share%22,%22width=150,height=150,scrollbars=yes%22);" 
-	class="btn btn-info btn-large">
-	Share on Facebook
-</a>
-<a href="javascript:window.open('http://twitter.com/share?text=Buy game on Gumroad &url=https://gamertiser.com/l/UWo/','Share','width=150,height=150,scrollbars=yes')" 
-	class="btn btn-info btn-large" target='none'>
-		Share on Tweet
-</a>-->
 
 <br>	
 <br>
