@@ -353,7 +353,7 @@ class ProductsController < ApplicationController
 				end
 			end
 
-			@product.encrypted_link = @product.id.to_s(36)
+			@product.encrypted_link = @product.id.to_s(32)
 			if @product.save
 				flash[:success] = "Success! Shop created. Share the link on the right to start selling."
 				redirect_to edit_company_product_path(current_company.id, @product.id )
