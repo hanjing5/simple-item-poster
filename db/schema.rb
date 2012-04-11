@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120319090038) do
+ActiveRecord::Schema.define(:version => 20120402042701) do
 
   create_table "ad_stats", :force => true do |t|
     t.integer  "ad_id"
@@ -246,6 +246,7 @@ ActiveRecord::Schema.define(:version => 20120319090038) do
     t.string   "product_type"
     t.string   "link"
     t.string   "encrypted_link"
+    t.boolean  "virtual",                                            :default => true
   end
 
   add_index "products", ["company_id", "ext_product_id"], :name => "index_products_on_company_id_and_ext_product_id", :unique => true

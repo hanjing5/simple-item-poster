@@ -9,6 +9,7 @@ end
 
 
 
+
 # == Schema Information
 #
 # Table name: products
@@ -32,5 +33,6 @@ end
 #  product_type         :string(255)
 #  link                 :string(255)
 #  encrypted_link       :string(255)
+#  virtual              :boolean(1)      default(TRUE)
 #
 

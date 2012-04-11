@@ -7,6 +7,7 @@ end
 
 
 
+
 # == Schema Information
 #
 # Table name: invoices
@@ -23,5 +24,6 @@ end
 #  email               :string(255)
 #  dispute             :boolean(1)      default(FALSE)
 #  paid                :boolean(1)      default(FALSE)
+#  stripe_customer_id  :string(255)
 #
 

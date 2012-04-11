@@ -297,8 +297,8 @@ class ProductsController < ApplicationController
 		if @product.encrypted_link.nil?
 	
 			# encrypted link is just the product's id in
-			# a base 36 encryption
-			@product.encrypted_link = @product.id.to_s(36)
+			# a base 32 encryption
+			@product.encrypted_link = @product.id.to_s(32)
 			@product.save
 
 		end
