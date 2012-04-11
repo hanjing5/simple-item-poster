@@ -29,6 +29,9 @@
                 Bought
                 </th>
                 <th style="padding:0.5em">
+                URL
+                </th>
+                <th style="padding:0.5em">
                 Price
                 </th>
                 <th style="padding:0.5em">
@@ -59,6 +62,9 @@
         </td>
         <td style="padding:0.5em">
         <%= product.purchased %>
+        </td>
+        <td style="padding:0.5em">
+        <%= link_to product.encrypted_link, root_url + 'g/'+product.encrypted_link, :target=>'_blank' %>
         </td>
         <td style="padding:0.5em">
         <%= number_to_currency product.price %>
