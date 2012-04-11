@@ -23,8 +23,10 @@
 	<%= link_to "About", "/about" %> |
 	<%= link_to "FAQ", "/misc" %> |
 	<%= link_to "Contact", "/contact" %> |
+	<% if current_company %>
 	<% if current_company.admin? %>
 		<%= link_to "Admin", "/admin/products" %>
+	<% end %>
 	<% end %>
 </p>
 </footer>
