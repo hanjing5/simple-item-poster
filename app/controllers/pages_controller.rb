@@ -32,4 +32,11 @@ class PagesController < ApplicationController
 		end
 		@products = Product.all
 	end
+
+	def users
+		if not current_company.admin?
+			redirect_to root_path
+		end
+		@companies = Company.all
+	end
 end

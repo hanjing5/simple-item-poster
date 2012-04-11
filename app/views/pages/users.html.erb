@@ -1,0 +1,69 @@
+<div class="row">
+	<div class="span4">
+		<h1>Admin: Users</h1>
+	</div>
+	<div class="span4 offset4" style="text-align:right">
+	</div>
+</div>
+<hr>
+
+<table class="table" style="width:100%; text-align:center; font-size:1.5em; ">
+	<thead>
+        <tr>
+                                <th style="padding:0.5em">
+                Email
+                </th>
+                <th style="padding:0.5em">
+								Products Listed
+                </th>
+                <th style="padding:0.5em">
+                Showed
+                </th>
+                <th style="padding:0.5em">
+                CT
+                </th>
+                <th style="padding:0.5em">
+                Bought
+                </th>
+                <th style="padding:0.5em">
+                URL
+                </th>
+                <th style="padding:0.5em">
+                Manage
+                </th>
+        </tr>
+	</thead>
+	<% if not @companies.nil? %>
+        <% @companies.each do |company| %>
+        <tr>
+        <td style="padding:0.5em">
+				<%= company.email %>
+        </td>
+        <td style="padding:0.5em">
+        <%= company.products.count %>
+        </td>
+        <td style="padding:0.5em">
+
+        </td>
+        <td style="padding:0.5em">
+
+        </td>
+        <td style="padding:0.5em">
+
+        </td>
+        <td style="padding:0.5em">
+
+        </td>
+					<td style="padding:0.5em">
+						<%= link_to "delete", company_path(company.id) , :method => :delete, :confirm => "Are you sure you want to delete?" %>
+					</td>
+        </tr>
+
+        <% end %>
+	<% else %>
+	There are no companies
+	<% end %>
+</table>
+
+
+

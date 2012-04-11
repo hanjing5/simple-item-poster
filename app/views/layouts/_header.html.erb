@@ -9,9 +9,20 @@
       <a class="brand" href="/" style="padding:0;margin:0" >
 			<%= image_tag "logo_small.png" %>
 			</a>
-      <ul class="nav" style="float:right">
-		
 		<% if company_signed_in? %>
+
+			<% if current_company.admin? %>
+			<ul class="nav">
+				<li>
+					<%= link_to "Users", admin_users_path %>
+				</li>
+				<li>
+					<%= link_to "Products", admin_products_path %>
+				</li>
+			</ul>
+      <ul class="nav pull-right">
+			<% end %>
+		
 			<!--<li class=''><%= link_to "My Brand's Dashboard", current_company %><li>-->
 			<li class="<%= @products_list %>"><%= link_to "Products List", company_products_path(current_company) %><li>
 			<li class="<%= @new %>"><%= link_to "Add Product", company_product_path(current_company, "new")%></li>

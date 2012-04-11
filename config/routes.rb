@@ -6,7 +6,8 @@ Adserver::Application.routes.draw do
   match "/about", :to => "pages#about"
   match "/contact", :to => "pages#contact"
   match "/docs", :to => "pages#documentation"
-  match "/admin/products", :to => "pages#products"
+  match "/admin/products", :to => "pages#products", :as => :admin_products
+  match "/admin/users", :to => "pages#users", :as => :admin_users
 
   devise_for :companies, :controllers => {:registrations => "registrations", :passwords=>"passwords", :sessions=>"sessions"} do
     get 'companies', :to => "companies#show", :as => :company_root
