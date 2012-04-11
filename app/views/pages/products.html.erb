@@ -1,0 +1,82 @@
+<div class="row">
+	<div class="span4">
+		<h1>Admin: Products</h1>
+	</div>
+	<div class="span4 offset4" style="text-align:right">
+	</div>
+</div>
+<hr>
+
+<table class="table" style="width:100%; text-align:center; font-size:1.5em; ">
+	<thead>
+        <tr>
+                <th style="padding:0.5em">
+                Image
+                </th>
+                <th style="padding:0.5em">
+                Name
+                </th>
+                <th style="padding:0.5em">
+								Text
+                </th>
+                <th style="padding:0.5em">
+                Showed
+                </th>
+                <th style="padding:0.5em">
+                CT
+                </th>
+                <th style="padding:0.5em">
+                Bought
+                </th>
+                <th style="padding:0.5em">
+                Price
+                </th>
+                <th style="padding:0.5em">
+                Earnings
+                </th>
+                        <th style="padding:0.5em">
+                Manage
+                </th>
+        </tr>
+	</thead>
+	<% if not @products.nil? %>
+        <% @products.each do |product| %>
+        <tr>
+        <td style="padding:0.5em">
+        <%= image_tag product.picture.url(:thumb) %>
+        <br>
+        <td style="padding:0.5em">
+				<%= product.name %>
+        </td>
+        <td style="padding:0.5em">
+        <%= product.description %>
+        </td>
+        <td style="padding:0.5em">
+        <%= product.displayed %>
+        </td>
+        <td style="padding:0.5em">
+        <%= product.click_through %>
+        </td>
+        <td style="padding:0.5em">
+        <%= product.purchased %>
+        </td>
+        <td style="padding:0.5em">
+        <%= number_to_currency product.price %>
+		</td>
+        <td style="padding:0.5em">
+        <%= number_to_currency product.purchased * product.price %>
+		</td>
+        <td style="padding:0.5em">
+
+        <%= link_to "delete", company_product_path(product.company_id, product.id) , :method => :delete, :confirm => "Are you sure you want to delete?" %>
+        </td>
+        </tr>
+
+        <% end %>
+	<% else %>
+	There are no products
+	<% end %>
+</table>
+
+
+

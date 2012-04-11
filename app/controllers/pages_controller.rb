@@ -25,4 +25,11 @@ class PagesController < ApplicationController
 
   def documentation
   end
+
+	def products
+		if not current_company.admin?
+			redirect_to root_path
+		end
+		@products = Product.all
+	end
 end
