@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -34,9 +35,9 @@ ActiveRecord::Schema.define(:version => 20120411013311) do
     t.datetime "updated_at"
     t.string   "name"
     t.text     "description"
-    t.decimal  "cost_per_impression",  :precision => 10, :scale => 0
-    t.decimal  "cost_per_click",       :precision => 10, :scale => 0
-    t.decimal  "cost_per_purchase",    :precision => 10, :scale => 0
+    t.decimal  "cost_per_impression"
+    t.decimal  "cost_per_click"
+    t.decimal  "cost_per_purchase"
     t.integer  "love_hate"
     t.integer  "relief_fear"
     t.integer  "excite_bore"
@@ -48,7 +49,7 @@ ActiveRecord::Schema.define(:version => 20120411013311) do
     t.integer  "picture_file_size"
     t.datetime "picture_updated_at"
     t.text     "meta_data"
-    t.integer  "distance",                                            :default => 0
+    t.integer  "distance",             :default => 0
   end
 
   add_index "ads", ["company_id"], :name => "index_ads_on_company_id"
@@ -107,16 +108,16 @@ ActiveRecord::Schema.define(:version => 20120411013311) do
     t.string   "name"
     t.text     "description"
     t.integer  "limit"
-    t.integer  "redeemed",                                           :default => 0
+    t.integer  "redeemed",             :default => 0
     t.integer  "ext_coupon_id"
     t.string   "picture_file_name"
     t.string   "picture_content_type"
     t.integer  "picture_file_size"
     t.datetime "picture_updated_at"
     t.text     "meta_data"
-    t.decimal  "cost_per_redeem",      :precision => 8, :scale => 2, :default => 0.0
-    t.integer  "displayed",                                          :default => 0
-    t.integer  "click_through",                                      :default => 0
+    t.decimal  "cost_per_redeem",      :default => 0.0
+    t.integer  "displayed",            :default => 0
+    t.integer  "click_through",        :default => 0
   end
 
   add_index "coupons", ["company_id", "ext_coupon_id"], :name => "index_coupons_on_company_id_and_ext_coupon_id", :unique => true
@@ -136,7 +137,7 @@ ActiveRecord::Schema.define(:version => 20120411013311) do
     t.integer  "game_id"
     t.integer  "user_id"
     t.integer  "plays"
-    t.decimal  "duration_average", :precision => 10, :scale => 0
+    t.decimal  "duration_average"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -240,14 +241,15 @@ ActiveRecord::Schema.define(:version => 20120411013311) do
     t.integer  "picture_file_size"
     t.datetime "picture_updated_at"
     t.text     "meta_data"
-    t.decimal  "price",                :precision => 8, :scale => 2, :default => 0.0
-    t.integer  "purchased",                                          :default => 0
-    t.integer  "displayed",                                          :default => 0
-    t.integer  "click_through",                                      :default => 0
+    t.decimal  "price",                :default => 0.0
+    t.integer  "clicked_through",      :default => 0
+    t.integer  "purchased",            :default => 0
+    t.integer  "displayed",            :default => 0
+    t.integer  "click_through",        :default => 0
     t.string   "product_type"
     t.string   "link"
     t.string   "encrypted_link"
-    t.boolean  "virtual",                                            :default => true
+    t.boolean  "virtual",              :default => true
   end
 
   add_index "products", ["company_id", "ext_product_id"], :name => "index_products_on_company_id_and_ext_product_id", :unique => true

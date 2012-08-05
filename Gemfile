@@ -19,6 +19,7 @@ gem 'stripe'
 gem 'paperclip', :git => 'git://github.com/thoughtbot/paperclip.git'
 
 group :development do
+  gem 'sqlite3'
   gem 'rspec-rails', '2.0.1'
   gem 'faker','~>1.0.0'
   gem 'nifty-generators'

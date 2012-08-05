@@ -1,18 +1,62 @@
 <!--Company's Home page tab -->
+<style>
+  h2{
+  font-size:50px;
+  line-height:50px;
+  margin: 10px 0;
+color:#444651;
+  }
+  body{
+    background-color:#f8f8f8;
+}
+</style>
 <div class="container">
-	<div class="hero-unit" style="background-image:url('/images/');  background-repeat:no-repeat; background-position:top right;font-color:#fff; background-size:100%">
-		<!--background-color:#faf2b8-->
-		<h1>Your own store in 30 seconds</h1>
-		<p>
-		<p>You can leverage your social networks and blogs.</p>
-		<p>Simply upload your things, share a link,</p>
-		<p>and we will take care of the rest.</p>
-		
-		</p>
-		<br>
-		<p><h3>Sounds too easy? Try it out.</h3></p>
-		<%= render "companies/sign_up" %>
-			<!--or <a data-toggle="modal" href="#myCompanySignInModal">Log In</a>-->
-	</div>
+<div>
+<h1>
+  <font style="font-size:55px;color:#444651">
+    <font style="font-weight:normal">Boc</font>Kie
+  </font>
+</h1>
+<br>
+<br>
+<br>
+  <h1>
+  <font style="position:relative;top:15px">
+    <font style="font-size:95px">
+    Online Store 
+    </font>
+    <font style="color:#444651;">
+    in 
+    </font>
+    <font style="color:#149F83;font-size:95px">
+      30 seconds
+    </font>
+  </font>
+  </h1>
+  <br>
+  <br>
+  <br>
+</div>
+<div>
+  <table style="width:100%">
+  <tr>
+    <td style="width:40%; border-right:2px dashed #444651;">
 
+      <br>
+      <p>
+        <h3>Sounds too easy? Try it out.
+        </h3></p>
+      <%= render "companies/sign_up" %>
+    </td>
+    <td>
+      <div style="margin-left:50px">
+      <h2>
+        <font style="font-weight:normal">Leverage your</font> social networks<font style="font-weight:normal"> and </font> blogs<font style="font-weight:normal">. Simply upload your things, </font>share a link<font style="font-weight:normal">,
+      and we will take care of the rest.</font>
+      </h2>
+      </div>
+    </td>
+  </tr>
+  </table>
+</div>
 </div>
