@@ -1,4 +1,4 @@
-ource 'http://rubygems.org'
+source 'http://rubygems.org'
 gem 'rails', '3.0.11'
 gem 'rake', '0.9.2.2'
 gem "builder"
@@ -6,15 +6,12 @@ gem 'gravatar_image_tag', '~>1.0.0'
 gem 'will_paginate' , "~> 3.0.0"
 gem 'aws-s3'
 gem 'aws-sdk'
-#gem "thinking-sphinx", "~>2.0.4"
-#gem "flying-sphinx" , "~>0.6.0"
 gem "jquery-rails", "~> 1.0.19"
 gem 'devise'
 gem "json_builder", "~> 3.0.6"
 gem 'mysql2', '~> 0.2.17'
 gem 'tlsmail'
 gem 'stripe'
-# gem "activerecord-import", "~> 0.2.8"
 gem 'paperclip', :git => 'git://github.com/thoughtbot/paperclip.git'
 
 group :development do
@@ -31,16 +28,10 @@ group :test do
   gem 'factory_girl_rails'
 
 end
-
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-#gem 'mysql'
-
-# Use unicorn as the web server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Deploy with Capistrano
+
 # gem 'capistrano'
 
 # To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
@@ -52,5 +43,4 @@ end
 # gem 'nokogiri'
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'
-
 
