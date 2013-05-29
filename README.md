@@ -1,6 +1,8 @@
 ##README
-Easy items-for-sale poster. 
-Think eBay stripped down to its basic components.
+Easy items-for-sale poster with a powerful cross-channel ad promotion
+control system.
+
+Think eBay + google ads stripped down to their bare components
 
 
 ##REQUIRED PROGRAMS:
