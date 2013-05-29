@@ -1,12 +1,13 @@
-#README
+##README
 Easy items-for-sale poster. 
 Think eBay stripped down to its basic components.
 
 
-#REQUIRED PROGRAMS:
+##REQUIRED PROGRAMS:
   ImageMagick
 
-#RUN:
+##quick start
   bundle exec rake db:create db:migrate
+
   rails s
 
