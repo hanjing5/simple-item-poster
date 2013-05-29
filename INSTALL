@@ -1,7 +1,0 @@
-For thin server, install the thin gem and run 'thin start'
-
-REQUIRED PROGRAMS:
-ImageMagick
-
-REQUIRED GEMS:
-paperclip
